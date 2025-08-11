@@ -1,0 +1,1 @@
+This will store scripts responsible for scraping and automation

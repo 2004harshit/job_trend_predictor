@@ -134,11 +134,11 @@ def naukriComScraper(job_type_list, max_pages=50, per_page_limit=None):
 
     # save to CSV
     df = pd.DataFrame(all_data)
-    df.to_csv("naukri_jobs_java_developer.csv", index=False, encoding="utf-8")
+    df.to_csv("naukri_jobs.csv", index=False, encoding="utf-8")
     driver.quit()
     print("🎉 Scraping Done! Data saved to naukri_jobs.csv")
 
 
 # Run scraper
 if __name__ == "__main__":
-    naukriComScraper(['java-developer'], max_pages=20, per_page_limit=19)
+    naukriComScraper(['python-developer'], max_pages=20, per_page_limit=19)

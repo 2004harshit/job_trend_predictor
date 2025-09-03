@@ -1,5 +1,6 @@
-from base import JobExtractor
+from data_collection.base import JobExtractor
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
@@ -17,7 +18,7 @@ class NaukriJobExtractor(JobExtractor):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         wait = WebDriverWait(driver, 8)
 
-        all_data = []
+        extracted_data = []
         seen_job_urls = set()
 
         print(f"Scraping jobs for: {job_name}")
@@ -86,7 +87,7 @@ class NaukriJobExtractor(JobExtractor):
                 skills = [star_skills, normal_skills]
                 jd_elem = page.find("div", class_="styles_JDC__dang-inner-html__h0K4t")
                 job_description = jd_elem.get_text(" ", strip=True) if jd_elem else "NA"
-                all_data.append({
+                extracted_data.append({
                     "Job Type": job_name,
                     "Title": title,
                     "Company": company,
@@ -118,7 +119,10 @@ class NaukriJobExtractor(JobExtractor):
                 break
             print(f"Finished {job_name}")
             
-
+        return extracted_data
+    def get_name(self):
+        return "NaukriExtractor"
+    
 if __name__ == "__main__":
     Nje = NaukriJobExtractor()
-    Nje.extract("python-developer", 5 , 5)
+    Nje.extract("python-developer", 10 , 15)

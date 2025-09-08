@@ -1,1 +1,0 @@
-This folder will contain jupyter notebook which perform eda on data

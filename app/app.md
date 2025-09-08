@@ -1,1 +1,0 @@
-this folder will cotain the python script which is responsible for frontend

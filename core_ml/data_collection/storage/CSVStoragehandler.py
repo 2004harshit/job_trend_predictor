@@ -1,12 +1,13 @@
-from base import StorageHandler
+from core_ml.data_collection.base import StorageHandler
 from typing import List , Dict 
 import pandas as pd
 import csv
-from config.logger import setup_logging
+import os
+from core_ml.configuration.logger import setup_logging
 import logging
 
 setup_logging()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("data_collection")
 
 class CSVStorageHandler(StorageHandler):
 
@@ -19,6 +20,7 @@ class CSVStorageHandler(StorageHandler):
             return
         
         try:
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
             df = pd.DataFrame(clean_dataset)
             logger.debug(f"Converted dataset with {len(df)} rows into DataFrame.")
         except Exception as e:

@@ -1,4 +1,4 @@
-from data_collection.base import JobExtractor
+from core_ml.data_collection.base import JobExtractor
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,15 +7,21 @@ import pandas as pd
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-import time
-from config.logger import setup_logging
+import random, time
+from core_ml.configuration.logger import setup_logging
 import logging
 
 setup_logging()
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("data_collection")
 
 class NaukriJobExtractor(JobExtractor):
-    def extract(self  ,job_name: str , max_pages: int , per_page_limit: int):
+    def __init__(self , max_pages , per_page_limit , min_delay , max_delay ):
+        self.max_pages = max_pages
+        self.per_page_limit = per_page_limit
+        self.min_delay = min_delay
+        self.max_delay = max_delay
+        
+    def extract(self  ,job_name: str):
         logger.info(f"tarting job scraping for `{job_name}` using NaukriJobExtractor")
 
 
@@ -31,7 +37,7 @@ class NaukriJobExtractor(JobExtractor):
         driver.get(f"https://www.naukri.com/{job_name}-jobs")
         page_no = 1
 
-        while page_no <= max_pages:
+        while page_no <= self.max_pages:
             logger.debug(f"Processing page {page_no} for {job_name}")
             try:
                 wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "a.title")))
@@ -43,8 +49,8 @@ class NaukriJobExtractor(JobExtractor):
             job_elems = driver.find_elements(By.CSS_SELECTOR, "a.title")
             job_hrefs = [a.get_attribute("href") for a in job_elems if a.get_attribute("href")]
 
-            if per_page_limit:
-                job_hrefs = job_hrefs[:per_page_limit]
+            if self.per_page_limit:
+                job_hrefs = job_hrefs[:self.per_page_limit]
             
             logger.info(f"Found {len(job_hrefs)} links on page {page_no} for `{job_name}`")
 
@@ -58,7 +64,9 @@ class NaukriJobExtractor(JobExtractor):
                 try:
                     driver.execute_script("window.open(arguments[0], '_blank');", job_url)
                     driver.switch_to.window(driver.window_handles[-1])
-                    time.sleep(2)
+                    # random delay to mimic human behavior
+                    time.sleep(random.uniform(self.min_delay,self.max_delay))
+
                     page = BeautifulSoup(driver.page_source, "html.parser")
 
                     # extract job  info

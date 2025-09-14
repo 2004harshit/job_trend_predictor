@@ -1,0 +1,59 @@
+# config.yaml
+pipeline:
+  max_pages: 5
+  per_page_limit: 10
+  min_delay: 3
+  max_delay: 7
+  role_delay: 20
+
+
+job_queue:
+  group1:
+    - "Data Scientist"
+    - "Machine Learning Engineer"
+    - "Data Analyst"
+  group2:
+    - "Business Analyst"
+    - "AI Engineer"
+    - "Research Associate"
+  group3:
+    - "Data Engineer"
+    - "Web Developer"
+    - "Software Engineer"
+  group4:
+    - "DevOps Engineer"
+    - "Product Manager"
+    - "Project Manager"
+  group5:
+    - "UX Designer"
+    - "Full Stack Developer"
+    - "Cloud Engineer"
+  group6:
+    - "DevOps Specialist"
+    - "Database Administrator"
+    - "Cybersecurity Analyst"
+  group7:
+    - "Network Engineer"
+    - "Systems Analyst"
+    - "IT Support Specialist"
+  group8:
+    - "Mobile App Developer"
+    - "Front End Developer"
+    - "Back End Developer"
+  group9:
+    - "QA Engineer"
+    - "Technical Writer"
+    - "Scrum Master"
+  group10:
+    - "Python Developer"
+    - "Java Developer"
+    - "Ruby on Rails Developer"
+
+
+storage:
+  filedirectory:
+    CSVStorageHandler: "core_ml/data/raw/scraped_data.csv"
+    JSONStorageHandler: "core_ml/data/raw/scraped_data.json"
+
+handlers:
+  - CSVStorageHandler

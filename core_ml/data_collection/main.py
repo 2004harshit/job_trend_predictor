@@ -5,7 +5,7 @@ from core_ml.configuration.logger import setup_logging
 import yaml
 import sys
 import os
-
+import time
 
 def load_config(config_path=None) -> dict:
     if config_path is None:
@@ -28,13 +28,15 @@ if __name__ == "__main__":
     per_page_limit = cfg["pipeline"]["per_page_limit"]
     role_delay = cfg["pipeline"]["role_delay"]
 
-    extractors = [NaukriJobExtractor(max_pages , per_page_limit , min_delay , max_delay)]
+    extractors = [NaukriJobExtractor(max_pages , per_page_limit , min_delay , max_delay, role_delay)]
     handlers = [CSVStorageHandler()]
 
     for group in job_queue:
-        for job in group:
+        for job in job_queue[group]:
             pipeline = Pipeline(extractors, handlers, job, filedirectory)
+            print(f"Running pipeline for job: {job}")
             pipeline.run()
             break
+            # time.sleep(role_delay)
         break
-    sys.exit(0)
+

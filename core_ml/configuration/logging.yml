@@ -19,7 +19,7 @@ handlers:
     class: logging.FileHandler
     level: DEBUG
     formatter: detailed
-    filename: core_ml/logs/app.log
+    filename: /logs/app.log
     mode: a
 
 loggers:

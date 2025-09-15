@@ -10,31 +10,46 @@ from bs4 import BeautifulSoup
 import random, time
 from core_ml.configuration.logger import setup_logging
 import logging
+# from core_ml.utils.robots import is_allowed
+from core_ml.utils.backoff import exponential_backoff
+
 
 setup_logging()
 logger = logging.getLogger("data_collection")
 
 class NaukriJobExtractor(JobExtractor):
-    def __init__(self , max_pages , per_page_limit , min_delay , max_delay ):
+    def __init__(self , max_pages , per_page_limit , min_delay , max_delay ,role_delay=10):
         self.max_pages = max_pages
         self.per_page_limit = per_page_limit
         self.min_delay = min_delay
         self.max_delay = max_delay
+        self.role_delay = role_delay
         
     def extract(self  ,job_name: str):
         logger.info(f"tarting job scraping for `{job_name}` using NaukriJobExtractor")
 
 
         options = webdriver.ChromeOptions()
-        options.add_argument("--start-maximized")
+        options.add_argument("--headless")          # Run without GUI
+        options.add_argument("--no-sandbox")        # Required for many Linux servers
+        options.add_argument("--disable-dev-shm-usage")  # Avoid memory issues
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("user-agent=Mozilla/5.0 ... Chrome/117.0 Safari/537.36")
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
         wait = WebDriverWait(driver, 8)
 
         extracted_data = []
         seen_job_urls = set()
 
+        job_url = f"https://www.naukri.com/{job_name}-jobs"
+
+        # if not is_allowed(job_url, "JobPipelineBot"):
+        #     logger.error(f"Skipping {job_url} due to robots.txt restrictions")
+        #     return []
+        
         # start from first page
-        driver.get(f"https://www.naukri.com/{job_name}-jobs")
+        exponential_backoff(lambda: driver.get(job_url))
+        # driver.get(job_url)
         page_no = 1
 
         while page_no <= self.max_pages:
@@ -147,10 +162,14 @@ class NaukriJobExtractor(JobExtractor):
                 break
 
         logger.info(f"Finished scraping {len(extracted_data)} jobs for '{job_name}'")
+        logger.info(f"Sleeping {self.role_delay} seconds before next role")
+        time.sleep(self.role_delay)
+
         return extracted_data
     
     def get_name(self):
         return "NaukriExtractor"
+    
     
 if __name__ == "__main__":
     Nje = NaukriJobExtractor()

@@ -1,27 +1,30 @@
 from airflow import DAG
 from airflow.decorators import task
+from airflow.utils.log.logging_mixin import LoggingMixin
 from datetime import datetime, timedelta
 import os
 import yaml
+
 import time
 import logging
+import sys
 
-from core_ml.data_collection.pipeline import Pipeline
-from core_ml.data_collection.extractors.NaukriExtractor import NaukriJobExtractor
-from core_ml.data_collection.storage.CSVStoragehandler import CSVStorageHandler
-from core_ml.configuration.logger import setup_logging
+from etl_pipeline.data_collection.pipeline import Pipeline
+from etl_pipeline.data_collection.extractors.NaukriExtractor import NaukriJobExtractor
+from etl_pipeline.data_collection.storage.CSVStoragehandler import CSVStorageHandler
 
 
-setup_logging()
-logger = logging.getLogger("airflow.task")
+logger = LoggingMixin().log
 
 @task
 def run_full_pipeline():
+
     
     logger.info("Starting the job scraping pipeline")
 
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # project root
-    config_path = os.path.join(base_dir , "core_ml","configuration","config.yaml")
+    config_path = os.path.join(base_dir, "etl_pipeline","configuration", "config.yml")
+
 
     with open(config_path, 'r') as file:
         cfg = yaml.safe_load(file)
@@ -36,8 +39,8 @@ def run_full_pipeline():
     role_delay = cfg["pipeline"]["role_delay"]
 
     logger.info(f"extractors and storage handlers initialization")
-    extractors = [NaukriJobExtractor(max_pages, per_page_limit, min_delay, max_delay, role_delay)]
-    storage_handlers = [CSVStorageHandler()]
+    extractors = [NaukriJobExtractor(max_pages, per_page_limit, min_delay, max_delay, role_delay, logger=logger)]
+    storage_handlers = [CSVStorageHandler(logger=logger)]
 
     logger.info(f"Starting the pipeline for job queue")
     for group in job_queue:
@@ -46,8 +49,10 @@ def run_full_pipeline():
                 logger.info(f"Running pipeline for job: {job}")
                 pipeline = Pipeline(extractors, storage_handlers, job, filedirectory)
                 pipeline.run()
+               
             except Exception as e:
                 logger.error(f"Pipeline failed for job: {job}", exc_info=True)
+       
     logger.info("Job scraping pipeline completed")
     
 
@@ -55,14 +60,15 @@ def run_full_pipeline():
 with DAG(
     dag_id = "job_scraper_dag",
     start_date = datetime(2025, 9, 15),
-    schedule_interval = "@daily",
+    schedule = "@daily",
     catchup = False,
     default_args = {
         "owner": "airflow",
-        "retries": 1,
+        # "retries": 1,
         "retry_delay": timedelta(minutes=5),
     }
 ) as dag:
     
 
     run_pipeline_task = run_full_pipeline()
+

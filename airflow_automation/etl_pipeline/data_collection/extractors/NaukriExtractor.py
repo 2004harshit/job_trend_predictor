@@ -1,4 +1,4 @@
-from core_ml.data_collection.base import JobExtractor
+from etl_pipeline.data_collection.base import JobExtractor
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,25 +8,22 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import random, time
-from core_ml.configuration.logger import setup_logging
-import logging
-# from core_ml.utils.robots import is_allowed
-from core_ml.utils.backoff import exponential_backoff
+import datetime
+# from etl_pipeline.utils.robots import is_allowed
+from etl_pipeline.utils.backoff import exponential_backoff
 
-
-setup_logging()
-logger = logging.getLogger("data_collection")
 
 class NaukriJobExtractor(JobExtractor):
-    def __init__(self , max_pages , per_page_limit , min_delay , max_delay ,role_delay=10):
+    def __init__(self , max_pages , per_page_limit , min_delay , max_delay ,role_delay=10,logger=None):
         self.max_pages = max_pages
         self.per_page_limit = per_page_limit
         self.min_delay = min_delay
         self.max_delay = max_delay
         self.role_delay = role_delay
-        
+        self.logger = logger
+
     def extract(self  ,job_name: str):
-        logger.info(f"tarting job scraping for `{job_name}` using NaukriJobExtractor")
+        self.logger.info(f"tarting job scraping for `{job_name}` using NaukriJobExtractor")
 
 
         options = webdriver.ChromeOptions()
@@ -35,8 +32,12 @@ class NaukriJobExtractor(JobExtractor):
         options.add_argument("--disable-dev-shm-usage")  # Avoid memory issues
         options.add_argument("--window-size=1920,1080")
         options.add_argument("user-agent=Mozilla/5.0 ... Chrome/117.0 Safari/537.36")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        wait = WebDriverWait(driver, 8)
+
+        self.service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=self.service , options=options)
+        driver =self.driver
+        wait = WebDriverWait(self.driver, 8)
+        
 
         extracted_data = []
         seen_job_urls = set()
@@ -44,7 +45,7 @@ class NaukriJobExtractor(JobExtractor):
         job_url = f"https://www.naukri.com/{job_name}-jobs"
 
         # if not is_allowed(job_url, "JobPipelineBot"):
-        #     logger.error(f"Skipping {job_url} due to robots.txt restrictions")
+        #     self.logger.error(f"Skipping {job_url} due to robots.txt restrictions")
         #     return []
         
         # start from first page
@@ -53,11 +54,11 @@ class NaukriJobExtractor(JobExtractor):
         page_no = 1
 
         while page_no <= self.max_pages:
-            logger.debug(f"Processing page {page_no} for {job_name}")
+            self.logger.debug(f"Processing page {page_no} for {job_name}")
             try:
                 wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "a.title")))
             except Exception as e:
-                logger.error(f"Failed to load job listing for {job_name} on page {page_no}: {e}")
+                self.logger.error(f"Failed to load job listing for {job_name} on page {page_no}: {e}")
                 break
 
             # collect job URLs
@@ -67,12 +68,12 @@ class NaukriJobExtractor(JobExtractor):
             if self.per_page_limit:
                 job_hrefs = job_hrefs[:self.per_page_limit]
             
-            logger.info(f"Found {len(job_hrefs)} links on page {page_no} for `{job_name}`")
+            self.logger.info(f"Found {len(job_hrefs)} links on page {page_no} for `{job_name}`")
 
             # scrape each job
             for job_url in job_hrefs:
                 if job_url in seen_job_urls:
-                    logger.debug(f"Skipping duplicate job url : {job_url}")
+                    self.logger.debug(f"Skipping duplicate job url : {job_url}")
                     continue
                 seen_job_urls.add(job_url)
 
@@ -137,13 +138,14 @@ class NaukriJobExtractor(JobExtractor):
                         "Skills": skills,
                         **details,
                         "Description": job_description,
-                        "Job URL": job_url
+                        "Job URL": job_url,
+                        "Timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     })
 
-                    logger.debug(f"Extracted job: {title} ({job_url})")
+                    self.logger.debug(f"Extracted job: {title} ({job_url})")
 
                 except Exception as e:
-                    logger.error(f"Error extracting job at {job_url}: {e}")
+                    self.logger.error(f"Error extracting job at {job_url}: {e}")
                 finally:
                     driver.close()
                     driver.switch_to.window(driver.window_handles[0])
@@ -153,16 +155,16 @@ class NaukriJobExtractor(JobExtractor):
                 next_btn = driver.find_element(By.CSS_SELECTOR, "a.styles_btn-secondary__2AsIP[href*='-jobs-']")
                 next_href = next_btn.get_attribute("href")
                 if not next_href:
-                    logger.warning(f"No 'Next' link found on page {page_no} for {job_name}. Stopping")
+                    self.logger.warning(f"No 'Next' link found on page {page_no} for {job_name}. Stopping")
                     break
                 driver.get(next_href)
                 page_no += 1
             except:
-                logger.warning(f"No Next button found on page {page_no} for {job_name} Ending pagination")
+                self.logger.warning(f"No Next button found on page {page_no} for {job_name} Ending pagination")
                 break
 
-        logger.info(f"Finished scraping {len(extracted_data)} jobs for '{job_name}'")
-        logger.info(f"Sleeping {self.role_delay} seconds before next role")
+        self.logger.info(f"Finished scraping {len(extracted_data)} jobs for '{job_name}'")
+        self.logger.info(f"Sleeping {self.role_delay} seconds before next role")
         time.sleep(self.role_delay)
 
         return extracted_data

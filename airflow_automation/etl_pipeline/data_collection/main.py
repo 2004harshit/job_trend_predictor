@@ -1,7 +1,8 @@
-from core_ml.data_collection.pipeline import Pipeline
-from core_ml.data_collection.extractors.NaukriExtractor import NaukriJobExtractor
-from core_ml.data_collection.storage.CSVStoragehandler import CSVStorageHandler
-from core_ml.configuration.logger import setup_logging
+from etl_pipeline.data_collection.pipeline import Pipeline
+from etl_pipeline.data_collection.extractors.NaukriExtractor import NaukriJobExtractor
+from etl_pipeline.data_collection.storage.CSVStoragehandler import CSVStorageHandler
+from airflow.utils.log.logging_mixin import LoggingMixin
+
 import yaml
 import sys
 import os
@@ -16,7 +17,7 @@ def load_config(config_path=None) -> dict:
     
 
 if __name__ == "__main__":
-    setup_logging()
+
     cfg = load_config()
 
     job_queue = cfg["job_queue"]
@@ -36,7 +37,6 @@ if __name__ == "__main__":
             pipeline = Pipeline(extractors, handlers, job, filedirectory)
             print(f"Running pipeline for job: {job}")
             pipeline.run()
-            break
-            # time.sleep(role_delay)
-        break
+            time.sleep(role_delay)
+
 

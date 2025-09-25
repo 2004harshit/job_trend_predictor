@@ -52,8 +52,8 @@ job_queue:
 
 storage:
   filedirectory:
-    CSVStorageHandler: "core_ml/data/raw/scraped_data.csv"
-    JSONStorageHandler: "core_ml/data/raw/scraped_data.json"
+    CSVStorageHandler: "etl_pipeline/data/raw/scraped_data.csv"
+    JSONStorageHandler: "etl_pipeline/data/raw/scraped_data.json"
 
 handlers:
   - CSVStorageHandler

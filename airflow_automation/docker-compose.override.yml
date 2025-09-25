@@ -1,0 +1,6 @@
+services:
+  scheduler:
+    volumes:
+      - D:/DATA SCIENCE AND ML/job_trend_predictor/airflow_automation/etl_pipeline/data/raw:/usr/local/airflow/etl_pipeline/data/raw
+
+  

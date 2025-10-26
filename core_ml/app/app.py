@@ -1,6 +1,17 @@
+import sys
+import os
+
+# Get the project root directory (parent of current file's directory)
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
+
+# Add project root to Python path
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 import streamlit as st
-from pages import home, student_dashboard, counselor_dashboard, about
-from utils.styles import apply_custom_styles
+from app.pages import home, student_dashboard, counselor_dashboard, about
+from app.utils.styles import apply_custom_styles
 
 # Page configuration
 st.set_page_config(

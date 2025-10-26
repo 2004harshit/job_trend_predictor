@@ -6,27 +6,29 @@ from plotly.subplots import make_subplots
 
 def render_powerbi_section():
     """Render Power BI integration section"""
-    st.markdown("""
-    <div class="powerbi-container">
-        <div class="powerbi-placeholder">📊 Power BI Report Integration</div>
-        <p style="color: #666; margin-top: 1rem;">
-            Embed your Power BI report iframe here for interactive insights.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    # st.markdown("""
+    # <div class="powerbi-container">
+    #     <div class="powerbi-placeholder">📊 Power BI Report Integration</div>
+    #     <p style="color: #666; margin-top: 1rem;">
+    #         Embed your Power BI report iframe here for interactive insights.
+    #     </p>
+    # </div>
+    # """, unsafe_allow_html=True)
+
+    st.image(r"D:\DATA SCIENCE AND ML\job_trend_predictor\core_ml\app\pages\images\dashboard.jpg", use_container_width=True)    
 
 def render_metrics():
     """Render key metrics cards"""
     st.markdown("### 📈 Market Analytics Dashboard")
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric("Total Jobs Analyzed", "1,724", "↗️ 12%")
+        st.metric("Total Jobs Analyzed", "1,724")
     with c2:
-        st.metric("Active Companies", "792", "↗️ 8%")
+        st.metric("Active Companies", "792")
     with c3:
-        st.metric("Average Salary", "₹7.2L", "↗️ 15%")
+        st.metric("Average Salary", "₹7.2L")
     with c4:
-        st.metric("Skill Categories", "2,918", "↗️ 5%")
+        st.metric("Skill Categories", "2,918")
 
 def render_market_trends():
     """Render market trends tab"""

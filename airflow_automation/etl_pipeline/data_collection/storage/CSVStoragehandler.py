@@ -1,13 +1,13 @@
-from etl_pipeline.data_collection.base import StorageHandler
+from ....etl_pipeline.data_collection.base import StorageHandler
 from typing import List , Dict 
 import pandas as pd
 import csv
 import os
-from airflow.utils.log.logging_mixin import LoggingMixin
+
 
 class CSVStorageHandler(StorageHandler):
     def __init__(self, logger=None):
-        self.logger = logger or LoggingMixin().log
+        self.logger = logger
 
     def get_name(self) -> str:
         return "CSVStorageHandler"

@@ -5,14 +5,14 @@ A Data + ML + LLM powered platform to analyze and predict job market trends for 
 🌍 1. Project Overview
 
 The Job Market Intelligence System is designed to analyze real-time job postings and uncover emerging patterns in hiring, salary, and skill demand.
-It acts as an AI-powered decision-support tool for three key stakeholders — students, policy-makers, and career counsellors.
+It acts as an AI-powered del for three key stakeholders — students, policy-makers, and career counsellors.
 
 The system not only predicts job types and salary ranges using Machine Learning models, but also explains the “why” behind the patterns through LLM-generated insights.
 All results are visualized in an interactive Business Intelligence (BI) dashboard, allowing users to explore hiring trends and make data-driven career or policy decisions.
 
 🎯 2. Core Objectives
 
-To identify current trends in the job market — demand, location, skill importance, and salary variations.
+To identify current trends in the job market — demand, location, skill importance, and salary variations.cision-support too
 
 To predict salary and job type based on required skills and experience level.
 

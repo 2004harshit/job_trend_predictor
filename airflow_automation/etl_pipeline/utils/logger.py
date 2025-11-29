@@ -7,10 +7,11 @@ def setup_logging(config_path=None):
     """
     Setup logging from a YAML config file.
     Ensures the log directory exists before configuring handlers.
-    """
+    """ 
     # Default path to logging.yml in the same folder as this file
     if config_path is None:
-        config_path = os.path.join(os.path.dirname(__file__), "logging.yml")
+        config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "configuration\logging.yml")
+   
 
     print("Loading logging config from:", config_path)
 
@@ -25,6 +26,13 @@ def setup_logging(config_path=None):
             project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             handler["filename"] = os.path.join(project_root, handler["filename"])
             os.makedirs(os.path.dirname(handler["filename"]), exist_ok=True)
+
+            # print("-"*50)
+            # print("Handler : ", handler)
+            # print("Log file : ", handler["filename"])
+            # print("file root ", project_root)
+            # print("-"*50)
+            # print()
 
     # Configure logging
     logging.config.dictConfig(config)

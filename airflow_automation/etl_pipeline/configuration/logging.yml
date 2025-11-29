@@ -4,6 +4,7 @@ disable_existing_loggers: False
 formatters:
   simple:
     format: "%(levelname)s: %(message)s"
+  
   detailed:
     format: "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
     datefmt: "%Y-%m-%d %H:%M:%S"
@@ -15,30 +16,58 @@ handlers:
     formatter: simple
     stream: ext://sys.stdout
 
-  file:
-    class: logging.FileHandler
+  file_data_collection:
+    class: logging.handlers.RotatingFileHandler
     level: DEBUG
     formatter: detailed
-    filename: /logs/app.log
+    filename: logs/data_collection.log
+    maxBytes: 10485760
+    backupCount: 5
+    mode: a
+
+  file_pipeline:
+    class: logging.handlers.RotatingFileHandler
+    level: DEBUG
+    formatter: detailed
+    filename: logs/pipeline.log
+    maxBytes: 10485760
+    backupCount: 5
+    mode: a
+
+  file_utils:
+    class: logging.handlers.RotatingFileHandler
+    level: WARNING
+    formatter: detailed
+    filename: logs/utils.log
+    maxBytes: 10485760
+    backupCount: 5
+    mode: a
+
+  file_error:
+    class: logging.handlers.RotatingFileHandler
+    level: ERROR
+    formatter: detailed
+    filename: logs/error.log
+    maxBytes: 10485760
+    backupCount: 5
     mode: a
 
 loggers:
   data_collection:
     level: DEBUG
-    handlers: [console, file]
+    handlers: [console, file_data_collection, file_error]
     propagate: no
 
   pipeline:
     level: INFO
-    handlers: [console, file]
+    handlers: [console, file_pipeline, file_error]
     propagate: no
 
   utils:
     level: WARNING
-    handlers: [console, file]
+    handlers: [console, file_utils, file_error]
     propagate: no
-
 
 root:
   level: INFO
-  handlers: [console, file]
+  handlers: [console, file_error]

@@ -61,7 +61,7 @@ import streamlit as st
 def render():
     """Render the about page"""
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
-    st.markdown('<div class="content-title">ℹ️ About Job Market Intelligence System</div>', 
+    st.markdown('<div class="content-title">ℹ️ About Job Trend Predictor</div>', 
                 unsafe_allow_html=True)
     
     # Project Overview Section
@@ -69,7 +69,7 @@ def render():
     <div class="about-section">
         <div class="about-title">🌍 Project Overview</div>
         <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">
-            The <strong>Job Market Intelligence System</strong> is a Data + ML + LLM powered 
+            The <strong>Job Trend Predictor</strong> is a Data + ML + LLM powered 
             platform designed to analyze and predict job market trends for students, policy-makers, 
             and career counsellors. This system not only predicts job types and salary ranges using 
             Machine Learning models, but also explains the "why" behind the patterns through 
@@ -227,11 +227,11 @@ def render():
     </div>
     """, unsafe_allow_html=True)
     
-    # Footer Section
+    # Footer SectionN
     st.markdown("""
     <div class="about-section" style="text-align:center; background:#f8f9fa;">
         <p style="color:#666; margin:0;">
-            © 2025 Job Market Intelligence System. Built with ❤️ using Python, Streamlit, Machine Learning & LLM
+            © 2025 Job Trend Predictor. Built with ❤️ using Python, Streamlit, Machine Learning & LLM
         </p>
     </div>
     """, unsafe_allow_html=True)

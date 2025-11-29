@@ -1,7 +1,7 @@
 # config.yaml
 pipeline:
-  max_pages: 5
-  per_page_limit: 10
+  max_pages: 10
+  per_page_limit: 15
   min_delay: 3
   max_delay: 7
   role_delay: 20

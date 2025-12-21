@@ -63,3 +63,12 @@ datasets/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+
+# Temporary files
+*.tmp
+*.swp
+
+documents/
+temp/
+doc/

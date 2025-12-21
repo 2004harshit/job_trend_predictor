@@ -7,6 +7,8 @@ from typing import List, Dict, Optional
 import logging
 from datetime import datetime
 
+from .storage.CSVStoragehandler import CSVStorageHandler
+from .extractors.NaukriExtractor import NaukriJobExtractor
 from .base import JobExtractor, StorageHandler
 
 
@@ -79,7 +81,7 @@ class Pipeline():
             stats ["job_details"][job] = job_stats
             if job_stats["success"]:
                 stats["successful_jobs"] +=1
-                stats["total_records"] += job_stats["record_extracted"]
+                stats["total_records"] += job_stats["records_extracted"]
             else:
                 stats["failed_jobs"] += 1
         
@@ -92,7 +94,7 @@ class Pipeline():
         self.logger.info(f" Successful: {stats['successful_jobs']}")
         self.logger.info(f" Failed: {stats['failed_jobs']}")
         self.logger.info(f" Total Recors: {stats['total_records']}")
-        self.logger.info(" Elapsed Time: {elapsed:.2f}s")
+        self.logger.info(f" Elapsed Time: {elapsed:.2f}s")
         self.logger.info("\n" + "=" *60 )
 
         return stats
@@ -156,16 +158,19 @@ class Pipeline():
             if not  all_data:
                 self.logger.warning(f" No data extracted for job '{job}' from any extractor")
                 return job_stats
+            
+            job_stats["records_extracted"] = len(all_data)
 
-            # Storage Phase
-            self.logger.info(f" Saving {len(all_data)} records using {len(self.handlers)} handler(s)... ")
-
+            
+        # Storage Phase
+        self.logger.info(f" Saving {len(all_data)} records using {len(self.handlers)} handler(s)... ")
         for handler in self.handlers:
             handler_name = handler.get_name()
             filename = self.filedirectory[handler_name]
 
             try:
                 handler.save(all_data, filename)
+                job_stats["handlers_used"] += 1
                 self.logger.info(f"Handler={handler_name} | Saved data to {filename}")
             except Exception as e:
                 error_msg = f"Handler {handler_name} failed : {str(e)}"
@@ -177,7 +182,7 @@ class Pipeline():
         # Mark as successful if at least one handler succeeded
         if job_stats["handlers_used"] > 0:
             job_stats["success"] = True
-
+           
         return job_stats
 
 
@@ -222,7 +227,7 @@ if __name__ == "__main__":
     )
     
     stats = pipeline.run()
-    print(f"\n✓ Pipeline completed! Total records: {stats['total_records']}")
+    print(f"\nPipeline completed! Total records: {stats['total_records']}")
     
 
 

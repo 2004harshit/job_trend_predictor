@@ -83,7 +83,7 @@ def render_geographic_distribution():
                  title="Job Distribution by City Tier")
     st.plotly_chart(fig, use_container_width=True)
 
-def render():
+def render(navigate_to):
     """Main render function for counselor dashboard"""
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     st.markdown('<div class="content-title">🧑‍🏫 Career Counselor Dashboard</div>', 

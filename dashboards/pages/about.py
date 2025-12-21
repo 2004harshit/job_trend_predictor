@@ -58,8 +58,9 @@
 
 import streamlit as st
 
-def render():
+def render(navigate_to):
     """Render the about page"""
+    
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
     st.markdown('<div class="content-title">ℹ️ About Job Trend Predictor</div>', 
                 unsafe_allow_html=True)

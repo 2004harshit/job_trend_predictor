@@ -10,8 +10,8 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 import streamlit as st
-from app.pages import home, student_dashboard, counselor_dashboard, about,profile
-from app.utils.styles import apply_custom_styles
+from dashboards.pages import fresher_dashboard, home, counselor_dashboard, about,set_profile
+from dashboards.utils.styles import apply_custom_styles
 
 # Page configuration
 st.set_page_config(
@@ -35,56 +35,38 @@ def navigate_to(page: str) -> None:
     st.session_state.current_page = page
     st.rerun()
 
-# def render_navigation() -> None:
-#     """Render the top navigation bar"""
-#     st.markdown("""
-#     <div class="nav-container">
-#         <h1 class="nav-title">📊 Job Trend Predictor</h1>
-#         <div class="nav-tabs"></div>
-#     </div>
-#     """, unsafe_allow_html=True)
-    
-#     # c1, c2 = st.columns([1, 1])
-#     # with c1:
-#     #     if st.button("🏠 Home", key="nav_home", use_container_width=True):
-#     #         navigate_to('Home')
-#     # with c2:
-#     #     if st.button("ℹ️ About", key="nav_about", use_container_width=True):
-#     #         navigate_to('About')
-
 def render_navigation() -> None:
-    """Render the top navigation bar"""
-    st.markdown("""
-    <div class="nav-container">
-        <div class="nav-content">
-            <div class="nav-brand">
-                <span class="nav-icon">📊</span>
-                <span class="nav-title">Job Trend Predictor</span>
-            </div>
+    """Render the top navigation bar in a single line"""
+    
+    # Ek hi row mein columns create karein
+    # [3, 1, 1, 1] ka matlab hai Brand name zyada space lega, buttons kam
+    col_brand, col_home, col_profile, col_login = st.columns([3, 1, 1, 1], vertical_alignment="center")
+
+    with col_brand:
+        # Markdown ko yahan render karein
+        st.markdown("""
+        <div style="display: flex; align-items: center;">
+            <span style="font-size: 24px; margin-right: 10px;">📊</span>
+            <span style="font-size: 20px; font-weight: bold; white-space: nowrap;">Job Trend Predictor</span>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Navigation buttons below the header
-    col1, col2, col3, col4 = st.columns([2, 1, 1, 1])
-    
-    with col1:
-        st.write("")  # Spacer
-    
-    with col2:
-        if st.button("🏠 Home", key="nav_home", use_container_width=True):
+        """, unsafe_allow_html=True)
+
+    with col_home:
+        if st.button("🏠 Home", key="nav_home", use_container_width=True, type="primary"):
             st.session_state.current_page = 'Home'
             st.rerun()
-    
-    with col3:
-        if st.button("👤 My Profile", key="nav_profile", use_container_width=True):
+
+    with col_profile:
+        if st.button("👤 Profile", key="nav_profile", use_container_width=True):
             st.session_state.current_page = 'Profile'
             st.rerun()
-    
-    with col4:
-        if st.button("🔐 profile", key="nav_login", use_container_width=True):
-            st.session_state.current_page = 'profile'
+
+    with col_login:
+        if st.button("🔐 Login", key="nav_login", use_container_width=True):
+            st.session_state.current_page = 'Login'
             st.rerun()
+    
+    st.markdown("---") # Optional: Divider line for clean look
 
 def main() -> None:
     """Main application logic"""
@@ -97,15 +79,14 @@ def main() -> None:
     if page == 'Home':
         home.render(navigate_to)
     elif page == 'Student Dashboard':
-        student_dashboard.render(navigate_to)
+        fresher_dashboard.render(navigate_to)
     elif page == 'Career Counselor Dashboard':
         counselor_dashboard.render(navigate_to)
     elif page == 'About':
         about.render(navigate_to)
     elif page == 'profile':
-        profile.render(navigate_to)
-    elif page == 'Profile':
-        pass
+        set_profile.render(navigate_to)
+    
 
 if __name__ == "__main__":
     main()

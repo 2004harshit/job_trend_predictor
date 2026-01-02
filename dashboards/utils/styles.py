@@ -17,7 +17,7 @@ def apply_custom_styles():
         html, body, [class*="css"] {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
-        
+                
         /* Main Container */
         .main {
             background: #0f1419;
@@ -708,29 +708,6 @@ def apply_custom_styles():
         .fade-in {
             animation: fadeInUp 0.6s ease-out;
         }
-        /* Profile Page Styles */
-.profile-header {
-    text-align: center;
-    padding: 2rem 0 3rem 0;
-}
-
-.profile-header h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    color: #f8fafc;
-    margin-bottom: 1rem;
-}
-
-.profile-header p {
-    font-size: 1.2rem;
-    color: #94a3b8;
-}
-
-/* Make role selection buttons taller and more visual */
-div[data-testid="column"] button {
-    height: 120px !important;
-    white-space: pre-line !important;
-    line-height: 1.6 !important;
 }
     </style>
     """, unsafe_allow_html=True)

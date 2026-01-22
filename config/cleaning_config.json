@@ -1,0 +1,14 @@
+{
+    "column_mappings": {
+        "Title": "TitleCleaningStrategy",
+        "Company": "CompanyCleaningStrategy",
+        "Location": "LocationCleaningStrategy",
+        "Salary": "SalaryCleaningStrategy",
+        "Description": "DescriptionCleaningStrategy",
+        "Role": "RoleCleaningStrategy",
+        "Industry": "IndustryCleaningStrategy",
+        "Experience": "ExperienceCleaningStrategy",
+        "Employment Type": "EmploymentTypeCleaningStrategy",
+        "Posted Date": "PostedDateCleaningStrategy"
+    }
+}

@@ -4,7 +4,7 @@
 # from .base_storage_handler import StorageHandler
 # from ..utils.database_schema import db_creation, cleaned_job_table_creation,raw_job_table_creation,rejected_job_table_creation,validated_job_table_creation
 
-# class MySQLHandler(StorageHandler):
+# class MySQLStorageHandler(StorageHandler):
 #     def __init__(self, host,user, password,database,table,port):
 #         self.host = host,
 #         self.user = user
@@ -12,7 +12,7 @@
 #         self.database = database
 #         self.table = table
 #         self.port = port 
-#         self.logger = logging.getLogger("MySQLHandler")
+#         self.logger = logging.getLogger("MySQLStorageHandler")
 
 #     def _get_connection(self):
 
@@ -103,9 +103,12 @@ from ..utils.database_schema import (
     rejected_job_table_creation,
     validated_job_table_creation
 )
+from dotenv import load_dotenv
+import yaml
+load_dotenv()
 
 
-class MySQLHandler(StorageHandler):
+class MySQLStorageHandler(StorageHandler):
     """
     MySQL Storage Handler for job data.
     
@@ -120,7 +123,8 @@ class MySQLHandler(StorageHandler):
         password: str,
         database: str,
         table: str = "raw_job_data",
-        port: int = 3306
+        port: int = 3306,
+        logger = None
     ):
         """
         Initialize MySQL Handler.
@@ -139,7 +143,17 @@ class MySQLHandler(StorageHandler):
         self.database = database
         self.table = table
         self.port = port
-        self.logger = logging.getLogger("MySQLHandler")
+        
+        if logger is None:
+            self.logger = logging.getLogger(self.__class__.__name__)
+            if not self.logger.handlers:
+                handler = logging.StreamHandler()
+                formatter = logging.Formatter('%(levelname)s: %(message)s')
+                handler.setFormatter(formatter)
+                self.logger.addHandler(handler)
+                self.logger.setLevel(logging.INFO)
+        else:
+            self.logger = logger
         
         # Validate required parameters
         self._validate_config()
@@ -279,6 +293,7 @@ class MySQLHandler(StorageHandler):
         normal_skills = self._serialize_skills(job_data.get("Normal_Skills", []))
         
         return (
+            job_data.get("Job_ID", "NA"),
             job_data.get("Title", "NA"),
             job_data.get("Company", "NA"),
             job_data.get("Experience", "NA"),
@@ -362,12 +377,12 @@ class MySQLHandler(StorageHandler):
             # Step 5: Prepare insertion query
             insert_query = """
                 INSERT INTO raw_job_data (
-                    title, company, experience, salary, location, education,
+                    job_id ,title, company, experience, salary, location, education,
                     star_skills, normal_skills, posted_date, last_apply_date,
                     num_openings, num_applicants, role, industry_type, department,
                     employment_type, role_category, job_type, description, job_url, scraped_at
                 ) VALUES (
-                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+                    %s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
                     %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
                 )
             """
@@ -422,7 +437,7 @@ class MySQLHandler(StorageHandler):
 
     def get_name(self) -> str:
         """Return handler name."""
-        return "MySQLHandler"
+        return "MySQLStorageHandler"
 
     def fetch_all(self, limit: Optional[int] = None) -> List[Dict[str, Any]]:
         """
@@ -516,52 +531,64 @@ if __name__ == "__main__":
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
+    import os
+    with open(r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\config\config.yml", 'r' ) as f:
+        config = yaml.safe_load(f)
+        database_config = config["database"]
+        
+
+        host = database_config["host"]
+        user = os.getenv("DB_USER") if database_config['user'] == '${DB_USER}' else database_config['user']
+        password = os.getenv("DB_PASSWORD") if database_config['password'] == '${DB_PASSWORD}' else database_config['password']
+        
+        database = database_config["database"]
+        table = database_config["raw_job_data"]
+        # Initialize handler
+        handler = MySQLStorageHandler(
+            host=host,
+            user=user,
+            password=password,
+            database=database,
+            table=table,
+            port=3306
+        )
     
-    # Initialize handler
-    handler = MySQLHandler(
-        host="localhost",
-        user="root",
-        password="harshit",
-        database="JOB_DATA_DB",
-        table="raw_job_data",
-        port=3306
-    )
-    
-    # Sample data
-    sample_jobs = [
-        {
-            "Title": "Python Developer - Fresher",
-            "Company": "TCS",
-            "Experience": "0-1 Yrs",
-            "Salary": "3-5 Lacs P.A.",
-            "Location": "Bengaluru",
-            "Education": "B.Tech/B.E.",
-            "Star_Skills": ["Python", "Django", "SQL"],
-            "Normal_Skills": ["Git", "REST API"],
-            "Posted_Date": "2 Days Ago",
-            "Last_Apply_Date": "15 Feb 2026",
-            "Role": "Software Development",
-            "Industry_Type": "IT Services",
-            "Department": "Engineering",
-            "Employment_Type": "Full Time",
-            "Role_Category": "Programming",
-            "Job_Type": "python-developer",
-            "Description": "Looking for fresh graduates...",
-            "Job_URL": "https://example.com/job1",
-            "Scraped_At": "2026-01-26T10:30:00",
-            "num_openings": 5,
-            "num_applicants": 120
-        }
-    ]
-    
-    # Save to database
-    result = handler.save(sample_jobs)
-    print(f"\nSave Results:")
-    print(f"  Success: {result['success']}")
-    print(f"  Inserted: {result['inserted']}")
-    print(f"  Duplicates: {result['duplicates']}")
-    print(f"  Errors: {result['errors']}")
-    
-    # Fetch data
-    jobs = handler.fetch_all(limit=10)
-    print(f"\nFetched {len(jobs)} jobs from database")
+        # Sample data
+        sample_jobs = [
+            {
+                "Job_ID":4511587,
+                "Title": "Python Developer - Fresher",
+                "Company": "TCS",
+                "Experience": "0-1 Yrs",
+                "Salary": "3-5 Lacs P.A.",
+                "Location": "Bengaluru",
+                "Education": "B.Tech/B.E.",
+                "Star_Skills": ["Python", "Django", "SQL"],
+                "Normal_Skills": ["Git", "REST API"],
+                "Posted_Date": "2 Days Ago",
+                "Last_Apply_Date": "15 Feb 2026",
+                "Role": "Software Development",
+                "Industry_Type": "IT Services",
+                "Department": "Engineering",
+                "Employment_Type": "Full Time",
+                "Role_Category": "Programming",
+                "Job_Type": "python-developer",
+                "Description": "Looking for fresh graduates...",
+                "Job_URL": "https://example.com/job1",
+                "Scraped_At": "2026-01-26T10:30:00",
+                "num_openings": 5,
+                "num_applicants": 120
+            }
+        ]
+
+        # Save to database
+        result = handler.save(sample_jobs)
+        print(f"\nSave Results:")
+        print(f"  Success: {result['success']}")
+        print(f"  Inserted: {result['inserted']}")
+        print(f"  Duplicates: {result['duplicates']}")
+        print(f"  Errors: {result['errors']}")
+
+        # Fetch data
+        jobs = handler.fetch_all(limit=10)
+        print(f"\nFetched {len(jobs)} jobs from database")

@@ -8,7 +8,7 @@ class JobExtractor(ABC):
     must implement the extract method.
     """
     @abstractmethod
-    def extract(self , job_name: Union[str, List[str]] , max_pages: int , max_limit: int)-> List[Dict[str, str]]: 
+    def extract(self , job_name: Union[str, List[str]] ,locations:List[str])-> List[Dict[str, str]]: 
         pass
 
     @abstractmethod

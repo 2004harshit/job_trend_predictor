@@ -5,6 +5,7 @@ raw_job_table_creation = """CREATE TABLE raw_job_data (
     id SERIAL PRIMARY KEY,
     
     -- Basic Job Info
+    job_id VARCHAR(50),
     title VARCHAR(255),
     company VARCHAR(255),
     experience VARCHAR(150),        -- Keeps "0-5 years" as string
@@ -41,6 +42,7 @@ raw_job_table_creation = """CREATE TABLE raw_job_data (
 
 validated_job_table_creation = """CREATE TABLE validated_job_data (
     id SERIAL PRIMARY KEY,
+    job_id VARCHAR(50),
     title VARCHAR(255),
     company VARCHAR(255),
     experience VARCHAR(150),
@@ -68,6 +70,7 @@ validated_job_table_creation = """CREATE TABLE validated_job_data (
 
 rejected_job_table_creation = """CREATE TABLE rejected_job_data (
     id SERIAL PRIMARY KEY,
+    job_id VARCHAR(50),
     title VARCHAR(255),
     company VARCHAR(255),
     experience VARCHAR(150),

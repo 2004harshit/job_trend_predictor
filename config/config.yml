@@ -1,59 +1,273 @@
-# config.yaml
+# config.yaml - Configuration for Job Scraping Pipelines
+# Supports both General and Fresher job extraction
+
+# ============================================
+# GENERAL PIPELINE CONFIGURATION
+# ============================================
 pipeline:
+  # Scraping limits
   max_pages: 10
   per_page_limit: 15
+  
+  # Delay settings (in seconds)
   min_delay: 3
   max_delay: 7
-  role_delay: 20
+  role_delay: 20  # Delay between different job roles
+  
+  # Request settings
+  timeout: 30
+  max_retries: 3
 
 
+# ============================================
+# FRESHER PIPELINE CONFIGURATION
+# ============================================
+fresher_pipeline:
+  # Scraping limits (typically lower for fresher jobs)
+  max_pages: 5
+  per_page_limit: 20
+  
+  # Delay settings (can be slightly faster)
+  min_delay: 2
+  max_delay: 5
+  role_delay: 15
+  
+  # Request settings
+  timeout: 30
+  max_retries: 3
+
+
+# ============================================
+# JOB QUEUES - GENERAL JOBS
+# ============================================
 job_queue:
   group1:
     - "Data Scientist"
     - "Machine Learning Engineer"
     - "Data Analyst"
+  
   group2:
     - "Business Analyst"
     - "AI Engineer"
     - "Research Associate"
+  
   group3:
     - "Data Engineer"
     - "Web Developer"
     - "Software Engineer"
+  
   group4:
     - "DevOps Engineer"
     - "Product Manager"
     - "Project Manager"
+  
   group5:
     - "UX Designer"
     - "Full Stack Developer"
     - "Cloud Engineer"
+  
   group6:
     - "DevOps Specialist"
     - "Database Administrator"
     - "Cybersecurity Analyst"
+  
   group7:
     - "Network Engineer"
     - "Systems Analyst"
     - "IT Support Specialist"
+  
   group8:
     - "Mobile App Developer"
     - "Front End Developer"
     - "Back End Developer"
+  
   group9:
     - "QA Engineer"
     - "Technical Writer"
     - "Scrum Master"
+  
   group10:
     - "Python Developer"
     - "Java Developer"
     - "Ruby on Rails Developer"
 
 
-storage:
-  filedirectory:
-    CSVStorageHandler: "etl_pipeline/data/raw/scraped_data.csv"
-    JSONStorageHandler: "etl_pipeline/data/raw/scraped_data.json"
+# ============================================
+# JOB QUEUES - FRESHER JOBS
+# ============================================
+fresher_job_queue:
+  group1:
+    - "Fresher Data Scientist"
+    - "Fresher Machine Learning Engineer"
+    - "Fresher Data Analyst"
+  
+  group2:
+    - "Fresher Business Analyst"
+    - "Fresher AI Engineer"
+    - "Fresher Research Associate"
+  
+  group3:
+    - "Fresher Data Engineer"
+    - "Fresher Web Developer"
+    - "Fresher Software Engineer"
+  
+  group4:
+    - "Fresher DevOps Engineer"
+    - "Associate Product Manager"
+    - "Junior Project Coordinator"
+  
+  group5:
+    - "Fresher UX Designer"
+    - "Fresher Full Stack Developer"
+    - "Fresher Cloud Engineer"
+  
+  group6:
+    - "Junior DevOps Engineer"
+    - "Fresher Database Administrator"
+    - "Fresher Cybersecurity Analyst"
 
-handlers:
-  - CSVStorageHandler
+  group7:
+    - "Fresher Network Engineer"
+    - "Fresher Systems Analyst"
+    - "Fresher IT Support Specialist"
+
+  group8:
+    - "Fresher Mobile App Developer"
+    - "Fresher Front End Developer"
+    - "Fresher Back End Developer"
+
+  group9:
+    - "Fresher QA Engineer"
+    - "Fresher Technical Writer"
+    - "Junior Scrum Master"
+
+  group10:
+    - "Fresher Python Developer"
+    - "Fresher Java Developer"
+    - "Fresher Ruby on Rails Developer"
+
+
+# ============================================
+# STORAGE CONFIGURATION
+# ============================================
+storage:
+  # File storage paths
+  filedirectory:
+    CSVStorageHandler: "etl_pipeline/data/raw/general_jobs.csv"
+    JSONStorageHandler: "etl_pipeline/data/raw/general_jobs.json"
+    FresherCSVHandler: "etl_pipeline/data/raw/fresher_jobs.csv"
+  
+  # Active handlers for general pipeline
+  handlers:
+    - CSVStorageHandler
+
+
+# ============================================
+# DATABASE CONFIGURATION (for Fresher Pipeline)
+# ============================================
+database:
+  # Connection settings
+  host: "localhost"
+  port: 3306
+  database: "job_trends"
+  
+  # Credentials (loaded from environment variables for security)
+  # Set DB_USER and DB_PASSWORD in your .env file
+  user: ${DB_USER}
+  password: ${DB_PASSWORD}
+  
+  # Table names
+  raw_job_data: "raw_job_data"
+  fresher_table: "fresher_jobs"
+  
+  # Connection pool settings
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+  
+  # Table schema options
+  create_if_not_exists: true
+  auto_commit: true
+
+
+# ============================================
+# LOGGING CONFIGURATION
+# ============================================
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  
+  # Log file paths
+  file_path: "logs/pipeline.log"
+  error_file_path: "logs/pipeline_error.log"
+  
+  # Log format
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+  
+  # Rotation settings
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+
+
+# ============================================
+# SCRAPER CONFIGURATION
+# ============================================
+scraper:
+  # User agent rotation
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+  
+  # Headers
+  default_headers:
+    Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    Accept-Language: "en-US,en;q=0.9"
+    Accept-Encoding: "gzip, deflate, br"
+    DNT: "1"
+    Connection: "keep-alive"
+    Upgrade-Insecure-Requests: "1"
+
+
+# ============================================
+# DATA QUALITY CONFIGURATION
+# ============================================
+data_quality:
+  # Validation rules
+  required_fields:
+    - "job_title"
+    - "company"
+    - "location"
+  
+  # Deduplication
+  deduplicate: true
+  dedup_key: "job_url"
+  
+  # Data cleaning
+  remove_duplicates: true
+  handle_missing_values: "skip"  # skip, fill, default
+  
+  # Export settings
+  export_format: "csv"  # csv, json, parquet
+  compression: false
+
+
+# ============================================
+# MONITORING & ALERTS
+# ============================================
+monitoring:
+  # Enable/disable monitoring
+  enabled: true
+  
+  # Metrics to track
+  track_metrics:
+    - "total_jobs_scraped"
+    - "success_rate"
+    - "average_response_time"
+    - "error_count"
+  
+  # Alert thresholds
+  alerts:
+    error_threshold: 10  # Alert after 10 errors
+    success_rate_threshold: 0.8  # Alert if success rate drops below 80%
+

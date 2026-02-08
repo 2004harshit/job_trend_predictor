@@ -1,0 +1,72 @@
+# config.yaml
+pipeline:
+  max_pages: 10
+  per_page_limit: 15
+  min_delay: 3
+  max_delay: 7
+  role_delay: 20
+  min_salary : 100000
+  max_salary : 1000000
+  location : []
+
+
+job_queue:
+  group1:
+    - "Data Scientist"
+    - "Machine Learning Engineer"
+    - "Data Analyst"
+  group2:
+    - "Business Analyst"
+    - "AI Engineer"
+    - "Research Associate"
+  group3:
+    - "Data Engineer"
+    - "Web Developer"
+    - "Software Engineer"
+  group4:
+    - "DevOps Engineer"
+    - "Product Manager"
+    - "Project Manager"
+  group5:
+    - "UX Designer"
+    - "Full Stack Developer"
+    - "Cloud Engineer"
+  group6:
+    - "DevOps Specialist"
+    - "Database Administrator"
+    - "Cybersecurity Analyst"
+  group7:
+    - "Network Engineer"
+    - "Systems Analyst"
+    - "IT Support Specialist"
+  group8:
+    - "Mobile App Developer"
+    - "Front End Developer"
+    - "Back End Developer"
+  group9:
+    - "QA Engineer"
+    - "Technical Writer"
+    - "Scrum Master"
+  group10:
+    - "Python Developer"
+    - "Java Developer"
+    - "Ruby on Rails Developer"
+
+
+storage:
+  filedirectory:
+    CSVStorageHandler: "etl_pipeline/data/raw/scraped_data.csv"
+    JSONStorageHandler: "etl_pipeline/data/raw/scraped_data.json"
+  
+  database:
+    host : "localhost"
+    user: "root"
+    database: "job_data_db"
+    table: "raw_job_data"
+    port: 3306
+
+  
+
+handlers:
+  - CSVStorageHandler
+  - MySQLStorageHandler

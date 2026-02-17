@@ -70,7 +70,7 @@ def apply_custom_styles():
         .hero-headline {
             font-weight: 900;
             line-height: 1.1;
-            color: #ffffff;
+            color: #ffffff !important;
             letter-spacing: -0.025em;
             margin-bottom: 1.5rem;
             font-size: 3.5rem;
@@ -86,65 +86,72 @@ def apply_custom_styles():
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: clamp(1.35rem, 1.4vw + 0.95rem, 1.85rem);
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.9);
             max-width: 48rem;
             margin: 0 auto 2.5rem auto;
             animation: fadeInUp 0.9s ease-out both;
             animation-delay: 0.2s;
+            text-align  : centre;
         }
 
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.25rem;
-            justify-content: center;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.9s ease-out both;
-            animation-delay: 0.35s;
+        /* Streamlit hero actions (real buttons outside hero) */
+        .hero-streamlit-actions {
+            margin: 0.25rem 0 0.75rem 0;
         }
 
-        .btn-primary,
-        .btn-secondary {
-            padding: 1rem 2.5rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: default;
-            user-select: none;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-            text-decoration: none;
+        .hero-streamlit-actions .stButton > button,
+        .hero-streamlit-actions .stButton button,
+        .hero-streamlit-actions button {
+            border: none !important;
+            border-radius: 12px !important;
+            padding: 1rem 2.5rem !important;
+            font-size: 1.125rem !important;
+            font-weight: 600 !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease !important;
         }
 
-        .btn-primary {
-            background: #ffffff;
-            color: #6d28d9;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+        /* Primary (matches earlier hero primary: white background) */
+        .hero-streamlit-actions .stButton > button[kind="primary"],
+        .hero-streamlit-actions .stButton > button[data-testid="baseButton-primary"],
+        .hero-streamlit-actions .stButton button[kind="primary"],
+        .hero-streamlit-actions .stButton button[data-testid="baseButton-primary"] {
+            background: #ffffff !important;
+            color: #6d28d9 !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25) !important;
         }
 
-        .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.96);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 18px 35px -12px rgba(0, 0, 0, 0.35);
+        .hero-streamlit-actions .stButton > button[kind="primary"]:hover,
+        .hero-streamlit-actions .stButton > button[data-testid="baseButton-primary"]:hover,
+        .hero-streamlit-actions .stButton button[kind="primary"]:hover,
+        .hero-streamlit-actions .stButton button[data-testid="baseButton-primary"]:hover {
+            background: rgba(255, 255, 255, 0.96) !important;
+            transform: translateY(-3px) scale(1.03) !important;
+            box-shadow: 0 18px 35px -12px rgba(0, 0, 0, 0.35) !important;
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+        /* Secondary (matches earlier hero secondary: glass background) */
+        .hero-streamlit-actions .stButton > button[kind="secondary"],
+        .hero-streamlit-actions .stButton > button[data-testid="baseButton-secondary"],
+        .hero-streamlit-actions .stButton button[kind="secondary"],
+        .hero-streamlit-actions .stButton button[data-testid="baseButton-secondary"] {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.25) !important;
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+        .hero-streamlit-actions .stButton > button[kind="secondary"]:hover,
+        .hero-streamlit-actions .stButton > button[data-testid="baseButton-secondary"]:hover,
+        .hero-streamlit-actions .stButton button[kind="secondary"]:hover,
+        .hero-streamlit-actions .stButton button[data-testid="baseButton-secondary"]:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: translateY(-3px) scale(1.02) !important;
+            box-shadow: 0 18px 35px -14px rgba(0, 0, 0, 0.32) !important;
         }
 
         .features {
@@ -192,64 +199,58 @@ def apply_custom_styles():
         div[data-testid="column"] {
             padding: 0 0.75rem;
         }
-        
-        .stat-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            position: relative;
-            overflow: hidden;
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            margin: 2.25rem 0 3rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
         }
         
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef);
+        .stat-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -12px rgba(15, 23, 42, 0.35);
         }
         
         .stat-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.5);
-            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.45);
         }
         
         .stat-number {
-            font-size: 3.5rem;
+            font-size: 2.25rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background: linear-gradient(to right, #2563eb, #7c3aed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .stat-number {
+                font-size: 3rem;
+            }
         }
         
         .stat-label {
-            font-size: 1.1rem;
-            color: #94a3b8;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-        }
-        
-        .stat-change {
-            font-size: 0.95rem;
+            font-size: 0.875rem;
+            color: #4b5563;
             font-weight: 600;
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            display: inline-block;
-            margin-top: 0.5rem;
-        }
-        
-        .stat-change.positive {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.15);
         }
         
         /* Section Headers */
@@ -290,77 +291,157 @@ def apply_custom_styles():
             font-weight: 400;
         }
         
-        /* Feature Cards */
+        /* Features Section - modern cards */
+        .features-section {
+            padding: 5rem 1.5rem;
+            background: #ffffff;
+            border-radius: 24px;
+            margin: 4rem 0;
+        }
+
+        .features-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .features-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .pill-badge-icon {
+            width: 1rem;
+            height: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .features-heading-title {
+            font-size: 2.25rem;
+            line-height: 1.1;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .features-heading-title {
+                font-size: 3rem;
+            }
+        }
+
+        .features-heading-title .gradient-title {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .features-heading-subtitle {
+            font-size: 1.125rem;
+            color: #4b5563;
+            max-width: 40rem;
+            margin: 0.5rem auto 0 auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .feature-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
         .feature-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(99, 102, 241, 0.15);
-            height: 100%;
-            position: relative;
-            overflow: hidden;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid #e5e7eb;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 rgba(15, 23, 42, 0);
         }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #6366f1, transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
+
         .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+            border-color: transparent;
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+            transform: scale(1.05);
         }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
+
+        .feature-icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 0.9rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
         }
-        
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
+
+        .feature-card:hover .feature-icon-wrapper {
+            transform: scale(1.1);
         }
-        
-        .feature-icon.purple { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-        .feature-icon.blue { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
-        .feature-icon.pink { background: linear-gradient(135deg, #ec4899, #f43f5e); }
-        .feature-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
-        .feature-icon.orange { background: linear-gradient(135deg, #f97316, #fb923c); }
-        .feature-icon.teal { background: linear-gradient(135deg, #14b8a6, #06b6d4); }
-        
+
+        .feature-icon-wrapper svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: #ffffff;
+        }
+
+        .gradient-blue-cyan {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        }
+
+        .gradient-purple-pink {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+        }
+
+        .gradient-green-emerald {
+            background: linear-gradient(135deg, #22c55e, #10b981);
+        }
+
+        .gradient-orange-red {
+            background: linear-gradient(135deg, #f97316, #ef4444);
+        }
+
+        .gradient-yellow-orange {
+            background: linear-gradient(135deg, #facc15, #fb923c);
+        }
+
+        .gradient-indigo-purple {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+
         .feature-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
+            color: #111827;
+            margin-bottom: 0.5rem;
         }
-        
+
         .feature-description {
-            font-size: 1.05rem;
-            color: #94a3b8;
-            line-height: 1.7;
+            font-size: 0.975rem;
+            color: #4b5563;
+            line-height: 1.6;
         }
         
         /* Process Cards */

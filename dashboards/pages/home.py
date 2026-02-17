@@ -196,10 +196,6 @@ def render(navigate_to):
             <p class="hero-subtitle">
                 Make informed career decisions backed by real-time market data, AI predictions, and comprehensive trend analysis across 350K+ job opportunities
             </p>
-            <div class="hero-buttons">
-                <button class="btn-primary" type="button">Get Started Now →</button>
-                <button class="btn-secondary" type="button">Watch Demo ▶</button>
-            </div>
             <div class="features">
                 <div class="feature-item">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -227,6 +223,7 @@ def render(navigate_to):
     # Real interactive buttons (kept outside the hero HTML by design)
     left_spacer, center, right_spacer = st.columns([1, 2, 1])
     with center:
+        st.markdown('<div class="hero-streamlit-actions">', unsafe_allow_html=True)
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             if st.button("🚀 Get Started Now", use_container_width=True, type="primary"):
@@ -234,6 +231,7 @@ def render(navigate_to):
         with btn_col2:
             if st.button("▶ Watch Demo", use_container_width=True):
                 st.info("Demo video coming soon!")
+        st.markdown('</div>', unsafe_allow_html=True)
     
     # Stats Section
     col1, col2, col3 = st.columns(3)

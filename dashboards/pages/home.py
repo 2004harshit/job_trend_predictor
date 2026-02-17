@@ -187,29 +187,53 @@ def render(navigate_to):
     
     # Hero Section
     st.markdown("""
-    <div class="hero-section">
+    <div class="hero-container">
         <div class="hero-content">
-            <h1 class="hero-title">Navigate Your Tech Career<br/>With Confidence</h1>
+            <h1 class="hero-headline">
+                Navigate Your Tech Career<br/>
+                <span class="hero-highlight">With Confidence</span>
+            </h1>
             <p class="hero-subtitle">
-                Make informed career decisions backed by real-time market data, AI predictions, 
-                and comprehensive trend analysis across 350K+ job opportunities
+                Make informed career decisions backed by real-time market data, AI predictions, and comprehensive trend analysis across 350K+ job opportunities
             </p>
             <div class="hero-buttons">
-                <button class="btn-primary">Get Started Now →</button>
-                <button class="btn-secondary">Watch Demo ▶</button>
+                <button class="btn-primary" type="button">Get Started Now →</button>
+                <button class="btn-secondary" type="button">Watch Demo ▶</button>
+            </div>
+            <div class="features">
+                <div class="feature-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                    <span>Real-time job market intel</span>
+                </div>
+                <div class="feature-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                    <span>AI-driven career predictions</span>
+                </div>
+                <div class="feature-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                    <span>350K+ opportunities analyzed</span>
+                </div>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
+
+    # Real interactive buttons (kept outside the hero HTML by design)
+    left_spacer, center, right_spacer = st.columns([1, 2, 1])
+    with center:
         btn_col1, btn_col2 = st.columns(2)
-    with btn_col1:
-        if st.button("🚀 Get Started Now", use_container_width=True, type="primary"):
-            navigate_to('profile')  # or wherever you want
-    with btn_col2:
-        if st.button("▶ Watch Demo", use_container_width=True):
-            st.info("Demo video coming soon!")
+        with btn_col1:
+            if st.button("🚀 Get Started Now", use_container_width=True, type="primary"):
+                navigate_to('profile')  # or wherever you want
+        with btn_col2:
+            if st.button("▶ Watch Demo", use_container_width=True):
+                st.info("Demo video coming soon!")
     
     # Stats Section
     col1, col2, col3 = st.columns(3)

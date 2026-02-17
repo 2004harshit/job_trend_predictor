@@ -38,97 +38,154 @@ def apply_custom_styles():
         header {visibility: hidden;}
         
         /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
-            padding: 5rem 3rem;
+        /* New premium hero (2025 SaaS style) */
+        .hero-container {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c026d3 100%);
+            padding: 6rem 2rem;
             border-radius: 24px;
-            margin: 2rem 0 3rem 0;
+            margin: 2rem 1rem 4rem 1rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(124, 58, 237, 0.4);
         }
-        
-        .hero-section::before {
-            content: '';
+
+        .hero-container::before {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            inset: 0;
+            background:
+                radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.14) 0%, transparent 55%),
+                radial-gradient(circle at 82% 78%, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
             pointer-events: none;
         }
-        
+
         .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
-        
-        .hero-title {
-            font-size: 4rem;
+
+        .hero-headline {
             font-weight: 900;
-            color: white;
-            margin-bottom: 1.5rem;
             line-height: 1.1;
-            letter-spacing: -0.02em;
+            color: #ffffff;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            animation: fadeInUp 0.9s ease-out both;
         }
-        
+
+        .hero-headline .hero-highlight {
+            background: linear-gradient(to right, #fde047, #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
         .hero-subtitle {
             font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 3rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.7;
-            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 48rem;
+            margin: 0 auto 2.5rem auto;
+            animation: fadeInUp 0.9s ease-out both;
+            animation-delay: 0.2s;
         }
-        
+
         .hero-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 1.25rem;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.9s ease-out both;
+            animation-delay: 0.35s;
         }
-        
-        .btn-primary, .btn-secondary {
+
+        .btn-primary,
+        .btn-secondary {
             padding: 1rem 2.5rem;
-            font-size: 1.1rem;
+            font-size: 1.125rem;
             font-weight: 600;
-            border: none;
             border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            user-select: none;
+            border: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            text-decoration: none;
         }
-        
+
         .btn-primary {
-            background: white;
-            color: #6366f1;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            color: #6d28d9;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
         }
-        
+
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.96);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 18px 35px -12px rgba(0, 0, 0, 0.35);
         }
-        
+
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
-        
+
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            animation: fadeInUp 0.9s ease-out both;
+            animation-delay: 0.5s;
+        }
+
+        .feature-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .feature-item svg {
+            width: 24px;
+            height: 24px;
+            color: #86efac;
+            flex: 0 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .hero-headline {
+                font-size: 5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                padding: 4rem 1.25rem;
+            }
         }
         
         /* Stats Section */
@@ -708,7 +765,6 @@ def apply_custom_styles():
         .fade-in {
             animation: fadeInUp 0.6s ease-out;
         }
-}
     </style>
     """, unsafe_allow_html=True)
 

@@ -257,125 +257,32 @@ def render(navigate_to):
     
     st.markdown("<br/>", unsafe_allow_html=True)
     
-    # Features Section - modern landing style
+    # Features Section - modern landing style (single-line SVGs to avoid raw HTML showing)
+    ICON_TARGET = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M22 12H18"/><path d="M6 12H2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="m15 9-3 3 3 3"/><path d="m9 9 3 3-3 3"/></svg>'
+    ICON_BRAIN = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0c0 1-.5 1.5-1 2-.5.5-1 1-1 2"/><path d="M12 17h.01"/><path d="M5.5 8A6.5 6.5 0 0 1 18 6.5"/><path d="M8 20h8"/><path d="M7 20a4 4 0 0 1-.88-7.9"/><path d="M17.88 12.1A4 4 0 0 1 17 20"/></svg>'
+    ICON_ROCKET = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21 9 3l4 9 4-6 2.5 15"/><path d="M4.5 21h15"/></svg>'
+    ICON_CHART = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7" rx="1"/><rect x="12" y="6" width="3" height="11" rx="1"/><rect x="17" y="8" width="3" height="9" rx="1"/></svg>'
+    ICON_ZAP = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg>'
+    ICON_TREND = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>'
+
     features = [
-        {
-            "title": "Domain Confusion Resolver",
-            "description": "Compare multiple tech domains with AI-powered recommendations. Know exactly which path suits you best.",
-            "gradient_class": "gradient-blue-cyan",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M22 12H18"></path>
-                    <path d="M6 12H2"></path>
-                    <path d="M12 2v4"></path>
-                    <path d="M12 18v4"></path>
-                    <path d="m15 9-3 3 3 3"></path>
-                    <path d="m9 9 3 3-3 3"></path>
-                </svg>
-            """,
-        },
-        {
-            "title": "AI-Powered Insights",
-            "description": "Machine learning models analyze market trends and predict future demands with 85%+ accuracy.",
-            "gradient_class": "gradient-purple-pink",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 9a3 3 0 0 1 6 0c0 1-.5 1.5-1 2-.5.5-1 1-1 2"></path>
-                    <path d="M12 17h.01"></path>
-                    <path d="M5.5 8A6.5 6.5 0 0 1 18 6.5"></path>
-                    <path d="M8 20h8"></path>
-                    <path d="M7 20a4 4 0 0 1-.88-7.9"></path>
-                    <path d="M17.88 12.1A4 4 0 0 1 17 20"></path>
-                </svg>
-            """,
-        },
-        {
-            "title": "Career Path Generator",
-            "description": "Get personalized learning roadmaps with skill requirements, timelines, and salary projections.",
-            "gradient_class": "gradient-green-emerald",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4.5 21 9 3l4 9 4-6 2.5 15"></path>
-                    <path d="M4.5 21h15"></path>
-                </svg>
-            """,
-        },
-        {
-            "title": "Real-Time Market Data",
-            "description": "Access live hiring trends, salary insights, and job openings across 350K+ opportunities.",
-            "gradient_class": "gradient-orange-red",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 3v18h18"></path>
-                    <rect x="7" y="10" width="3" height="7" rx="1"></rect>
-                    <rect x="12" y="6" width="3" height="11" rx="1"></rect>
-                    <rect x="17" y="8" width="3" height="9" rx="1"></rect>
-                </svg>
-            """,
-        },
-        {
-            "title": "Skill Gap Analysis",
-            "description": "Identify missing skills and get priority learning paths to become industry-ready faster.",
-            "gradient_class": "gradient-yellow-orange",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12h6l3-9 3 18 3-9h3"></path>
-                </svg>
-            """,
-        },
-        {
-            "title": "Future Trend Forecasting",
-            "description": "ARIMA & Prophet models predict 6-12 month market trends for strategic career planning.",
-            "gradient_class": "gradient-indigo-purple",
-            "icon_svg": """
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 3v18h18"></path>
-                    <path d="m19 9-5 5-4-4-3 3"></path>
-                </svg>
-            """,
-        },
+        {"title": "Domain Confusion Resolver", "description": "Compare multiple tech domains with AI-powered recommendations. Know exactly which path suits you best.", "gradient_class": "gradient-blue-cyan", "icon_svg": ICON_TARGET},
+        {"title": "AI-Powered Insights", "description": "Machine learning models analyze market trends and predict future demands with 85%+ accuracy.", "gradient_class": "gradient-purple-pink", "icon_svg": ICON_BRAIN},
+        {"title": "Career Path Generator", "description": "Get personalized learning roadmaps with skill requirements, timelines, and salary projections.", "gradient_class": "gradient-green-emerald", "icon_svg": ICON_ROCKET},
+        {"title": "Real-Time Market Data", "description": "Access live hiring trends, salary insights, and job openings across 350K+ opportunities.", "gradient_class": "gradient-orange-red", "icon_svg": ICON_CHART},
+        {"title": "Skill Gap Analysis", "description": "Identify missing skills and get priority learning paths to become industry-ready faster.", "gradient_class": "gradient-yellow-orange", "icon_svg": ICON_ZAP},
+        {"title": "Future Trend Forecasting", "description": "ARIMA & Prophet models predict 6-12 month market trends for strategic career planning.", "gradient_class": "gradient-indigo-purple", "icon_svg": ICON_TREND},
     ]
 
-    cards_html = ""
-    for feature in features:
-        cards_html += f"""
-        <div class="feature-card">
-            <div class="feature-icon-wrapper {feature['gradient_class']}">
-                {feature['icon_svg']}
-            </div>
-            <h3 class="feature-title">{feature['title']}</h3>
-            <p class="feature-description">{feature['description']}</p>
-        </div>
-        """
+    cards_html = "".join(
+        f'<div class="feature-card"><div class="feature-icon-wrapper {f["gradient_class"]}">{f["icon_svg"]}</div><h3 class="feature-title">{f["title"]}</h3><p class="feature-description">{f["description"]}</p></div>'
+        for f in features
+    )
+
+    hero_heading_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>'
 
     st.markdown(
-        f"""
-        <section class="features-section">
-            <div class="features-inner">
-                <div class="features-heading">
-                    <div class="pill-badge">
-                        <span class="pill-badge-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                            </svg>
-                        </span>
-                        <span>Powerful Features</span>
-                    </div>
-                    <h2 class="features-heading-title">
-                        Everything You Need to<br/>
-                        <span class="gradient-title">Make Smart Career Moves</span>
-                    </h2>
-                    <p class="features-heading-subtitle">
-                        Comprehensive tools and insights designed for every stage of your career journey.
-                    </p>
-                </div>
-                <div class="feature-grid">
-                    {cards_html}
-                </div>
-            </div>
-        </section>
-        """,
+        f'<section class="features-section"><div class="features-inner"><div class="features-heading"><div class="pill-badge"><span class="pill-badge-icon">{hero_heading_svg}</span><span>Powerful Features</span></div><h2 class="features-heading-title">Everything You Need to<br/><span class="gradient-title">Make Smart Career Moves</span></h2><p class="features-heading-subtitle">Comprehensive tools and insights designed for every stage of your career journey.</p></div><div class="feature-grid">{cards_html}</div></div></section>',
         unsafe_allow_html=True,
     )
     

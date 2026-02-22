@@ -1,0 +1,195 @@
+# Git Attributes Configuration for Job Market Intelligence System
+# This file defines how Git handles different file types and languages
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROJECT METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Primary Language: Python
+# Secondary Languages: Jupyter Notebooks, YAML, Markdown
+# Project Type: Data Science & Machine Learning with Web Scraping
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LANGUAGE DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Python Source Code
+*.py text diff=python encoding=UTF-8 eol=lf
+
+# Jupyter Notebooks
+*.ipynb diff=jupyter text merge=union
+
+# JavaScript (Dashboard frontend)
+*.js text diff=javascript encoding=UTF-8 eol=lf
+*.jsx text diff=javascript encoding=UTF-8 eol=lf
+
+# TypeScript
+*.ts text diff=typescript encoding=UTF-8 eol=lf
+*.tsx text diff=typescript encoding=UTF-8 eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATA & CONFIG FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# YAML Configuration Files
+*.yml text diff=yaml encoding=UTF-8 eol=lf
+*.yaml text diff=yaml encoding=UTF-8 eol=lf
+
+# JSON Configuration
+*.json text diff=json encoding=UTF-8 eol=lf
+
+# CSV Data Files
+*.csv text diff=csv encoding=UTF-8 eol=lf
+
+# Markdown Documentation
+*.md text diff=markdown encoding=UTF-8 eol=lf
+README.md text diff=markdown encoding=UTF-8 eol=lf
+
+# Text Files
+*.txt text encoding=UTF-8 eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BINARY FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Database Files
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+
+# Binary Model Files
+*.pkl binary
+*.pickle binary
+*.joblib binary
+*.h5 binary
+*.pth binary
+*.pt binary
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg text
+
+# Archives
+*.zip binary
+*.tar binary
+*.gz binary
+*.rar binary
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SHELL & BUILD FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Shell Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Batch Scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Docker
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+docker-compose*.yml text diff=yaml encoding=UTF-8 eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCY FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Python Dependencies
+requirements.txt text diff=text encoding=UTF-8 eol=lf
+setup.py text diff=python encoding=UTF-8 eol=lf
+setup.cfg text encoding=UTF-8 eol=lf
+pyproject.toml text encoding=UTF-8 eol=lf
+Pipfile text encoding=UTF-8 eol=lf
+Pipfile.lock text encoding=UTF-8 eol=lf
+poetry.lock text encoding=UTF-8 eol=lf
+
+# Node Dependencies
+package.json text diff=json encoding=UTF-8 eol=lf
+package-lock.json text diff=json encoding=UTF-8 eol=lf
+yarn.lock text encoding=UTF-8 eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GIT & VCS FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+.gitignore text encoding=UTF-8 eol=lf
+.gitattributes text encoding=UTF-8 eol=lf
+.github/** text eol=lf
+.gitlab-ci.yml text diff=yaml encoding=UTF-8 eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# IDE & EDITOR FILES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# VS Code
+.vscode/** text eol=lf
+*.code-workspace text diff=json encoding=UTF-8 eol=lf
+
+# Vim
+.vim/** text eol=lf
+*.swp binary
+*.swo binary
+
+# PyCharm / JetBrains
+.idea/** text eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LIBRARY INFORMATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Core Libraries:
+# - pandas: Data manipulation and analysis
+# - numpy: Numerical computing
+# - scikit-learn: Machine learning
+# - selenium: Web scraping and browser automation
+# - beautifulsoup4: HTML/XML parsing
+# - requests: HTTP library
+# - mysql-connector-python: Database connectivity
+# - streamlit: Dashboard framework
+# - pyyaml: YAML file handling
+# - python-dotenv: Environment variable management
+# - webdriver-manager: WebDriver management
+
+# Optional Libraries:
+# - tensorflow/pytorch: Deep learning frameworks
+# - nltk/spacy: Natural language processing
+# - plotly: Interactive visualization
+# - pytest: Unit testing
+# - black: Code formatting
+# - pylint: Code linting
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEFAULT BEHAVIOR
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Auto detect text files and normalize line endings to LF
+* text=auto
+* encoding=UTF-8
+
+# Ensure newline at end of file
+* eol=lf
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROJECT SPECIFIC RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Data files (logs, session data)
+/logs/** text eol=lf
+*.log text eol=lf
+/data/raw/** text
+/data/processed/** text
+
+# Configuration
+/config/** text diff=yaml encoding=UTF-8 eol=lf
+
+# Notebooks directory
+/notebooks/** merge=union
+
+# Tests
+/tests/** text diff=python encoding=UTF-8 eol=lf

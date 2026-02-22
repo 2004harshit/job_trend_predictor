@@ -1,398 +1,271 @@
 """
-run_pipeline.py - Main pipeline orchestrator for job scraping.
+run_pipeline.py - Main orchestrator for job market scraping pipelines
 
-This script manages multiple extractors (NaukriJobExtractor, FresherJobExtractor)
-and their respective storage handlers (CSV, MySQL).
+Supports three modes:
+  - general   → Naukri general jobs → CSV
+  - fresher   → Naukri fresher jobs → MySQL
+  - all       → both pipelines sequentially
 
-Usage:
-    python run_pipeline.py --mode general --group group1
-    python run_pipeline.py --mode fresher --group group2
-    python run_pipeline.py --mode all
+Usage examples:
+  python run_pipeline.py --mode fresher
+  python run_pipeline.py --mode general --group group1
+  python run_pipeline.py --mode all
+  python run_pipeline.py --mode fresher --config config/custom.yml
 """
 
 import yaml
 import sys
 import os
 import time
-import logging
 import argparse
 from typing import List, Dict, Optional
 from dotenv import load_dotenv
 
-# Import extractors
-from airflow_automation.etl_pipeline.data_collection.extractors.NaukriExtractor import NaukriJobExtractor
-from src.scrapers.naukri_fresher_extractor import FresherJobExtractor
+# ─── Logging & Session ──────────────────────────────────────────────────────────
+from src.utils.logger import setup_logging, get_logger
+from src.utils.session_logger import ScrapeSessionLogger
 
-# Import storage handlers
-from airflow_automation.etl_pipeline.data_collection.storage.CSVStoragehandler import CSVStorageHandler
+logger = get_logger(__name__)
+
+# ─── Extractors & Handlers ──────────────────────────────────────────────────────
+from src.scrapers.naukri_general_job_scraper import GeneralJobScraper
+from src.scrapers.naukri_fresher_job_scraper import FresherJobScraper
+from src.storage.csv_storage_handler import CSVStorageHandler
 from src.storage.sqlite_handler import MySQLStorageHandler
 
-# Import pipelines
-from airflow_automation.etl_pipeline.data_collection.pipeline import Pipeline
+# ─── Pipeline classes ───────────────────────────────────────────────────────────
 from pipelines.naukri_fresher_job_scraping_pipeline import NaukriFresherJobDataExtractionPipeline
+from pipelines.naukri_general_pipeline import NaukriGeneralJobDataExtractionPipeline
 
-# Import utilities
-from airflow_automation.etl_pipeline.utils.logger import setup_logging
-
-load_dotenv()
 
 class PipelineOrchestrator:
-    """Orchestrates different scraping pipelines based on configuration."""
-    
+    """Central orchestrator that prepares and runs the desired scraping pipeline(s)."""
+
     def __init__(self, config_path: Optional[str] = None):
-        """
-        Initialize the pipeline orchestrator.
-        
-        Args:
-            config_path: Path to configuration file. If None, uses default location.
-        """
         self.config = self._load_config(config_path)
-        self.logger = self._setup_logger()
-        
+        self.session_logger = None
+
     def _load_config(self, config_path: Optional[str] = None) -> dict:
-        """
-        Load configuration from YAML file.
-        
-        Args:
-            config_path: Path to config file
-            
-        Returns:
-            Configuration dictionary
-        """
         if config_path is None:
-            # Try multiple possible locations
-            possible_paths = [
+            possible = [
                 "config/config.yml",
                 "configuration/config.yml",
                 "../config/config.yml",
-                "../configuration/config.yml"
+                "../configuration/config.yml",
+                "airflow_automation/etl_pipeline/configuration/config.yml",
             ]
-            
-            for path in possible_paths:
-                if os.path.exists(path):
-                    config_path = path
+            for p in possible:
+                if os.path.exists(p):
+                    config_path = p
                     break
             else:
-                raise FileNotFoundError(
-                    f"Configuration file not found. Searched in: {possible_paths}"
-                )
-        
-        with open(config_path, "r") as f:
-            return yaml.safe_load(f)
-    
-    def _setup_logger(self) -> logging.Logger:
-        """Setup logging configuration."""
-        if not logging.getLogger().hasHandlers():
-            setup_logging()
-        return logging.getLogger("pipeline_orchestrator")
-    
-    def _initialize_general_extractor(self) -> List:
-        """
-        Initialize Naukri general job extractor.
-        
-        Returns:
-            List of extractor instances
-        """
-        pipeline_config = self.config['pipeline']
-        
-        extractor = NaukriJobExtractor(
-            max_pages=pipeline_config.get('max_pages', 10),
-            per_page_limit=pipeline_config.get('per_page_limit', 15),
-            min_delay=pipeline_config.get('min_delay', 3),
-            max_delay=pipeline_config.get('max_delay', 7),
-            role_delay=pipeline_config.get('role_delay', 20),
-            logger=self.logger
-        )
-        
-        self.logger.info("Initialized NaukriJobExtractor")
-        return [extractor]
-    
-    def _initialize_fresher_extractor(self) -> List:
-        """
-        Initialize Fresher job extractor.
-        
-        Returns:
-            List of extractor instances
-        """
-        pipeline_config = self.config['pipeline']
-        
-        extractor = FresherJobExtractor(
-            max_pages=pipeline_config.get('fresher_max_pages', 5),
-            per_page_limit=pipeline_config.get('fresher_per_page_limit', 20),
-            min_delay=pipeline_config.get('fresher_min_delay', 2),
-            max_delay=pipeline_config.get('fresher_max_delay', 5),
-            role_delay=pipeline_config.get('fresher_role_delay', 15),
-            logger=self.logger
-        )
-        
-        self.logger.info("Initialized FresherJobExtractor")
-        return [extractor]
-    
-    def _initialize_csv_handler(self) -> CSVStorageHandler:
-        """
-        Initialize CSV storage handler.
-        
-        Returns:
-            CSVStorageHandler instance
-        """
-        self.logger.info("Initialized CSVStorageHandler")
-        return CSVStorageHandler(logger=self.logger)
-    
-    def _initialize_mysql_handler(self) -> MySQLStorageHandler:
-        """
-        Initialize MySQL storage handler.
-        
-        Returns:
-            MySQLStorageHandler instance
-        """
-        # Load database credentials from environment or config
-        db_config = self.config.get('database', {})
-        
-        handler = MySQLStorageHandler(
-            host=db_config.get('host', 'localhost'),
-            port=db_config.get('port', 3306),
-            user=os.getenv("DB_USER") if db_config['user'] == '${DB_USER}' else db_config['user'],
-            password=os.getenv("DB_PASSWORD") if db_config['password'] == '${DB_PASSWORD}' else db_config['password'],
-            database=db_config.get('database', os.getenv('DB_NAME')),
-            logger=self.logger
-        )
-        
-        self.logger.info("Initialized MySQLStorageHandler")
-        return handler
-    
+                raise FileNotFoundError("No config.yml found in common locations")
+
+        logger.info(f"Loading configuration from: {config_path}")
+        with open(config_path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+            data["__loaded_from__"] = config_path  # useful for session metadata
+            return data
+
     def _get_jobs_from_config(self, group: Optional[str] = None, mode: str = 'general') -> List[str]:
-        """
-        Get job list from configuration.
-        
-        Args:
-            group: Specific group to run (e.g., 'group1')
-            mode: Pipeline mode ('general' or 'fresher')
-            
-        Returns:
-            List of job titles
-        """
-        # Determine which job queue to use
-        queue_key = 'fresher_job_queue' if mode == 'fresher' else 'job_queue'
-        job_queue = self.config.get(queue_key, {})
-        
-        if group and group in job_queue:
-            jobs = job_queue[group]
-            self.logger.info(f"Running {mode} mode for group '{group}' with {len(jobs)} jobs")
+        INVALID = {'-', '--', '---', 'null', 'none', '', ' '}
+
+        def validate(roles: list, src: str) -> List[str]:
+            valid = []
+            for r in (roles or []):
+                if r is None:
+                    logger.warning(f"Null role in {src} — skipping")
+                    continue
+                s = str(r).strip()
+                if s.lower() in INVALID or len(s) < 2:
+                    logger.warning(f"Invalid role '{r}' in {src} — skipping")
+                    continue
+                valid.append(s)
+            return valid
+
+        key = 'fresher_job_queue' if mode == 'fresher' else 'job_queue'
+        queue = self.config.get(key, {})
+
+        if group and group in queue:
+            jobs = validate(queue[group], group)
+            logger.info(f"Group '{group}' → {len(jobs)} valid roles")
             return jobs
-        
-        # Return all jobs if no group specified
+
+        # all groups
         all_jobs = []
-        for jobs in job_queue.values():
-            all_jobs.extend(jobs)
-        
-        self.logger.info(f"Running {mode} mode for ALL groups with {len(all_jobs)} jobs")
+        for gname, roles in queue.items():
+            all_jobs.extend(validate(roles, gname))
+        logger.info(f"All groups → {len(all_jobs)} valid roles")
         return all_jobs
-    
-    def run_general_pipeline(self, group: Optional[str] = None) -> Dict:
-        """
-        Run general job extraction pipeline with CSV storage.
-        
-        Args:
-            group: Optional job group to process
-            
-        Returns:
-            Pipeline execution statistics
-        """
-        self.logger.info("=" * 60)
-        self.logger.info("Starting GENERAL Job Extraction Pipeline")
-        self.logger.info("=" * 60)
-        
-        # Initialize components
-        extractors = self._initialize_general_extractor()
-        handlers = [self._initialize_csv_handler()]
-        jobs = self._get_jobs_from_config(group, mode='general')
-        
-        # Get file directory
-        storage_config = self.config.get('storage', {})
-        filedirectory = storage_config.get('filedirectory', {}).get(
-            'CSVStorageHandler',
-            'data/raw/general_jobs.csv'
-        )
-        
-        # Create pipeline
-        pipeline = Pipeline(
-            extractors=extractors,
-            handlers=handlers,
-            jobs=jobs,
-            filedirectory=filedirectory,
-            logger=self.logger
-        )
-        
-        # Execute
-        start_time = time.time()
-        stats = pipeline.run()
-        execution_time = time.time() - start_time
-        
-        # Log results
-        self.logger.info("=" * 60)
-        self.logger.info("General Pipeline Completed Successfully!")
-        self.logger.info(f"Total records scraped: {stats.get('total_records', 0)}")
-        self.logger.info(f"Execution time: {execution_time:.2f} seconds")
-        self.logger.info(f"Data saved to: {filedirectory}")
-        self.logger.info("=" * 60)
-        
-        return stats
-    
-    def run_fresher_pipeline(self, group: Optional[str] = None) -> Dict:
-        """
-        Run fresher job extraction pipeline with MySQL storage.
-        
-        Args:
-            group: Optional job group to process
-            
-        Returns:
-            Pipeline execution statistics
-        """
-        self.logger.info("=" * 60)
-        self.logger.info("Starting FRESHER Job Extraction Pipeline")
-        self.logger.info("=" * 60)
-        
-        # Initialize components
-        extractors = self._initialize_fresher_extractor()
-        handlers = [self._initialize_mysql_handler()]
-        jobs = self._get_jobs_from_config(group, mode='fresher')
-        
-        # Get database table name
-        db_config = self.config.get('database', {})
-        table_name = db_config.get('raw_job_data', 'raw_job_data')
-        
-        # Create specialized fresher pipeline
-        pipeline = NaukriFresherJobDataExtractionPipeline(
-            extractors=extractors,
-            handlers=handlers,
-            job_roles=jobs,
-            logger=self.logger,
-            filedirectory={"MySQLStorageHandler" :""}
-        )
-        
-        # Execute
-        start_time = time.time()
-        stats = pipeline.run()
-        execution_time = time.time() - start_time
-        
-        # Log results
-        self.logger.info("=" * 60)
-        self.logger.info("Fresher Pipeline Completed Successfully!")
-        self.logger.info(f"Total records scraped: {stats.get('total_records', 0)}")
-        self.logger.info(f"Execution time: {execution_time:.2f} seconds")
-        self.logger.info(f"Data saved to database table: {table_name}")
-        self.logger.info("=" * 60)
-        
-        return stats
-    
-    def run_all_pipelines(self, group: Optional[str] = None) -> Dict:
-        """
-        Run both general and fresher pipelines sequentially.
-        
-        Args:
-            group: Optional job group to process
-            
-        Returns:
-            Combined statistics from both pipelines
-        """
-        self.logger.info("#" * 60)
-        self.logger.info("Starting ALL Pipelines (General + Fresher)")
-        self.logger.info("#" * 60)
-        
-        # Run general pipeline
-        general_stats = self.run_general_pipeline(group)
-        
-        # Wait between pipelines to avoid rate limiting
-        self.logger.info("Waiting 30 seconds before starting fresher pipeline...")
-        time.sleep(30)
-        
-        # Run fresher pipeline
-        fresher_stats = self.run_fresher_pipeline(group)
-        
-        # Combine statistics
-        combined_stats = {
-            'general': general_stats,
-            'fresher': fresher_stats,
-            'total_records': (
-                general_stats.get('total_records', 0) + 
-                fresher_stats.get('total_records', 0)
+
+    def _init_session_logger(self, mode: str, group: Optional[str]) -> Optional[ScrapeSessionLogger]:
+        """Initialize session logger safely (your version does not support auto_recover)"""
+        try:
+            s = ScrapeSessionLogger()  # no auto_recover argument
+            total = len(self._get_jobs_from_config(group, mode))
+            sid = s.start_session(
+                mode=mode,
+                total_roles=total,
+                group=group or "ALL"
             )
-        }
-        
-        self.logger.info("#" * 60)
-        self.logger.info("ALL Pipelines Completed Successfully!")
-        self.logger.info(f"Total records across all pipelines: {combined_stats['total_records']}")
-        self.logger.info("#" * 60)
-        
-        return combined_stats
+            logger.info(f"Session started: {sid}  (mode={mode}, roles≈{total})")
+            return s
+        except Exception as e:
+            logger.warning(f"Session logger could not start: {e} → continuing without session tracking")
+            return None
+
+    def _finalize_session(self, s: Optional[ScrapeSessionLogger], stats: Dict, success: bool = True):
+        """Safely close the session logger if it was initialized"""
+        if s is None:
+            return
+        try:
+            status = "completed" if success else "failed"
+            s.update_session(stats)
+            s.end_session(status=status)
+            logger.info(f"Session {s.session_id} closed → {status}")
+        except Exception as e:
+            logger.warning(f"Failed to finalize session: {e}")
+
+    # ─── Pipeline runners ───────────────────────────────────────────────────────────
+
+    def run_general_pipeline(self, group: Optional[str] = None) -> Dict:
+        logger.info("GENERAL pipeline" + (f" (group={group})" if group else ""))
+        session = self._init_session_logger("general", group)
+
+        try:
+            extractors = [GeneralJobScraper(
+                max_pages=self.config['pipeline'].get('max_pages', 10),
+                per_page_limit=self.config['pipeline'].get('per_page_limit', 15),
+                min_delay=self.config['pipeline'].get('min_delay', 3),
+                max_delay=self.config['pipeline'].get('max_delay', 7),
+                role_delay=self.config['pipeline'].get('role_delay', 20)
+            )]
+
+            handlers = [CSVStorageHandler()]
+
+            jobs = self._get_jobs_from_config(group, 'general')
+
+            csv_path = self.config.get('storage', {}).get('filedirectory', {}).get(
+                'CSVStorageHandler', 'data/raw/general_jobs.csv'
+            )
+
+            pipeline = NaukriGeneralJobDataExtractionPipeline(
+                extractors=extractors,
+                handlers=handlers,
+                jobs=jobs,
+                filedirectory={'CSVStorageHandler': csv_path}
+            )
+
+            start = time.time()
+            stats = pipeline.run()
+            stats['execution_time_seconds'] = time.time() - start
+
+            logger.info(f"GENERAL done → {stats.get('total_records', 0)} records")
+            self._finalize_session(session, stats)
+            return stats
+
+        except Exception as e:
+            logger.error("GENERAL pipeline failed", exc_info=True)
+            self._finalize_session(session, {}, success=False)
+            raise
+
+    def run_fresher_pipeline(self, group: Optional[str] = None) -> Dict:
+        logger.info("FRESHER pipeline" + (f" (group={group})" if group else ""))
+        session = self._init_session_logger("fresher", group)
+
+        try:
+            extractors = [FresherJobScraper(
+                max_pages=self.config['pipeline'].get('fresher_max_pages', 5),
+                per_page_limit=self.config['pipeline'].get('fresher_per_page_limit', 20),
+                min_delay=self.config['pipeline'].get('fresher_min_delay', 2),
+                max_delay=self.config['pipeline'].get('fresher_max_delay', 5),
+                role_delay=self.config['pipeline'].get('fresher_role_delay', 15),
+            )]
+
+            db = self.config.get('database', {})
+            handlers = [MySQLStorageHandler(
+                host=db.get('host', 'localhost'),
+                port=db.get('port', 3306),
+                user=os.getenv("DB_USER") if db.get('user') == '${DB_USER}' else db.get('user', 'root'),
+                password=os.getenv("DB_PASSWORD") if db.get('password') == '${DB_PASSWORD}' else db.get('password', ''),
+                database=db.get('database', os.getenv('DB_NAME', 'job_trend_db')),
+                table=db.get('raw_job_data', 'raw_job_data')
+            )]
+
+            jobs = self._get_jobs_from_config(group, 'fresher')
+
+            pipeline = NaukriFresherJobDataExtractionPipeline(
+                extractors=extractors,
+                handlers=handlers,
+                job_roles=jobs,
+                filedirectory={"MySQLStorageHandler": ""}
+            )
+
+            start = time.time()
+            stats = pipeline.run()
+            stats['execution_time_seconds'] = time.time() - start
+
+            logger.info(f"FRESHER done → {stats.get('total_records', 0)} records")
+            self._finalize_session(session, stats)
+            return stats
+
+        except Exception as e:
+            logger.error("FRESHER pipeline failed", exc_info=True)
+            self._finalize_session(session, {}, success=False)
+            raise
+
+    def run_all_pipelines(self, group: Optional[str] = None) -> Dict:
+        logger.info("ALL pipelines" + (f" (group={group})" if group else ""))
+        session = self._init_session_logger("all", group)
+
+        try:
+            g_stats = self.run_general_pipeline(group)
+            logger.info("Waiting 30s before fresher pipeline...")
+            time.sleep(30)
+            f_stats = self.run_fresher_pipeline(group)
+
+            combined = {
+                'general': g_stats,
+                'fresher': f_stats,
+                'total_records': g_stats.get('total_records', 0) + f_stats.get('total_records', 0)
+            }
+
+            self._finalize_session(session, combined)
+            return combined
+
+        except Exception as e:
+            logger.error("ALL pipelines failed", exc_info=True)
+            self._finalize_session(session, {}, success=False)
+            raise
 
 
 def main():
-    """Main execution function with CLI argument parsing."""
-    
-    parser = argparse.ArgumentParser(
-        description="Job Scraping Pipeline Orchestrator",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Run general pipeline for all jobs
-  python run_pipeline.py --mode general
-  
-  # Run fresher pipeline for specific group
-  python run_pipeline.py --mode fresher --group group1
-  
-  # Run both pipelines for group2
-  python run_pipeline.py --mode all --group group2
-  
-  # Use custom config file
-  python run_pipeline.py --mode general --config custom_config.yml
-        """
-    )
-    
-    parser.add_argument(
-        '--mode',
-        type=str,
-        choices=['general', 'fresher', 'all'],
-        default='general',
-        help='Pipeline mode: general (CSV), fresher (MySQL), or all (both)'
-    )
-    
-    parser.add_argument(
-        '--group',
-        type=str,
-        help='Specific job group to process (e.g., group1, group2). If not specified, runs all groups.',
-        default=None
-    )
-    
-    parser.add_argument(
-        '--config',
-        type=str,
-        help='Path to configuration file',
-        default=None
-    )
-    
+    parser = argparse.ArgumentParser(description="Job Trend Scraping Orchestrator")
+    parser.add_argument('--mode', choices=['general', 'fresher', 'all'], default='general')
+    parser.add_argument('--group', type=str, default=None)
+    parser.add_argument('--config', type=str, default=None)
     args = parser.parse_args()
-    
+
+    # ─── Logging initialized HERE – once per run ────────────────────────────────
+    setup_logging()
+
     try:
-        # Initialize orchestrator
-        orchestrator = PipelineOrchestrator(config_path=args.config)
-        
-        # Run appropriate pipeline(s)
+        orch = PipelineOrchestrator(config_path=args.config)
+
         if args.mode == 'general':
-            stats = orchestrator.run_general_pipeline(group=args.group)
+            orch.run_general_pipeline(args.group)
         elif args.mode == 'fresher':
-            stats = orchestrator.run_fresher_pipeline(group=args.group)
+            orch.run_fresher_pipeline(args.group)
         elif args.mode == 'all':
-            stats = orchestrator.run_all_pipelines(group=args.group)
-        
-        # Exit successfully
+            orch.run_all_pipelines(args.group)
+
         sys.exit(0)
-        
+
     except KeyboardInterrupt:
-        print("\n\nPipeline interrupted by user. Exiting gracefully...")
+        print("\nInterrupted by user.")
         sys.exit(1)
     except Exception as e:
-        print(f"\n\nFATAL ERROR: {str(e)}")
+        print(f"\nFATAL: {str(e)}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

@@ -1,34 +1,116 @@
+
+"""
+fresher_dashboard.py
+Entry-point page for the Fresher / Personalised Insights dashboard.
+Handles global path selection and routes to the correct sub-components.
+"""
+
 import streamlit as st
-from ..components.career_profiler import render_profiling_flow
 
-def render(navigate_to):
-    # Step 1: Check karo ki user ne submit button click kiya hai ya nahi
-    # Hum 'profiling_complete' naam ka ek flag use karenge
-    if 'profiling_complete' not in st.session_state:
-        st.session_state.profiling_complete = False
+# Career profiler (assumed to exist)
+from dashboards.components.career_profiler import render_profiling_flow
 
-    # Step 2: Conditional Rendering
-    if not st.session_state.profiling_complete:
-        # User ko profiling QNA dikhao
-        render_profiling_flow(navigate_to)
-    elif st.session_state.profile_results.get("comfort") == "Comfortable":
-        render_actual_intermediate_dashboard()
-    else:
-        # User profiling kar chuka hai, ab asli dashboard dikhao
-        render_actual_fresher_dashboard()
+# Domain Confusion Resolver sub-flows
+from dashboards.components.domain_confusion_resolver import (
+    render_domain_confusion_resolver,
+    render_path_1_flow,
+    render_path_2_flow,
+)
 
-def render_actual_fresher_dashboard():
-    st.title("👨‍🎓 Your Personalized Insights")
-    st.write("Welcome to the actual functionality!")
-    
-    # Yahan aap apna graphs, data aur analysis dikha sakte hain
-    user_data = st.session_state.get('profile_results', {})
-    st.success(f"Showing trends for {user_data.get('branch', 'your branch')}...")
 
-def render_actual_intermediate_dashboard():
-    st.title("👨‍🎓 Your Personalized Insights for Intermediate")
-    st.write("Welcome to the actual functionality!")
-    
-    # Yahan aap apna graphs, data aur analysis dikha sakte hain
-    user_data = st.session_state.get('profile_results', {})
-    st.success(f"Showing trends for {user_data.get('branch', 'your branch')}...")
+def render(navigate_to):  # noqa: ARG001  (navigate_to kept for API compatibility)
+    st.title("👨‍🎓 Your Personalised Insights")
+
+    # --- Global path selection (lives above the tabs) ---
+    if "path_choice" not in st.session_state:
+        st.session_state.path_choice = None
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        is_p1 = st.session_state.path_choice == "help_me_decide"
+        if st.button(
+            "🤔 Help Me Decide (Path 1)",
+            use_container_width=True,
+            type="primary" if is_p1 else "secondary",
+            key="fd_btn_p1",
+        ):
+            st.session_state.path_choice = "help_me_decide"
+            st.rerun()
+
+    with col2:
+        is_p2 = st.session_state.path_choice == "know_my_domain"
+        if st.button(
+            "🚀 I Know My Domain (Path 2)",
+            use_container_width=True,
+            type="primary" if is_p2 else "secondary",
+            key="fd_btn_p2",
+        ):
+            st.session_state.path_choice = "know_my_domain"
+            st.rerun()
+
+    st.divider()
+
+    # --- Tabs ---
+    tabs = st.tabs(
+        [
+            "Domain Confusion Resolver",
+            "Skill Path Generator",
+            "Company & Salary Insight",
+            "Market Comparison Tool",
+            "Skill Gap Analyzer",
+            "Upskilling Advisor",
+        ]
+    )
+
+    (
+        tab_resolver,
+        tab_path,
+        tab_company,
+        tab_market,
+        tab_gap,
+        tab_upskilling,
+    ) = tabs
+
+    # ------------------------------------------------------------------ #
+    # Tab 1 – Domain Confusion Resolver                                    #
+    # ------------------------------------------------------------------ #
+    with tab_resolver:
+        path = st.session_state.get("path_choice")
+
+        if path == "help_me_decide":
+            render_path_1_flow()
+        elif path == "know_my_domain":
+            render_path_2_flow()
+        else:
+            st.info("👆 Please select a path above to begin your journey.")
+
+    # ------------------------------------------------------------------ #
+    # Tab 2 – Skill Path Generator (placeholder)                          #
+    # ------------------------------------------------------------------ #
+    with tab_path:
+        st.info("🚧 Skill Path Generator coming soon.")
+
+    # ------------------------------------------------------------------ #
+    # Tab 3 – Company & Salary Insight (placeholder)                      #
+    # ------------------------------------------------------------------ #
+    with tab_company:
+        st.info("🚧 Company & Salary Insight coming soon.")
+
+    # ------------------------------------------------------------------ #
+    # Tab 4 – Market Comparison Tool (placeholder)                        #
+    # ------------------------------------------------------------------ #
+    with tab_market:
+        st.info("🚧 Market Comparison Tool coming soon.")
+
+    # ------------------------------------------------------------------ #
+    # Tab 5 – Skill Gap Analyzer (placeholder)                            #
+    # ------------------------------------------------------------------ #
+    with tab_gap:
+        st.info("🚧 Skill Gap Analyzer coming soon.")
+
+    # ------------------------------------------------------------------ #
+    # Tab 6 – Upskilling Advisor (placeholder)                            #
+    # ------------------------------------------------------------------ #
+    with tab_upskilling:
+        st.info("🚧 Upskilling Advisor coming soon.")

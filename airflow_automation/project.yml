@@ -1,8 +1,0 @@
-project:
-  name: job_trend_predictor
-
-dev-environments:
-  default:
-    mounts:
-      - source: ./etl_pipeline/configuration
-        target: /usr/local/airflow/etl_pipeline/configuration

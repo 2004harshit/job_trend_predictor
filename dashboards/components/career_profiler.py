@@ -176,4 +176,5 @@ def render_profiling_flow(navigate_to):
                 
                 # State update for navigation
                 st.session_state.profiling_complete = True
+                # print("Profiling complete! User profile:", st.session_state.profile_results)  # Debugging line
                 st.rerun()

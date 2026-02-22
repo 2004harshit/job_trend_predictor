@@ -6,8 +6,13 @@ formatters:
     format: "%(levelname)s: %(message)s"
   
   detailed:
-    format: "%(asctime)s | %(name)s | %(levelname)s | %(message)s"
+    format: "%(asctime)s | %(name)s | %(levelname)s | %(filename)s:%(lineno)d | %(message)s"
     datefmt: "%Y-%m-%d %H:%M:%S"
+  
+  # ⭐ NEW: JSON formatter for structured logging (optional but powerful)
+  json:
+    format: '{"timestamp": "%(asctime)s", "logger": "%(name)s", "level": "%(levelname)s", "file": "%(filename)s", "line": %(lineno)d, "message": "%(message)s"}'
+    datefmt: "%Y-%m-%dT%H:%M:%S"
 
 handlers:
   console:
@@ -16,33 +21,74 @@ handlers:
     formatter: simple
     stream: ext://sys.stdout
 
-  file_data_collection:
+  # --- Pipeline Specific Handlers ---
+  
+  general_scraper_handler:
     class: logging.handlers.RotatingFileHandler
     level: DEBUG
     formatter: detailed
-    filename: logs/data_collection.log
-    maxBytes: 10485760
-    backupCount: 5
-    mode: a
+    filename: logs/general_scraper.log
+    maxBytes: 10485760  # 10MB
+    backupCount: 3
+    encoding: utf-8
 
-  file_pipeline:
+  fresher_scraper_handler:
     class: logging.handlers.RotatingFileHandler
     level: DEBUG
     formatter: detailed
-    filename: logs/pipeline.log
+    filename: logs/fresher_scraper.log
     maxBytes: 10485760
-    backupCount: 5
-    mode: a
+    backupCount: 3
+    encoding: utf-8
 
-  file_utils:
+  cleaning_handler:
     class: logging.handlers.RotatingFileHandler
-    level: WARNING
+    level: INFO
     formatter: detailed
-    filename: logs/utils.log
+    filename: logs/data_cleaning.log
+    maxBytes: 10485760
+    backupCount: 3
+    encoding: utf-8
+
+  analytics_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: detailed
+    filename: logs/analytics.log
+    maxBytes: 10485760
+    backupCount: 3
+    encoding: utf-8
+
+  model_training_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: detailed
+    filename: logs/model_training.log
+    maxBytes: 10485760
+    backupCount: 3
+    encoding: utf-8
+
+  # ⭐ NEW: Session logger handler
+  session_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: detailed
+    filename: logs/sessions.log
     maxBytes: 10485760
     backupCount: 5
-    mode: a
+    encoding: utf-8
 
+  # ⭐ NEW: Validator handler
+  validator_handler:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: detailed
+    filename: logs/data_validation.log
+    maxBytes: 10485760
+    backupCount: 3
+    encoding: utf-8
+
+  # --- Central Error Handler ---
   file_error:
     class: logging.handlers.RotatingFileHandler
     level: ERROR
@@ -50,22 +96,71 @@ handlers:
     filename: logs/error.log
     maxBytes: 10485760
     backupCount: 5
-    mode: a
+    encoding: utf-8
 
 loggers:
-  data_collection:
+  # General Scraper
+  src.scrapers.naukri_general_job_scraper:
     level: DEBUG
-    handlers: [console, file_data_collection, file_error]
+    handlers: [console, general_scraper_handler, file_error]
     propagate: no
 
-  pipeline:
+  # # Fresher Scraper
+  # src.pipelines.fresher_scraper:
+  #   level: DEBUG
+  #   handlers: [console, fresher_scraper_handler, file_error]
+  #   propagate: no
+
+  src.scrapers.naukri_fresher_job_scraper:
+    level: DEBUG
+    handlers: [console, fresher_scraper_handler, file_error]
+    propagate: no
+
+  # pipeline specific loggers (if you want to log from pipeline classes directly)
+  pipelines.naukri_fresher_job_scraping_pipeline:
     level: INFO
-    handlers: [console, file_pipeline, file_error]
+    handlers: [console, fresher_scraper_handler, file_error]
+    propagate: no
+  
+  pipelines.naukri_general_pipeline:
+    level: INFO
+    handlers: [console, general_scraper_handler, file_error]
     propagate: no
 
-  utils:
+  # Data Cleaning
+  src.pipelines.cleaning:
+    level: INFO
+    handlers: [console, cleaning_handler, file_error]
+    propagate: no
+
+  # Analytics
+  src.pipelines.analytics:
+    level: INFO
+    handlers: [console, analytics_handler, file_error]
+    propagate: no
+
+  # Model Training
+  src.pipelines.model_training:
+    level: INFO
+    handlers: [console, model_training_handler, file_error]
+    propagate: no
+
+  # ⭐ NEW: Session Logger
+  ScrapeSessionLogger:
+    level: INFO
+    handlers: [console, session_handler, file_error]
+    propagate: no
+
+  # ⭐ NEW: Data Validator
+  DataValidator:
+    level: INFO
+    handlers: [console, validator_handler, file_error]
+    propagate: no
+
+  # Utils (Common functions)
+  src.utils:
     level: WARNING
-    handlers: [console, file_utils, file_error]
+    handlers: [console, file_error]
     propagate: no
 
 root:

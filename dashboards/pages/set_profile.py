@@ -372,3 +372,8 @@ def render(navigate_to):
     
     # Additional spacing
     st.markdown("<div style='margin-bottom: 3rem;'></div>", unsafe_allow_html=True)
+
+
+
+if __name__ == "__main__":
+    render(lambda x: print(f"Navigate to: {x}"))

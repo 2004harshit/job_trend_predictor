@@ -1,6 +1,7 @@
 import sys
 import os
 
+
 # Get the project root directory (parent of current file's directory)
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
@@ -10,6 +11,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 import streamlit as st
+# from dashboards.components.career_profiler import render_profiling_flow
 from dashboards.pages import fresher_dashboard, home, counselor_dashboard, about,set_profile
 from dashboards.utils.styles import apply_custom_styles
 
@@ -86,7 +88,8 @@ def main() -> None:
         about.render(navigate_to)
     elif page == 'profile':
         set_profile.render(navigate_to)
-    
+    elif page =="profiling_flow":
+        render_profiling_flow(navigate_to)
 
 if __name__ == "__main__":
     main()

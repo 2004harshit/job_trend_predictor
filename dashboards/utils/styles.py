@@ -444,138 +444,233 @@ def apply_custom_styles():
             line-height: 1.6;
         }
         
-        /* Process Cards */
-        .process-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Process Cards - Clean Light Design */
+        .process-wrapper {
             position: relative;
-            border: 2px solid transparent;
-            height: 100%;
+        }
+        
+        .process-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),
+                        0 4px 6px -4px rgba(0,0,0,0.1);
+            position: relative;
+            transition: box-shadow 0.3s ease;
+            min-height: 260px;
         }
         
         .process-card:hover {
-            border-color: #6366f1;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1),
+                        0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+        
+        .process-number-wrapper {
+            position: absolute;
+            top: -24px;
+            left: 32px;
         }
         
         .process-number {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(to bottom right, #2563eb, #7c3aed);
             color: white;
-            border-radius: 50%;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            font-weight: 900;
-            margin: 0 auto 2rem auto;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            font-size: 1.25rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),
+                        0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        
+        .process-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(to bottom right, #eff6ff, #f3e8ff);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0 1rem 0;
+        }
+        
+        .process-icon {
+            width: 28px;
+            height: 28px;
+            color: #2563eb;
         }
         
         .process-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
+            color: #111827;
+            margin-bottom: 0.5rem;
+            text-align: center;
         }
         
         .process-description {
-            font-size: 1.05rem;
-            color: #94a3b8;
-            line-height: 1.7;
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.6;
+            text-align: center;
         }
         
-        /* Persona Cards */
-        .persona-card {
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left: 5px solid #6366f1;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .persona-card::after {
-            content: '';
+        .process-arrow {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-            pointer-events: none;
+            top: 50%;
+            right: -16px;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: none;
         }
         
+        @media (min-width: 768px) {
+            .process-arrow {
+                display: block;
+            }
+        }
+        
+        /* Persona Section – exact visual match + refined spacing */
+        .personas-section {
+            padding: 5rem 0;                    /* py-20 */
+            background: #ffffff;                /* bg-white */
+        }
+
+        .personas-inner {
+            max-width: 80rem;                   /* max-w-7xl */
+            margin: 0 auto;
+            padding: 0 1rem;                    /* px-4 */
+        }
+
+        .personas-heading {
+            text-align: center;
+            margin-bottom: 0rem !important;     /* mb-16 — reduced slightly for tighter feel, adjust to 2.5rem–3.5rem */
+        }
+
+        .personas-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;                        /* gap-2 */
+            padding: 0.5rem 1rem;               /* px-4 py-2 */
+            background: #f0fdf4;                /* bg-green-50 */
+            color: #16a34a;                     /* text-green-600 */
+            border-radius: 9999px;
+            margin-bottom: 1rem;                /* mb-4 */
+            font-size: 0.875rem;                /* text-sm */
+        }
+
+        .personas-badge svg {
+            width: 1.5rem;                      /* w-6 for better visibility */
+            height: 1.5rem;
+        }
+
+        .personas-title {
+            font-size: 2.25rem;                 /* text-4xl */
+            font-weight: 800;
+            color: #111827;                     /* text-gray-900 */
+            margin-bottom: 1rem;                /* mb-4 */
+            line-height: 1.1;
+        }
+
+        @media (min-width: 768px) {
+            .personas-title {
+                font-size: 3rem;                /* md:text-5xl */
+            }
+            .personas-heading {
+                margin-bottom: 4rem !important; /* stronger separation on desktop */
+            }
+        }
+
+        .personas-subtitle {
+            font-size: 1.25rem;                 /* text-xl */
+            color: #4b5563;                     /* text-gray-600 */
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 2rem !important;               /* gap-8 — consistent horizontal + vertical */
+        }
+
+        @media (min-width: 768px) {
+            .persona-grid {
+                grid-template-columns: repeat(2, 1fr);  /* md:grid-cols-2 */
+                gap: 2rem !important;               /* keep same gap for rows & columns */
+            }
+        }
+
+        /* Card – exact match */
+        .persona-card {
+            padding: 2rem;                      /* p-8 */
+            border-radius: 1rem;                /* rounded-2xl */
+            border: 2px solid #e5e7eb;          /* border-2 border-gray-200 */
+            background: linear-gradient(to bottom right, #ffffff, #f9fafb);  /* from-white to-gray-50 */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03);
+            height: 100% !important;            /* equal height */
+            min-height: 380px;                  /* fallback minimum – adjust to 400px if needed */
+            
+        }
+
         .persona-card:hover {
-            transform: translateX(8px);
-            box-shadow: -8px 0 30px rgba(99, 102, 241, 0.2);
-            border-left-color: #8b5cf6;
+            border-color: #93c5fd;              /* hover:border-blue-300 */
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);  /* hover:shadow-xl */
         }
-        
-        .persona-header {
+
+        /* Emoji title */
+        .persona-emoji {
+            font-size: 2.5rem;                  /* text-4xl feel */
+            margin-bottom: 0.75rem;             /* mb-3 */
+            text-align: center;
+        }
+
+        /* Description */
+        .persona-description {
+            color: #4b5563;                     /* text-gray-600 */
+            margin-bottom: 1.5rem;              /* mb-6 */
+            line-height: 1.6;
+        }
+
+        /* Features list */
+        .persona-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;                        /* space-y-2 */
+        }
+
+        /* Feature row */
+        .persona-feature-item {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+            gap: 0.5rem;                        /* gap-2 */
         }
-        
-        .persona-icon {
-            font-size: 3.5rem;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+
+        /* Green circle */
+        .persona-feature-icon {
+            width: 1.25rem;                     /* w-5 h-5 */
+            height: 1.25rem;
+            border-radius: 9999px;
+            background: #dcfce7;                /* bg-green-100 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
-        
-        .persona-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            color: #f8fafc;
-            margin: 0;
-            letter-spacing: -0.01em;
+
+        .persona-feature-icon svg {
+            width: 0.75rem;                     /* w-3 h-3 */
+            height: 0.75rem;
+            color: #16a34a;                     /* text-green-600 */
         }
-        
-        .persona-description {
-            font-size: 1.05rem;
-            color: #94a3b8;
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            position: relative;
-            z-index: 1;
+
+        /* Feature text */
+        .persona-feature-item span {
+            font-size: 0.875rem;                /* text-sm */
+            color: #374151;                     /* text-gray-700 */
         }
-        
-        .persona-features {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .persona-features li {
-            padding: 1rem 0;
-            color: #cbd5e1;
-            font-size: 1rem;
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
-            transition: all 0.3s;
-        }
-        
-        .persona-features li:hover {
-            color: #f8fafc;
-            padding-left: 0.5rem;
-        }
-        
-        .persona-features li:last-child {
-            border-bottom: none;
-        }
-        
         /* AI Model Cards */
         .ai-model-card {
             background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
@@ -831,6 +926,56 @@ def apply_custom_styles():
             }
         }
         
+        /* How It Works Hero Section */
+        .how-it-works-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .how-it-works-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #faf5ff;
+            color: #9333ea;
+            border-radius: 9999px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .how-it-works-badge-icon {
+            width: 1rem;
+            height: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .how-it-works-title {
+            font-size: 2.5rem;
+            line-height: 1.1;
+            color: #111827;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        @media (min-width: 768px) {
+            .how-it-works-title {
+                font-size: 3.5rem;
+            }
+        }
+        
+        .how-it-works-subtitle {
+            font-size: 1.25rem;
+            color: #4b5563;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
         /* Smooth Animations */
         @keyframes fadeInUp {
             from {
@@ -848,5 +993,3 @@ def apply_custom_styles():
         }
     </style>
     """, unsafe_allow_html=True)
-
-    

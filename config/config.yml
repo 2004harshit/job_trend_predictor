@@ -241,9 +241,9 @@ fresher_job_queue:
 storage:
   # File storage paths
   filedirectory:
-    CSVStorageHandler: "etl_pipeline/data/raw/general_jobs.csv"
-    JSONStorageHandler: "etl_pipeline/data/raw/general_jobs.json"
-    FresherCSVHandler: "etl_pipeline/data/raw/fresher_jobs.csv"
+    CSVStorageHandler: "data/raw/general_jobs.csv"
+    JSONStorageHandler: "data/raw/general_jobs.json"
+    FresherCSVHandler: "data/raw/fresher_jobs.csv"
   
   # Active handlers for general pipeline
   handlers:

@@ -37,7 +37,7 @@ class DataIngestionFactory:
 
 # Example usage:
 if __name__ == "__main__":
-    file_path = r"D:\DATA SCIENCE AND ML\job_trend_predictor\airflow_automation\etl_pipeline\data\raw\scraped_data.csv"
+    file_path = r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\raw\scraped_data.csv"
     file_type = "csv"
     
     ingestor = DataIngestionFactory.get_ingestor(file_type)

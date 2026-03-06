@@ -336,7 +336,7 @@ if __name__ == "__main__":
     )
     
     # Load data
-    df = pd.read_csv(r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\etl_pipeline\data\raw\scraped_data.csv")
+    df = pd.read_csv(r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\raw\scraped_data.csv")
     
     # Validate with actual column names
     df_valid, df_invalid, report = validator.validate_data(

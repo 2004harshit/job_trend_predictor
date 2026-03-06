@@ -1,7 +1,5 @@
 import streamlit as st
-
-from app import navigate_to
-
+from dashboards.utils.pipeline_loader import run_profile_analytics
 
 def load_qna_based_profiler() -> None:
     """Load the Q&A based user profiler component"""
@@ -11,6 +9,12 @@ def load_qna_based_profiler() -> None:
 
 
 def render_profiling_flow(navigate_to):
+
+    COMFORT_MAP = {
+    "beginner":    "basic",
+    "comfortable": "intermediate",
+    "advanced":    "advanced",
+}
     # 1. Reuse and Enhanced CSS
     st.markdown("""
     <style>
@@ -165,16 +169,52 @@ def render_profiling_flow(navigate_to):
             with c2:
                 math = st.select_slider("Math comfort", options=["Weak", "Average", "Strong"])
     
-            # Ab button check karein
-            if st.form_submit_button("🚀 Generate My Career Roadmap"):
-                # Yahan interests_selection accessible hai
-                st.session_state.profile_results.update({
-                    "interests": interests_selection, 
-                    "location": loc, 
-                    "math": math
-                })
+            # # Ab button check karein
+            # if st.form_submit_button("🚀 Generate My Career Roadmap"):
+            #     # Yahan interests_selection accessible hai
+            #     st.session_state.profile_results.update({
+            #         "interests": interests_selection, 
+            #         "location": loc, 
+            #         "math": math
+            #     })
                 
-                # State update for navigation
+            #     # State update for navigation
+            #     st.session_state.profiling_complete = True
+            #     # print("Profiling complete! User profile:", st.session_state.profile_results)  # Debugging line
+            #     st.rerun()
+            if st.form_submit_button("🚀 Generate My Career Roadmap"):
+                st.session_state.profile_results.update({
+                    "interests": interests_selection,
+                    "location":  loc,
+                    "math":      math,
+                })
+
+                # Build the inputs Phase 3 needs
+                profile  = st.session_state.profile_results
+                domain   = st.session_state.get("domain_analytics", {}).get("domain", "Data Scientist")
+                exp_band = st.session_state.get("domain_analytics", {}).get("experience_band", (0, 3))
+
+                # user_project_stats — map from profiler answers
+                project_stats = {
+                    "features":     2,       # update from actual profiler fields if available
+                    "tech_count":   3,
+                    "integrations": 1,
+                    "deployment":   False,
+                }
+
+                with st.spinner("Building your personalised career roadmap…"):
+                    comfort_raw = profile.get("comfort", "beginner").lower()
+                    prior_knowledge = COMFORT_MAP.get(comfort_raw, "basic")
+                    st.session_state["profile_analytics"] = run_profile_analytics(
+                        df=st.session_state["df"],
+                        domain=domain,
+                        experience_band=exp_band,
+                        location=profile.get("location", "Jaipur"),
+                        user_skills=profile.get("interests", []),
+                        prior_knowledge=prior_knowledge,
+                        user_project_stats=project_stats,
+                        domain_results=st.session_state.get("domain_analytics", {}),
+                    )
+
                 st.session_state.profiling_complete = True
-                # print("Profiling complete! User profile:", st.session_state.profile_results)  # Debugging line
                 st.rerun()

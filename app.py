@@ -11,17 +11,27 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 import streamlit as st
-# from dashboards.components.career_profiler import render_profiling_flow
+from dashboards.components.career_profiler import render_profiling_flow
 from dashboards.pages import fresher_dashboard, home, counselor_dashboard, about,set_profile
 from dashboards.utils.styles import apply_custom_styles
+from dashboards.utils.pipeline_loader import load_dataframe, get_global_metrics
 
-# Page configuration
+# 1. set_page_config FIRST — before any other st.* call
 st.set_page_config(
     page_title="Job Trend Predictor",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# 2. Bootstrap AFTER
+if "df" not in st.session_state:
+    st.session_state["df"] = load_dataframe()
+
+if "global_analytics" not in st.session_state:
+    st.session_state["global_analytics"] = get_global_metrics(
+        st.session_state["df"]
+    )
 
 # Apply custom styles
 apply_custom_styles()

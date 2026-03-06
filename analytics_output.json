@@ -1,454 +1,454 @@
 {
     "global": {
         "market_demand": {
-            "Web Developer": {
-                "Overall_Demand_Score": 6.93,
+            "Research Associate": {
+                "Overall_Demand_Score": 7.29,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 9.999999999999998,
-                    "Growth_Trend": 5.0,
+                    "Volume": 10.0,
+                    "Growth_Trend": 5.85,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.29,
-                    "Entry_Flexibility": 7.38
+                    "Market_Diversity": 6.5,
+                    "Entry_Flexibility": 8.52
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 537,
-                    "Total_Domain_Jobs": 728
+                    "Fresher_Jobs": 1026,
+                    "Total_Domain_Jobs": 1204
                 }
             },
-            "Research Associate": {
-                "Overall_Demand_Score": 5.61,
-                "Score_Label": "\u2696\ufe0f  Stable",
+            "Web Developer": {
+                "Overall_Demand_Score": 6.62,
+                "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 5.068251543982115,
-                    "Growth_Trend": 5.0,
+                    "Volume": 6.651880171073518,
+                    "Growth_Trend": 8.06,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.38,
-                    "Entry_Flexibility": 8.87
+                    "Market_Diversity": 6.43,
+                    "Entry_Flexibility": 6.42
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 508,
-                    "Total_Domain_Jobs": 573
-                }
-            },
-            "Software Engineer": {
-                "Overall_Demand_Score": 5.73,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 7.367646029700453,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.17,
-                    "Entry_Flexibility": 6.4
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 440,
-                    "Total_Domain_Jobs": 688
+                    "Fresher_Jobs": 840,
+                    "Total_Domain_Jobs": 1308
                 }
             },
             "Data Analyst": {
-                "Overall_Demand_Score": 4.92,
-                "Score_Label": "\u2696\ufe0f  Stable",
+                "Overall_Demand_Score": 6.17,
+                "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 3.6038292505028595,
-                    "Growth_Trend": 5.0,
+                    "Volume": 6.181548627560106,
+                    "Growth_Trend": 6.67,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.46,
-                    "Entry_Flexibility": 6.17
+                    "Market_Diversity": 6.94,
+                    "Entry_Flexibility": 6.07
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 382,
-                    "Total_Domain_Jobs": 619
+                    "Fresher_Jobs": 756,
+                    "Total_Domain_Jobs": 1246
+                }
+            },
+            "Software Engineer": {
+                "Overall_Demand_Score": 4.08,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 2.207112872268554,
+                    "Growth_Trend": 5.0,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 4.56,
+                    "Entry_Flexibility": 4.84
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 623,
+                    "Total_Domain_Jobs": 1287
                 }
             },
             "Data Engineer": {
-                "Overall_Demand_Score": 5.28,
-                "Score_Label": "\u2696\ufe0f  Stable",
+                "Overall_Demand_Score": 2.89,
+                "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 6.774276957615246,
-                    "Growth_Trend": 5.0,
+                    "Volume": 2.84285781634219,
+                    "Growth_Trend": 0.0,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 3.7,
-                    "Entry_Flexibility": 4.43
+                    "Market_Diversity": 4.13,
+                    "Entry_Flexibility": 4.15
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 337,
-                    "Total_Domain_Jobs": 761
-                }
-            },
-            "Mobile App Developer": {
-                "Overall_Demand_Score": 5.02,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 3.6671873050931376,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.96,
-                    "Entry_Flexibility": 7.74
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 319,
-                    "Total_Domain_Jobs": 412
+                    "Fresher_Jobs": 595,
+                    "Total_Domain_Jobs": 1435
                 }
             },
             "IT Support Specialist": {
-                "Overall_Demand_Score": 4.58,
+                "Overall_Demand_Score": 5.23,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.4447915367287583,
-                    "Growth_Trend": 5.0,
+                    "Volume": 3.1878670064508583,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.44,
-                    "Entry_Flexibility": 6.32
+                    "Market_Diversity": 6.61,
+                    "Entry_Flexibility": 6.62
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 278,
-                    "Total_Domain_Jobs": 440
+                    "Fresher_Jobs": 558,
+                    "Total_Domain_Jobs": 843
+                }
+            },
+            "Mobile App Developer": {
+                "Overall_Demand_Score": 5.68,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 4.685327968441386,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 6.14,
+                    "Entry_Flexibility": 7.29
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 556,
+                    "Total_Domain_Jobs": 763
                 }
             },
             "Front End Developer": {
-                "Overall_Demand_Score": 5.03,
-                "Score_Label": "\u2696\ufe0f  Stable",
+                "Overall_Demand_Score": 6.48,
+                "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 4.000567969192513,
-                    "Growth_Trend": 5.0,
+                    "Volume": 7.382176062192059,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.13,
-                    "Entry_Flexibility": 6.6
+                    "Market_Diversity": 6.14,
+                    "Entry_Flexibility": 7.19
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 250,
-                    "Total_Domain_Jobs": 379
-                }
-            },
-            "Database Administrator": {
-                "Overall_Demand_Score": 5.04,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 5.111836849523766,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.91,
-                    "Entry_Flexibility": 5.22
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 212,
-                    "Total_Domain_Jobs": 406
+                    "Fresher_Jobs": 494,
+                    "Total_Domain_Jobs": 687
                 }
             },
             "Business Analyst": {
-                "Overall_Demand_Score": 3.61,
-                "Score_Label": "\ud83d\udcc9 Declining",
-                "Breakdown": {
-                    "Volume": 0.5220989011365482,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.39,
-                    "Entry_Flexibility": 3.99
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 206,
-                    "Total_Domain_Jobs": 516
-                }
-            },
-            "Back End Developer": {
-                "Overall_Demand_Score": 4.55,
+                "Overall_Demand_Score": 5.66,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.8892990888612595,
-                    "Growth_Trend": 5.0,
+                    "Volume": 4.972388971248917,
+                    "Growth_Trend": 7.21,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.76,
-                    "Entry_Flexibility": 5.71
+                    "Market_Diversity": 6.31,
+                    "Entry_Flexibility": 4.24
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 205,
-                    "Total_Domain_Jobs": 359
+                    "Fresher_Jobs": 465,
+                    "Total_Domain_Jobs": 1097
                 }
             },
             "UX Designer": {
-                "Overall_Demand_Score": 4.75,
+                "Overall_Demand_Score": 4.95,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.611904887205639,
-                    "Growth_Trend": 5.0,
+                    "Volume": 4.887188552281809,
+                    "Growth_Trend": 5.21,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.81,
-                    "Entry_Flexibility": 3.99
+                    "Market_Diversity": 5.2,
+                    "Entry_Flexibility": 4.03
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 197,
-                    "Total_Domain_Jobs": 494
+                    "Fresher_Jobs": 454,
+                    "Total_Domain_Jobs": 1126
                 }
             },
-            "Technical Writer": {
-                "Overall_Demand_Score": 3.98,
-                "Score_Label": "\ud83d\udcc9 Declining",
+            "Database Administrator": {
+                "Overall_Demand_Score": 4.72,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.6831162752096616,
-                    "Growth_Trend": 5.0,
+                    "Volume": 3.5345307134073813,
+                    "Growth_Trend": 5.72,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.0,
-                    "Entry_Flexibility": 4.79
+                    "Market_Diversity": 5.36,
+                    "Entry_Flexibility": 4.3
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 192,
-                    "Total_Domain_Jobs": 401
+                    "Fresher_Jobs": 421,
+                    "Total_Domain_Jobs": 979
                 }
             },
             "Cybersecurity Analyst": {
-                "Overall_Demand_Score": 4.86,
+                "Overall_Demand_Score": 5.04,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.55620240935814,
-                    "Growth_Trend": 5.0,
+                    "Volume": 4.531113720121606,
+                    "Growth_Trend": 5.59,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.25,
-                    "Entry_Flexibility": 4.57
+                    "Market_Diversity": 5.55,
+                    "Entry_Flexibility": 4.46
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 185,
-                    "Total_Domain_Jobs": 405
-                }
-            },
-            "QA Engineer": {
-                "Overall_Demand_Score": 4.14,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 2.111410872629382,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.62,
-                    "Entry_Flexibility": 4.13
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 172,
-                    "Total_Domain_Jobs": 416
-                }
-            },
-            "Ruby on Rails Developer": {
-                "Overall_Demand_Score": 4.17,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 2.5096433555798825,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.52,
-                    "Entry_Flexibility": 4.86
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 153,
-                    "Total_Domain_Jobs": 315
-                }
-            },
-            "DevOps Engineer": {
-                "Overall_Demand_Score": 4.07,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 2.696359486648307,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.86,
-                    "Entry_Flexibility": 2.82
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 153,
-                    "Total_Domain_Jobs": 542
-                }
-            },
-            "Python Developer": {
-                "Overall_Demand_Score": 4.09,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 2.035952484964375,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.64,
-                    "Entry_Flexibility": 3.85
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 149,
-                    "Total_Domain_Jobs": 387
+                    "Fresher_Jobs": 383,
+                    "Total_Domain_Jobs": 859
                 }
             },
             "Cloud Engineer": {
-                "Overall_Demand_Score": 4.48,
+                "Overall_Demand_Score": 4.34,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.111694857225639,
-                    "Growth_Trend": 5.0,
+                    "Volume": 4.2707879918158,
+                    "Growth_Trend": 3.46,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.64,
-                    "Entry_Flexibility": 3.04
+                    "Market_Diversity": 5.63,
+                    "Entry_Flexibility": 3.45
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 137,
-                    "Total_Domain_Jobs": 450
+                    "Fresher_Jobs": 379,
+                    "Total_Domain_Jobs": 1100
+                }
+            },
+            "DevOps Engineer": {
+                "Overall_Demand_Score": 5.79,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 3.9425073445169048,
+                    "Growth_Trend": 10.0,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 5.53,
+                    "Entry_Flexibility": 2.82
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 348,
+                    "Total_Domain_Jobs": 1233
+                }
+            },
+            "Back End Developer": {
+                "Overall_Demand_Score": 5.39,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 4.430031582758586,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 6.02,
+                    "Entry_Flexibility": 5.37
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 344,
+                    "Total_Domain_Jobs": 641
+                }
+            },
+            "Technical Writer": {
+                "Overall_Demand_Score": 5.19,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 4.168109638303018,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 5.64,
+                    "Entry_Flexibility": 4.67
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 332,
+                    "Total_Domain_Jobs": 711
                 }
             },
             "Network Engineer": {
-                "Overall_Demand_Score": 4.03,
+                "Overall_Demand_Score": 4.99,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.222537760662507,
-                    "Growth_Trend": 5.0,
+                    "Volume": 3.9033695964946897,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.25,
-                    "Entry_Flexibility": 3.27
+                    "Market_Diversity": 5.71,
+                    "Entry_Flexibility": 3.39
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 133,
-                    "Total_Domain_Jobs": 407
-                }
-            },
-            "AI Engineer": {
-                "Overall_Demand_Score": 3.74,
-                "Score_Label": "\ud83d\udcc9 Declining",
-                "Breakdown": {
-                    "Volume": 1.5694997355652935,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.17,
-                    "Entry_Flexibility": 2.42
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 131,
-                    "Total_Domain_Jobs": 542
+                    "Fresher_Jobs": 308,
+                    "Total_Domain_Jobs": 909
                 }
             },
             "Full Stack Developer": {
-                "Overall_Demand_Score": 4.19,
+                "Overall_Demand_Score": 4.14,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.7782703423558535,
-                    "Growth_Trend": 5.0,
+                    "Volume": 3.220346966045443,
+                    "Growth_Trend": 3.65,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.7,
-                    "Entry_Flexibility": 2.52
+                    "Market_Diversity": 6.51,
+                    "Entry_Flexibility": 2.8
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 125,
-                    "Total_Domain_Jobs": 496
+                    "Fresher_Jobs": 297,
+                    "Total_Domain_Jobs": 1059
+                }
+            },
+            "AI Engineer": {
+                "Overall_Demand_Score": 5.62,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 3.8292666921447314,
+                    "Growth_Trend": 9.2,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 6.1,
+                    "Entry_Flexibility": 2.58
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 295,
+                    "Total_Domain_Jobs": 1143
+                }
+            },
+            "QA Engineer": {
+                "Overall_Demand_Score": 4.96,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 3.2022595588564755,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 6.33,
+                    "Entry_Flexibility": 4.25
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 294,
+                    "Total_Domain_Jobs": 691
+                }
+            },
+            "Ruby on Rails Developer": {
+                "Overall_Demand_Score": 4.52,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 2.7727334992419657,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 4.38,
+                    "Entry_Flexibility": 4.09
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 271,
+                    "Total_Domain_Jobs": 662
                 }
             },
             "Machine Learning Engineer": {
-                "Overall_Demand_Score": 3.3,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.56,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 0.06625624958273377,
-                    "Growth_Trend": 5.0,
+                    "Volume": 2.616819561710246,
+                    "Growth_Trend": 6.75,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.49,
-                    "Entry_Flexibility": 2.06
+                    "Market_Diversity": 5.88,
+                    "Entry_Flexibility": 2.01
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 121,
-                    "Total_Domain_Jobs": 586
+                    "Fresher_Jobs": 263,
+                    "Total_Domain_Jobs": 1310
                 }
             },
-            "Data Scientist": {
-                "Overall_Demand_Score": 3.5,
-                "Score_Label": "\ud83d\udcc9 Declining",
+            "Python Developer": {
+                "Overall_Demand_Score": 4.87,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.2361406357469649,
-                    "Growth_Trend": 5.0,
+                    "Volume": 3.366515898144547,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.64,
-                    "Entry_Flexibility": 1.8
+                    "Market_Diversity": 6.12,
+                    "Entry_Flexibility": 3.21
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 114,
-                    "Total_Domain_Jobs": 634
-                }
-            },
-            "Product Manager": {
-                "Overall_Demand_Score": 3.58,
-                "Score_Label": "\ud83d\udcc9 Declining",
-                "Breakdown": {
-                    "Volume": 1.2780164616054446,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.91,
-                    "Entry_Flexibility": 2.11
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 105,
-                    "Total_Domain_Jobs": 498
+                    "Fresher_Jobs": 262,
+                    "Total_Domain_Jobs": 816
                 }
             },
             "Systems Analyst": {
-                "Overall_Demand_Score": 3.64,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.4,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.8891570965631312,
-                    "Growth_Trend": 5.0,
+                    "Volume": 2.9430297276437867,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 3.81,
-                    "Entry_Flexibility": 2.52
+                    "Market_Diversity": 4.13,
+                    "Entry_Flexibility": 2.77
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 102,
-                    "Total_Domain_Jobs": 405
+                    "Fresher_Jobs": 241,
+                    "Total_Domain_Jobs": 870
+                }
+            },
+            "Product Manager": {
+                "Overall_Demand_Score": 4.47,
+                "Score_Label": "\u2696\ufe0f  Stable",
+                "Breakdown": {
+                    "Volume": 2.226165667483367,
+                    "Growth_Trend": 6.84,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 5.93,
+                    "Entry_Flexibility": 2.04
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 238,
+                    "Total_Domain_Jobs": 1169
+                }
+            },
+            "Data Scientist": {
+                "Overall_Demand_Score": 3.68,
+                "Score_Label": "\ud83d\udcc9 Declining",
+                "Breakdown": {
+                    "Volume": 1.4305140718648415,
+                    "Growth_Trend": 5.0,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 5.61,
+                    "Entry_Flexibility": 1.64
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 222,
+                    "Total_Domain_Jobs": 1357
                 }
             },
             "DevOps Specialist": {
-                "Overall_Demand_Score": 4.03,
-                "Score_Label": "\u2696\ufe0f  Stable",
-                "Breakdown": {
-                    "Volume": 2.7781722008281347,
-                    "Growth_Trend": 5.0,
-                    "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.7,
-                    "Entry_Flexibility": 2.42
-                },
-                "Raw_Counts": {
-                    "Fresher_Jobs": 87,
-                    "Total_Domain_Jobs": 360
-                }
-            },
-            "Java Developer": {
-                "Overall_Demand_Score": 3.07,
+                "Overall_Demand_Score": 3.49,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.35283620975471336,
-                    "Growth_Trend": 5.0,
+                    "Volume": 1.9977845677519945,
+                    "Growth_Trend": 3.54,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 3.81,
-                    "Entry_Flexibility": 1.42
+                    "Market_Diversity": 5.34,
+                    "Entry_Flexibility": 2.04
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 40,
-                    "Total_Domain_Jobs": 281
+                    "Fresher_Jobs": 177,
+                    "Total_Domain_Jobs": 867
                 }
             },
             "Project Manager": {
-                "Overall_Demand_Score": 3.19,
+                "Overall_Demand_Score": 3.25,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.7779209300744507,
+                    "Volume": 0.7124282672114518,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.17,
-                    "Entry_Flexibility": 0.82
+                    "Market_Diversity": 4.79,
+                    "Entry_Flexibility": 0.71
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 39,
-                    "Total_Domain_Jobs": 474
+                    "Fresher_Jobs": 80,
+                    "Total_Domain_Jobs": 1128
+                }
+            },
+            "Java Developer": {
+                "Overall_Demand_Score": 3.75,
+                "Score_Label": "\ud83d\udcc9 Declining",
+                "Breakdown": {
+                    "Volume": 0.9708513211532478,
+                    "Growth_Trend": 6.5,
+                    "Applicant_Ratio": 5.0,
+                    "Market_Diversity": 4.79,
+                    "Entry_Flexibility": 1.13
+                },
+                "Raw_Counts": {
+                    "Fresher_Jobs": 77,
+                    "Total_Domain_Jobs": 681
                 }
             },
             "Scrum Master": {
-                "Overall_Demand_Score": 2.81,
+                "Overall_Demand_Score": 2.92,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.23198154889391936,
+                    "Volume": 0.23204931316675417,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 3.0,
-                    "Entry_Flexibility": 0.42
+                    "Market_Diversity": 3.73,
+                    "Entry_Flexibility": 0.41
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 19,
-                    "Total_Domain_Jobs": 451
+                    "Fresher_Jobs": 33,
+                    "Total_Domain_Jobs": 801
                 }
             }
         }
@@ -456,59 +456,59 @@
     "domain": {
         "market_demand_top3": {
             "Data Scientist": {
-                "Overall_Demand_Score": 3.5,
+                "Overall_Demand_Score": 3.68,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 1.2361406357469649,
+                    "Volume": 1.4305140718648415,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 4.64,
-                    "Entry_Flexibility": 1.8
+                    "Market_Diversity": 5.61,
+                    "Entry_Flexibility": 1.64
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 114,
-                    "Total_Domain_Jobs": 634
+                    "Fresher_Jobs": 222,
+                    "Total_Domain_Jobs": 1357
                 }
             },
             "Machine Learning Engineer": {
-                "Overall_Demand_Score": 3.3,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.56,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 0.06625624958273377,
-                    "Growth_Trend": 5.0,
+                    "Volume": 2.616819561710246,
+                    "Growth_Trend": 6.75,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 5.49,
-                    "Entry_Flexibility": 2.06
+                    "Market_Diversity": 5.88,
+                    "Entry_Flexibility": 2.01
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 121,
-                    "Total_Domain_Jobs": 586
+                    "Fresher_Jobs": 263,
+                    "Total_Domain_Jobs": 1310
                 }
             },
             "Data Analyst": {
-                "Overall_Demand_Score": 4.92,
-                "Score_Label": "\u2696\ufe0f  Stable",
+                "Overall_Demand_Score": 6.17,
+                "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 3.6038292505028595,
-                    "Growth_Trend": 5.0,
+                    "Volume": 6.181548627560106,
+                    "Growth_Trend": 6.67,
                     "Applicant_Ratio": 5.0,
-                    "Market_Diversity": 6.46,
-                    "Entry_Flexibility": 6.17
+                    "Market_Diversity": 6.94,
+                    "Entry_Flexibility": 6.07
                 },
                 "Raw_Counts": {
-                    "Fresher_Jobs": 382,
-                    "Total_Domain_Jobs": 619
+                    "Fresher_Jobs": 756,
+                    "Total_Domain_Jobs": 1246
                 }
             }
         },
         "ai_risk": {
             "Domain": "Data Scientist",
-            "AI_Risk_Score": 0.21,
+            "AI_Risk_Score": 0.22,
             "Risk_Category": "AI-Resilient (Human-Centric)",
             "Vulnerability_Breakdown": {
                 "Routine_Exposure": "22%",
-                "Rule_Based_Exposure": "13%",
-                "Creativity_Gap": "66%"
+                "Rule_Based_Exposure": "12%",
+                "Creativity_Gap": "69%"
             },
             "Actionable_Advice": "Stay updated with AI tools to enhance productivity."
         },
@@ -521,14 +521,14 @@
             "Projection_Years": 3,
             "Data_Quality": {
                 "Confidence": "Low",
-                "Fresher_Sample_Size": 0,
+                "Fresher_Sample_Size": 13,
                 "Time_Series_Signal": false,
                 "TS_Reliable": false
             },
             "Baseline": {
                 "Fresher_Median_LPA": 0.0,
                 "Location_Factor": 1.0,
-                "Base_CAGR_Pct": 0.26
+                "Base_CAGR_Pct": 40.57
             },
             "Market_Inflation": {
                 "Annualized_Pct": 0.0,
@@ -536,83 +536,99 @@
                 "Months_Analyzed": 0
             },
             "Experience_Ladder": {
+                "fresher": {
+                    "median": 9.0,
+                    "p25": 9.0,
+                    "p75": 9.0,
+                    "n": 13,
+                    "exp_midpoint_yr": 0.5
+                },
+                "junior": {
+                    "median": 15.0,
+                    "p25": 9.5,
+                    "p75": 20.0,
+                    "n": 5,
+                    "exp_midpoint_yr": 2.0
+                },
                 "mid": {
                     "median": 21.25,
-                    "p25": 17.75,
-                    "p75": 26.25,
-                    "n": 35,
+                    "p25": 17.0,
+                    "p75": 25.0,
+                    "n": 69,
                     "exp_midpoint_yr": 4.5
                 },
                 "senior": {
-                    "median": 21.5,
+                    "median": 21.0,
                     "p25": 13.5,
-                    "p75": 21.5,
-                    "n": 17,
+                    "p75": 21.75,
+                    "n": 28,
                     "exp_midpoint_yr": 9.0
                 }
             },
             "CAGR_By_Segment": {
-                "mid_to_senior": 0.26
+                "fresher_to_junior": 40.57,
+                "junior_to_mid": 14.95,
+                "mid_to_senior": -0.26
             },
             "Scenarios": {
                 "Conservative": {
-                    "Annual_CAGR": "0.2%",
+                    "Annual_CAGR": "24.3%",
                     "Yearly_Salary_LPA": {
                         "Year_1": 0.0,
                         "Year_2": 0.0,
                         "Year_3": 0.0
                     },
                     "Final_Salary_LPA": 0.0,
-                    "Total_Growth_Pct": 0.5,
+                    "Total_Growth_Pct": 92.2,
                     "Description": "Slow growth path \u2014 minimal skill upgrades, same company"
                 },
                 "Expected": {
-                    "Annual_CAGR": "0.3%",
+                    "Annual_CAGR": "40.6%",
                     "Yearly_Salary_LPA": {
                         "Year_1": 0.0,
                         "Year_2": 0.0,
                         "Year_3": 0.0
                     },
                     "Final_Salary_LPA": 0.0,
-                    "Total_Growth_Pct": 0.8,
+                    "Total_Growth_Pct": 177.8,
                     "Description": "Market-average progression with standard raises"
                 },
                 "Optimistic": {
-                    "Annual_CAGR": "0.3%",
+                    "Annual_CAGR": "52.7%",
                     "Yearly_Salary_LPA": {
                         "Year_1": 0.0,
                         "Year_2": 0.0,
                         "Year_3": 0.0
                     },
                     "Final_Salary_LPA": 0.0,
-                    "Total_Growth_Pct": 1.0,
+                    "Total_Growth_Pct": 256.3,
                     "Description": "Above-average growth \u2014 1 job switch or strong upskilling"
                 },
                 "Aggressive": {
-                    "Annual_CAGR": "0.4%",
+                    "Annual_CAGR": "69.0%",
                     "Yearly_Salary_LPA": {
                         "Year_1": 0.0,
                         "Year_2": 0.0,
                         "Year_3": 0.0
                     },
                     "Final_Salary_LPA": 0.0,
-                    "Total_Growth_Pct": 1.3,
+                    "Total_Growth_Pct": 382.4,
                     "Description": "Top performer path \u2014 multiple switches, high-demand skills"
                 }
             },
-            "Interpretation": "\u26a0\ufe0f  Slow growth \u2014 consider adjacent domains or skill upgrades for acceleration."
+            "Interpretation": "\ud83d\ude80 Exceptional growth trajectory \u2014 top-tier domain for salary progression."
         },
         "saturation": {
             "Domain": "Data Scientist",
-            "Sample_Size": 500,
-            "Saturation_Score": 0.745,
+            "Sample_Size": 1125,
+            "Saturation_Score": 0.697,
             "Risk_Level": "High Saturation",
             "Color_Code": "Orange",
             "Factor_Breakdown": {
                 "Supply_Demand": {
                     "score": 1.0,
-                    "ratio": 7500,
-                    "total_openings": 500,
+                    "ratio": 16875,
+                    "total_openings": 1125,
                     "data_quality": "Estimated"
                 },
                 "Trend_Slope": {
@@ -622,39 +638,39 @@
                     "reliable": false
                 },
                 "Experience_Barrier": {
-                    "score": 0.8,
-                    "median_exp": 4.0,
-                    "exp_trend": "Rising",
-                    "fresher_pct": 11.0
+                    "score": 0.167,
+                    "median_exp": 3.0,
+                    "exp_trend": "Falling",
+                    "fresher_pct": 11.5
                 },
                 "Salary_Compression": {
-                    "score": 0.8,
+                    "score": 0.667,
                     "compression_ratio": 0.4,
-                    "median_gap_lpa": 8.25,
+                    "median_gap_lpa": 8.0,
                     "interpretation": "Compressed"
                 },
                 "Skill_Inflation": {
-                    "score": 0.3,
-                    "median_skills": 10.0,
-                    "skill_trend": "Stable",
-                    "market_percentile": 30.0
+                    "score": 0.967,
+                    "median_skills": 13.0,
+                    "skill_trend": "Inflating",
+                    "market_percentile": 96.7
                 }
             },
             "Alerts": [
-                "\ud83d\udea8 Very high applicant/opening ratio (7500:1). Expect intense competition for every role.",
+                "\ud83d\udea8 Very high applicant/opening ratio (16875:1). Expect intense competition for every role.",
                 "\u26a0\ufe0f  Trend signal is weak \u2014 insufficient historical data for confident prediction.",
-                "\ud83d\udcc8 Experience requirements are rising \u2014 entry barrier increasing for freshers.",
-                "\ud83d\udd12 Only 11.0% of roles open to freshers. Experienced candidates dominate this market.",
-                "\ud83d\udcb0 Salary bands are compressed \u2014 limited negotiation power. Employer's market."
+                "\ud83d\udd12 Only 11.5% of roles open to freshers. Experienced candidates dominate this market.",
+                "\ud83d\udcb0 Salary bands are compressed \u2014 limited negotiation power. Employer's market.",
+                "\ud83d\udcda Skill requirements are increasing over time \u2014 market becoming harder to enter."
             ],
             "Signals": {
                 "Demand_Trend": "Declining",
                 "Trend_Reliable": false,
-                "Experience_Barrier": "High",
-                "Experience_Trend": "Rising",
+                "Experience_Barrier": "Normal",
+                "Experience_Trend": "Falling",
                 "Salary_State": "Compressed",
-                "Skill_Inflation": "Stable",
-                "Fresher_Pct": 11.0
+                "Skill_Inflation": "Inflating",
+                "Fresher_Pct": 11.5
             }
         },
         "velocity": {
@@ -785,7 +801,7 @@
                                 "median_lpa": 0.0,
                                 "p25_lpa": 0.0,
                                 "p75_lpa": 0.0,
-                                "sample_size": 145
+                                "sample_size": 273
                             }
                         },
                         {
@@ -924,11 +940,11 @@
                 0,
                 3
             ],
-            "Sample_Size": 337,
+            "Sample_Size": 731,
             "Domain_Complexity": {
                 "max_depth": 6,
-                "avg_depth": 0.63,
-                "skill_count": 156,
+                "avg_depth": 0.73,
+                "skill_count": 141,
                 "complexity_index": 5.2,
                 "classification": "\ud83d\udea8 Expert Prerequisites \u2014 12+ months before job-ready",
                 "barrier_level": "Very High",
@@ -950,73 +966,105 @@
                         "depth": 5
                     },
                     {
-                        "skill": "data science",
-                        "depth": 4
+                        "skill": "nlp",
+                        "depth": 5
                     }
                 ]
             },
             "Your_Readiness": {
-                "composite_score": 0.123,
-                "weighted_coverage": 0.192,
-                "count_ratio": 0.019,
+                "composite_score": 0.113,
+                "weighted_coverage": 0.175,
+                "count_ratio": 0.021,
                 "matched_skills": 3,
-                "total_required": 156,
+                "total_required": 141,
                 "status": "\u26aa Starting Fresh \u2014 build from foundations",
                 "Skills_You_Have": [
+                    "python",
                     "sql",
-                    "machine learning",
-                    "python"
+                    "machine learning"
                 ],
                 "Skills_You_Gave": [
+                    "python",
                     "sql",
-                    "machine learning",
-                    "python"
+                    "machine learning"
                 ]
             },
             "Missing_Skills_Prioritized": [
                 {
-                    "skill": "data science",
-                    "importance": 1.097
+                    "skill": "data scientist",
+                    "importance": 1.077
                 },
                 {
-                    "skill": "data scientist",
-                    "importance": 0.834
+                    "skill": "data science",
+                    "importance": 0.984
                 },
                 {
                     "skill": "artificial intelligence",
-                    "importance": 0.611
+                    "importance": 0.841
                 },
                 {
                     "skill": "tensorflow",
-                    "importance": 0.563
-                },
-                {
-                    "skill": "deep learning",
-                    "importance": 0.501
+                    "importance": 0.645
                 },
                 {
                     "skill": "pytorch",
-                    "importance": 0.473
+                    "importance": 0.599
                 },
                 {
-                    "skill": "natural language processing",
-                    "importance": 0.452
-                },
-                {
-                    "skill": "pandas",
-                    "importance": 0.408
+                    "skill": "deep learning",
+                    "importance": 0.514
                 },
                 {
                     "skill": "keras",
-                    "importance": 0.395
+                    "importance": 0.51
                 },
                 {
-                    "skill": "data analysis",
-                    "importance": 0.309
+                    "skill": "pandas",
+                    "importance": 0.492
+                },
+                {
+                    "skill": "natural language processing",
+                    "importance": 0.446
+                },
+                {
+                    "skill": "programming",
+                    "importance": 0.438
                 }
             ],
             "Learning_Path": {
                 "Ordered_Steps": [
+                    {
+                        "skill": "programming",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "natural language processing",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "cloud",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "data scientist",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
                     {
                         "skill": "basic math",
                         "weeks_to_learn": 1,
@@ -1057,16 +1105,17 @@
                         "depth": 2
                     },
                     {
-                        "skill": "data analysis",
-                        "weeks_to_learn": 5,
+                        "skill": "data science",
+                        "weeks_to_learn": 20,
                         "prerequisites": [
-                            "python",
                             "statistics",
-                            "sql"
+                            "python",
+                            "sql",
+                            "machine learning"
                         ],
                         "prereq_ready": true,
                         "can_start_now": false,
-                        "depth": 3
+                        "depth": 4
                     },
                     {
                         "skill": "logic",
@@ -1085,42 +1134,6 @@
                         "prereq_ready": true,
                         "can_start_now": false,
                         "depth": 1
-                    },
-                    {
-                        "skill": "linux",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "programming basics"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 2
-                    },
-                    {
-                        "skill": "pandas",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "python"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 3
-                    },
-                    {
-                        "skill": "statistical modeling",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "data scientist",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
                     },
                     {
                         "skill": "linear algebra",
@@ -1145,33 +1158,6 @@
                         "depth": 4
                     },
                     {
-                        "skill": "natural language processing",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "artificial intelligence",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "data visualization",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "python",
-                            "statistics"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 3
-                    },
-                    {
                         "skill": "tensorflow",
                         "weeks_to_learn": 10,
                         "prerequisites": [
@@ -1183,14 +1169,63 @@
                         "depth": 5
                     },
                     {
-                        "skill": "aws",
-                        "weeks_to_learn": 8,
+                        "skill": "keras",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "java",
+                        "weeks_to_learn": 5,
                         "prerequisites": [
-                            "linux",
                             "programming basics"
                         ],
                         "prereq_ready": true,
                         "can_start_now": false,
+                        "depth": 2
+                    },
+                    {
+                        "skill": "artificial intelligence",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "big data",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "cloud platforms",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "matplotlib",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "pandas",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [
+                            "python"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": true,
                         "depth": 3
                     },
                     {
@@ -1203,39 +1238,9 @@
                         "prereq_ready": true,
                         "can_start_now": false,
                         "depth": 5
-                    },
-                    {
-                        "skill": "data science",
-                        "weeks_to_learn": 20,
-                        "prerequisites": [
-                            "statistics",
-                            "python",
-                            "sql",
-                            "machine learning"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 4
-                    },
-                    {
-                        "skill": "scikit-learn",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "machine learning",
-                            "python"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 4
-                    },
-                    {
-                        "skill": "keras",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
+                    }
+                ],
+                "Can_Start_Now": [
                     {
                         "skill": "programming",
                         "weeks_to_learn": 5,
@@ -1243,9 +1248,31 @@
                         "prereq_ready": true,
                         "can_start_now": true,
                         "depth": 0
-                    }
-                ],
-                "Can_Start_Now": [
+                    },
+                    {
+                        "skill": "natural language processing",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "cloud",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "data scientist",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
                     {
                         "skill": "basic math",
                         "weeks_to_learn": 1,
@@ -1263,33 +1290,7 @@
                         "depth": 0
                     },
                     {
-                        "skill": "pandas",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "python"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 3
-                    },
-                    {
-                        "skill": "statistical modeling",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "data scientist",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "natural language processing",
+                        "skill": "keras",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1305,39 +1306,46 @@
                         "depth": 0
                     },
                     {
-                        "skill": "scikit-learn",
+                        "skill": "big data",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "cloud platforms",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "matplotlib",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "pandas",
                         "weeks_to_learn": 5,
                         "prerequisites": [
-                            "machine learning",
                             "python"
                         ],
                         "prereq_ready": true,
                         "can_start_now": true,
-                        "depth": 4
-                    },
-                    {
-                        "skill": "keras",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "programming",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
+                        "depth": 3
                     }
                 ],
-                "Total_Skills_Needed": 23,
-                "Estimated_Months": 35.1,
+                "Total_Skills_Needed": 22,
+                "Estimated_Months": 33.3,
                 "Time_Assumption": "10 hrs/week dedicated learning"
             },
-            "Education_Signal": "\u26a0\ufe0f  80% of postings prefer PG degree \u2014 consider if relevant.",
-            "Quick_Summary": "\ud83d\udd34 Significant gap. Entry barrier is 'Very High'. Realistic timeline: ~35.1 months. This is doable but requires serious commitment and structured learning."
+            "Education_Signal": "\u26a0\ufe0f  81% of postings prefer PG degree \u2014 consider if relevant.",
+            "Quick_Summary": "\ud83d\udd34 Significant gap. Entry barrier is 'Very High'. Realistic timeline: ~33.3 months. This is doable but requires serious commitment and structured learning."
         },
         "career_path": {
             "Target_Domain": "Data Scientist",
@@ -1345,15 +1353,15 @@
                 0,
                 3
             ],
-            "Sample_Size": 337,
+            "Sample_Size": 731,
             "Readiness_Score": {
-                "score": 19.8,
-                "label": "Unknown",
-                "color": "gray",
+                "score": 21.0,
+                "label": "\ud83d\udd34 Significant Work Ahead",
+                "color": "red",
                 "components": {
                     "skill_overlap_score": 0.0,
-                    "blocker_clearance": 4.0,
-                    "interview_manageability": 79.0,
+                    "blocker_clearance": 12.8,
+                    "interview_manageability": 74.0,
                     "time_manageability": 20
                 }
             },
@@ -1362,58 +1370,58 @@
                 "weighted_coverage": 0.0,
                 "count_ratio": 0.0,
                 "matched_count": 0,
-                "required_count": 187,
+                "required_count": 164,
                 "matched_skills": [],
                 "status": "\u26aa Minimal overlap \u2014 building from scratch",
                 "Prior_Knowledge_Level": "basic"
             },
             "Learning_Plan": {
-                "gap_skills_count": 187,
-                "total_hours": 6650,
-                "weeks_at_10hrs": 665.0,
-                "months": 154.7,
+                "gap_skills_count": 164,
+                "total_hours": 5862,
+                "weeks_at_10hrs": 586.2,
+                "months": 136.3,
                 "prior_factor": 1.0,
-                "label": "~154.7 months at 10hrs/week",
+                "label": "~136.3 months at 10hrs/week",
                 "top_gap_skills": [
                     [
                         "'machine learning'",
-                        1.2403560830860665
+                        1.2295485636115047
                     ],
                     [
                         "'python'",
-                        0.7667655786350137
-                    ],
-                    [
-                        "[]",
-                        0.6451038575667652
+                        0.8831737346101294
                     ],
                     [
                         "'artificial intelligence'",
-                        0.585756676557862
+                        0.7729138166894746
                     ],
                     [
-                        "'python']",
-                        0.5839762611275955
+                        "['data scientist']",
+                        0.612311901504788
+                    ],
+                    [
+                        "'tensorflow'",
+                        0.6057455540355748
                     ]
                 ],
                 "Prior_Knowledge_Factor": 1.0
             },
             "Project_Benchmark": {
-                "Score": 3.02,
+                "Score": 3.25,
                 "Label": "\ud83d\udfe1 Simple-Intermediate",
                 "Confidence": "High",
                 "Signals": {
-                    "feature_complexity": 3.14,
-                    "integration_depth": 0.59,
-                    "deployment_complexity": 4.1,
-                    "skill_breadth": 5.0
+                    "feature_complexity": 2.76,
+                    "integration_depth": 0.71,
+                    "deployment_complexity": 4.23,
+                    "skill_breadth": 7.0
                 },
                 "Example_Project": "End-to-end ML pipeline: data collection \u2192 feature engineering \u2192 model \u2192 evaluation dashboard"
             },
             "Interview_Difficulty": {
-                "Index": 2.1,
+                "Index": 2.6,
                 "Label": "\u26aa Accessible",
-                "Raw_Score": 0.21
+                "Raw_Score": 0.256
             },
             "Hidden_Blockers": {
                 "Count": 2,
@@ -1422,15 +1430,15 @@
                     {
                         "blocker_id": "senior_dominated",
                         "category": "Experience Barrier",
-                        "severity": 0.591,
-                        "evidence": "73.9% of postings require 3+ years experience.",
+                        "severity": 0.57,
+                        "evidence": "71.3% of postings require 3+ years experience.",
                         "message": "Domain heavily favors 3+ year experienced candidates"
                     },
                     {
                         "blocker_id": "dsa_intensive",
                         "category": "Technical Depth Barrier",
-                        "severity": 0.461,
-                        "evidence": "46.0% of job descriptions mention this requirement (threshold: 35%)",
+                        "severity": 0.378,
+                        "evidence": "42.1% of job descriptions mention this requirement (threshold: 35%)",
                         "message": "Strong DSA/competitive programming expected in interviews"
                     }
                 ]
@@ -1444,7 +1452,7 @@
                 "first_step": "mid data scientist",
                 "years_to_senior": 4.0
             },
-            "Priority_Action": "\ud83c\udfaf Start with highest-impact gap skill: ''machine learning''. Full preparation: ~154.7 months at 10hrs/week.",
+            "Priority_Action": "\ud83c\udfaf Start with highest-impact gap skill: ''machine learning''. Full preparation: ~136.3 months at 10hrs/week.",
             "Data_Sources_Used": {
                 "PrerequisiteEngine": true,
                 "SkillTransferabilityEngine": false,
@@ -1461,11 +1469,11 @@
                 5
             ],
             "Transferability": {
-                "Composite_Score": 0.634,
+                "Composite_Score": 0.716,
                 "Coverage_Ratio": 0.476,
-                "Portability_Ratio": 0.42,
-                "Label": "\ud83d\udfe1 Moderate Transferability",
-                "Difficulty": "Moderate Effort",
+                "Portability_Ratio": 0.586,
+                "Label": "\ud83d\udfe2 High Transferability",
+                "Difficulty": "Easy Switch",
                 "Time_Estimate": "Extended transition (~15+ months)",
                 "Coverage_Warning": null
             },
@@ -1473,53 +1481,53 @@
                 "Priority_Skills_To_Learn": [
                     {
                         "skill": "'api'",
-                        "importance": 0.116,
-                        "weeks": 6
-                    },
-                    {
-                        "skill": "'c++'",
-                        "importance": 0.095,
-                        "weeks": 6
-                    },
-                    {
-                        "skill": "'architecture'",
-                        "importance": 0.083,
+                        "importance": 0.094,
                         "weeks": 6
                     },
                     {
                         "skill": "'debugging'",
-                        "importance": 0.067,
+                        "importance": 0.086,
                         "weeks": 6
                     },
                     {
-                        "skill": "'red hat'",
-                        "importance": 0.06,
+                        "skill": "'c++'",
+                        "importance": 0.085,
                         "weeks": 6
                     },
                     {
-                        "skill": "'distribution system'",
-                        "importance": 0.06,
+                        "skill": "'architecture'",
+                        "importance": 0.073,
                         "weeks": 6
                     },
                     {
-                        "skill": "['numpy'",
-                        "importance": 0.059,
+                        "skill": "'engineering'",
+                        "importance": 0.055,
                         "weeks": 6
                     },
                     {
-                        "skill": "'nosql'",
-                        "importance": 0.057,
+                        "skill": "'opencv'",
+                        "importance": 0.054,
+                        "weeks": 6
+                    },
+                    {
+                        "skill": "['mlops'",
+                        "importance": 0.054,
+                        "weeks": 6
+                    },
+                    {
+                        "skill": "'ai engineer'",
+                        "importance": 0.052,
                         "weeks": 6
                     }
                 ],
                 "Bridge_Skills": [
                     {
                         "skill": "'machine learning'",
-                        "target_importance": 1.287
+                        "target_importance": 1.224
                     },
                     {
                         "skill": "'python']",
-                        "target_importance": 0.925
+                        "target_importance": 0.884
                     },
                     {
                         "skill": "[]",
@@ -1527,52 +1535,52 @@
                     },
                     {
                         "skill": "'artificial intelligence'",
-                        "target_importance": 0.763
+                        "target_importance": 0.741
                     },
                     {
                         "skill": "'python'",
-                        "target_importance": 0.549
-                    },
-                    {
-                        "skill": "['machine learning']",
-                        "target_importance": 0.513
+                        "target_importance": 0.642
                     },
                     {
                         "skill": "'pytorch'",
-                        "target_importance": 0.448
+                        "target_importance": 0.487
+                    },
+                    {
+                        "skill": "['machine learning']",
+                        "target_importance": 0.482
                     },
                     {
                         "skill": "['machine learning'",
-                        "target_importance": 0.356
+                        "target_importance": 0.395
                     }
                 ],
                 "Skills_Becoming_Obsolete": [
-                    "['data scientist']",
-                    "'data visualization'",
-                    "'statistical modeling'",
                     "['data scientist'",
-                    "'tableau'"
+                    "'tableau'",
+                    "'ai frameworks'",
+                    "'enterprise applications'",
+                    "'cloud technologies'"
                 ],
-                "Total_Gap_Skills": 153,
-                "Total_Bridge_Skills": 139,
+                "Total_Gap_Skills": 187,
+                "Total_Bridge_Skills": 170,
                 "Estimated_Months": 14.9
             },
             "Domain_Complexity": {
-                "Source_Median_Skills": 10.0,
-                "Target_Median_Skills": 9.0,
-                "Complexity_Jump": -1.0
+                "Source_Median_Skills": 13.0,
+                "Target_Median_Skills": 10.0,
+                "Complexity_Jump": -3.0
             },
             "Salary_Impact": {
                 "available": true,
                 "source_median": 0.0,
                 "target_median": 0.0,
-                "delta_pct": -29.4,
-                "signal": "\ud83d\udcc9 Salary cut: -29.4% reduction \u2014 factor into timing"
+                "delta_pct": 10.4,
+                "signal": "\ud83d\udcc8 Salary upgrade: +10.4% median compensation gain"
             },
-            "Bidirectional_Note": "\u2194\ufe0f  Both directions are similarly feasible (63% vs 63%).",
+            "Bidirectional_Note": "\u2194\ufe0f  Both directions are similarly feasible (72% vs 70%).",
             "Sample_Sizes": {
-                "Source_Listings": 528,
-                "Target_Listings": 511
+                "Source_Listings": 1157,
+                "Target_Listings": 1132
             }
         },
         "real_talk": {
@@ -1591,16 +1599,16 @@
                 ]
             },
             "readiness_snapshot": {
-                "score": 19.8,
-                "label": "Unknown",
+                "score": 21.0,
+                "label": "\ud83d\udd34 Significant Work Ahead",
                 "skill_overlap": "0%",
-                "months_to_ready": 154.7,
+                "months_to_ready": 136.3,
                 "active_blockers": 2
             },
             "market_pulse": {
                 "competition": "5.0/10",
-                "barrier_depth": "1.2/5",
-                "ai_risk": "21%",
+                "barrier_depth": "1.4/5",
+                "ai_risk": "22%",
                 "growth_signal": "\u27a1\ufe0f  Stable"
             },
             "real_talk": {
@@ -1620,11 +1628,11 @@
             "urgency": {
                 "signal": "\ud83d\udd34 Build Foundation First",
                 "color": "red",
-                "message": "Readiness score: 20/100. This domain requires a strong foundation you're still building. Start with prerequisite skills before targeting this role directly."
+                "message": "Readiness score: 21/100. This domain requires a strong foundation you're still building. Start with prerequisite skills before targeting this role directly."
             },
             "evolution_note": "\ud83d\udcc8 Natural next step from Data Scientist: **mid data scientist** (~4.0 years to senior level)",
             "salary_context": "\ud83d\udcb0 Market median: \u20b90.0 LPA (P25: \u20b90.0 | P75: \u20b90.0 LPA)",
-            "priority_action": "\ud83c\udfaf Start with highest-impact gap skill: ''machine learning''. Full preparation: ~154.7 months at 10hrs/week."
+            "priority_action": "\ud83c\udfaf Start with highest-impact gap skill: ''machine learning''. Full preparation: ~136.3 months at 10hrs/week."
         }
     }
 }

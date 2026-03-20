@@ -213,20 +213,20 @@ class GeneralJobScraper(JobExtractor):
             job_description = jd_elem.get_text(" ", strip=True) if jd_elem else "NA"
 
             return {
-                "Title": title,
-                "Company": company,
-                "Experience": exp,
-                "Salary": salary,
-                "Location": location,
-                "Education": education,
-                "Star_Skills": star_skills,
-                "Normal_Skills": normal_skills,
-                "Posted_Date": posted_date,
-                "Last_Apply_Date": last_apply_date,
+                "title": title,
+                "company": company,
+                "experience": exp,
+                "salary": salary,
+                "location": location,
+                "education": education,
+                "star_skills": star_skills,
+                "normal_skills": normal_skills,
+                "posted_date": posted_date,
+                "last_apply_date": last_apply_date,
                 **details,
-                "Description": job_description,
-                "Job_URL": job_url,
-                "Scraped_At": datetime.datetime.now().isoformat()
+                "description": job_description,
+                "job_url": job_url,
+                "scraped_at": datetime.datetime.now().isoformat()
             }
         except Exception as e:
             logger.error(f"Error extracting job details from {job_url}: {e}")

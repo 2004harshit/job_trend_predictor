@@ -43,7 +43,7 @@ class MarketDemandEngine:
         if not (0.98 <= total <= 1.02):
             raise ValueError(f"Weights must sum to 1.0, got {total:.3f}")
    
-    MIN_SAMPLE_THRESHOLD = 10
+    MIN_SAMPLE_THRESHOLD = 30
 
     def _filter_fresher_data(self, df):
         return df[
@@ -79,7 +79,6 @@ class MarketDemandEngine:
         return min((weighted_freq / max_freq) * 10, 10.0)
     
     def _calculate_trend_score(self, fresher_df, domain, first_this, first_prev, last_prev):
-        # BUG FIX: Removed .dt.date to allow Timestamp vs Timestamp comparison
         curr_df = fresher_df[
             (fresher_df["Job_Type"] == domain) &
             (fresher_df["Scraped_At_Cleaned"] >= first_this)

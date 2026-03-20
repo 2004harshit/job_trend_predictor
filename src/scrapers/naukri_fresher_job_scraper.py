@@ -504,11 +504,11 @@ class FresherJobScraper(JobExtractor):
             Dict with Role, Industry_Type, Department, Employment_Type, Role_Category
         """
         details = {
-            "Role": "NA",
-            "Industry_Type": "NA", 
-            "Department": "NA",
-            "Employment_Type": "NA",
-            "Role_Category": "NA"
+            "role": "NA",
+            "industry_type": "NA", 
+            "department": "NA",
+            "employment_Type": "NA",
+            "role_category": "NA"
         }
         
         # Mapping from Naukri labels to our standardized fields
@@ -626,26 +626,26 @@ class FresherJobScraper(JobExtractor):
 
             # Return standardized dictionary with Job_ID as first field
             return {
-                "Job_ID": job_id,
-                "Title": title,
-                "Company": company,
-                "Experience": experience,
-                "Salary": salary,
-                "Location": location,
-                "Education": education,
-                "Star_Skills": star_skills,
-                "Normal_Skills": normal_skills,
-                "Posted_Date": posted_date,
-                "Last_Apply_Date": last_apply_date,
-                "Role": structured_details["Role"],
-                "Industry_Type": structured_details["Industry_Type"],
-                "Department": structured_details["Department"],
-                "Employment_Type": structured_details["Employment_Type"],
-                "Role_Category": structured_details["Role_Category"],
-                "Description": description,
-                "Job_URL": job_url,
-                "Scraped_At": datetime.datetime.now().isoformat(),
-                "Job_Type": "Fresher",  # Will be overridden with actual job role searched
+                "job_id": job_id,
+                "title": title,
+                "company": company,
+                "experience": experience,
+                "salary": salary,
+                "location": location,
+                "education": education,
+                "star_skills": star_skills,
+                "normal_skills": normal_skills,
+                "posted_date": posted_date,
+                "last_apply_date": last_apply_date,
+                "role": structured_details["Role"],
+                "industry_type": structured_details["industry_type"],
+                "department": structured_details["department"],
+                "employment_type": structured_details["employment_type"],
+                "role_category": structured_details["role_category"],
+                "description": description,
+                "job_url": job_url,
+                "scraped_at": datetime.datetime.now().isoformat(),
+                "job_type": "Fresher",  # Will be overridden with actual job role searched
                 "num_openings": applicant_stats["num_openings"],
                 "num_applicants": applicant_stats["num_applicants"]
             }

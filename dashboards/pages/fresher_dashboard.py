@@ -7,20 +7,15 @@ Handles global path selection and routes to the correct sub-components.
 
 import streamlit as st
 
-# Career profiler (assumed to exist)
-from dashboards.components.career_profiler import render_profiling_flow
+
 
 # Domain Confusion Resolver sub-flows
 from dashboards.components.domain_confusion_resolver import (
-    render_domain_confusion_resolver,
     render_path_1_flow,
     render_path_2_flow,
 )
 
-
-def render(navigate_to):  # noqa: ARG001  (navigate_to kept for API compatibility)
-    st.title("👨‍🎓 Your Personalised Insights")
-
+def render_path():
     # --- Global path selection (lives above the tabs) ---
     if "path_choice" not in st.session_state:
         st.session_state.path_choice = None
@@ -51,6 +46,10 @@ def render(navigate_to):  # noqa: ARG001  (navigate_to kept for API compatibilit
 
     st.divider()
 
+
+def render():  
+    st.title("👨‍🎓 Your Personalised Insights")
+
     # --- Tabs ---
     tabs = st.tabs(
         [
@@ -76,6 +75,9 @@ def render(navigate_to):  # noqa: ARG001  (navigate_to kept for API compatibilit
     # Tab 1 – Domain Confusion Resolver                                    #
     # ------------------------------------------------------------------ #
     with tab_resolver:
+      
+        # render_path()
+        
         path = st.session_state.get("path_choice")
 
         if path == "help_me_decide":

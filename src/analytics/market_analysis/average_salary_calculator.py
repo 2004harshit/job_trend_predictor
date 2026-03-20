@@ -36,10 +36,10 @@ class AverageSalaryRangeCalculator:
         if missing:
             raise ValueError(f"Missing required columns: {missing}")
         
-        # Fix column name typo dynamically
-        if 'TItle_Cleaned' in df.columns and 'Title_Cleaned' not in df.columns:
-            df = df.rename(columns={'TItle_Cleaned': 'Title_Cleaned'})
-            self.logger.warning("Auto-fixed column typo: 'TItle_Cleaned' → 'Title_Cleaned'")
+        # # Fix column name typo dynamically
+        # if 'TItle_Cleaned' in df.columns and 'Title_Cleaned' not in df.columns:
+        #     df = df.rename(columns={'TItle_Cleaned': 'Title_Cleaned'})
+        #     self.logger.warning("Auto-fixed column typo: 'TItle_Cleaned' → 'Title_Cleaned'")
         
         # Safe numeric conversion on the COPY only
         for col in ['Min_Salary', 'Max_Salary', 'Avg_Salary', 
@@ -202,7 +202,6 @@ class AverageSalaryRangeCalculator:
         Location factor = local domain median / national domain median.
         Both numerator and denominator are DOMAIN-SPECIFIC.
 
-        Previous bug: compared domain salary to ALL-JOBS national avg.
         """
         # National median for THIS domain only
         national_median = domain_df['Avg_Salary'].median()
@@ -378,7 +377,7 @@ if __name__ == "__main__":    # Example usage
     result = calculator.calculate_salary_metrics(
         df=df,
         target_domain="Data Analyst",
-        target_location="Bangalore",
+        # target_location="Bangalore",
         experience_band="junior"
     )
 

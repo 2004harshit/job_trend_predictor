@@ -551,3 +551,16 @@ class DomainStabilityEngine:
             alerts.append(f"👥 Very high competition ({supply['ratio']:.0f} applicants/opening). Difficult market to enter.")
 
         return alerts if alerts else ["✅ No major stability concerns detected."]
+    
+
+if __name__ == "__main__":
+    # Load sample data
+    data_path = r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\processed\cleaned\cleaned_job_data.csv"
+    
+    df = pd.read_csv(data_path)
+
+    dse = DomainStabilityEngine()
+
+    result = dse.calculate_stability_score(df, "Data Analyst")
+
+    print(result)

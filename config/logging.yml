@@ -127,8 +127,13 @@ loggers:
     handlers: [console, general_scraper_handler, file_error]
     propagate: no
 
-  # Data Cleaning
   src.pipelines.cleaning:
+    level: INFO
+    handlers: [console, cleaning_handler, file_error]
+    propagate: no
+
+  # Cleaning Pipeline Orchestrator
+  pipelines.cleaning_pipeline:
     level: INFO
     handlers: [console, cleaning_handler, file_error]
     propagate: no

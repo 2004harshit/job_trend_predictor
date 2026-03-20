@@ -2,11 +2,11 @@
     "global": {
         "market_demand": {
             "Research Associate": {
-                "Overall_Demand_Score": 7.29,
+                "Overall_Demand_Score": 7.45,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 10.0,
-                    "Growth_Trend": 5.85,
+                    "Volume": 9.999999999999998,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.5,
                     "Entry_Flexibility": 8.52
@@ -17,11 +17,11 @@
                 }
             },
             "Web Developer": {
-                "Overall_Demand_Score": 6.62,
+                "Overall_Demand_Score": 6.14,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 6.651880171073518,
-                    "Growth_Trend": 8.06,
+                    "Volume": 6.349600094515491,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.43,
                     "Entry_Flexibility": 6.42
@@ -32,11 +32,11 @@
                 }
             },
             "Data Analyst": {
-                "Overall_Demand_Score": 6.17,
+                "Overall_Demand_Score": 6.13,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 6.181548627560106,
-                    "Growth_Trend": 6.67,
+                    "Volume": 6.198220597453191,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.94,
                     "Entry_Flexibility": 6.07
@@ -47,10 +47,10 @@
                 }
             },
             "Software Engineer": {
-                "Overall_Demand_Score": 4.08,
+                "Overall_Demand_Score": 4.01,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.207112872268554,
+                    "Volume": 1.9888206109183932,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.56,
@@ -62,11 +62,11 @@
                 }
             },
             "Data Engineer": {
-                "Overall_Demand_Score": 2.89,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.02,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.84285781634219,
-                    "Growth_Trend": 0.0,
+                    "Volume": 2.4363650767063287,
+                    "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.13,
                     "Entry_Flexibility": 4.15
@@ -77,10 +77,10 @@
                 }
             },
             "IT Support Specialist": {
-                "Overall_Demand_Score": 5.23,
+                "Overall_Demand_Score": 5.29,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.1878670064508583,
+                    "Volume": 3.3585132753355906,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.61,
@@ -92,10 +92,10 @@
                 }
             },
             "Mobile App Developer": {
-                "Overall_Demand_Score": 5.68,
+                "Overall_Demand_Score": 5.65,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.685327968441386,
+                    "Volume": 4.599972060724726,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.14,
@@ -107,10 +107,10 @@
                 }
             },
             "Front End Developer": {
-                "Overall_Demand_Score": 6.48,
+                "Overall_Demand_Score": 6.53,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 7.382176062192059,
+                    "Volume": 7.55140978722359,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.14,
@@ -122,11 +122,11 @@
                 }
             },
             "Business Analyst": {
-                "Overall_Demand_Score": 5.66,
+                "Overall_Demand_Score": 5.52,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.972388971248917,
-                    "Growth_Trend": 7.21,
+                    "Volume": 5.076503176683352,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.31,
                     "Entry_Flexibility": 4.24
@@ -137,11 +137,11 @@
                 }
             },
             "UX Designer": {
-                "Overall_Demand_Score": 4.95,
+                "Overall_Demand_Score": 5.24,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.887188552281809,
-                    "Growth_Trend": 5.21,
+                    "Volume": 4.76732306458619,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.2,
                     "Entry_Flexibility": 4.03
@@ -152,11 +152,11 @@
                 }
             },
             "Database Administrator": {
-                "Overall_Demand_Score": 4.72,
+                "Overall_Demand_Score": 4.87,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.5345307134073813,
-                    "Growth_Trend": 5.72,
+                    "Volume": 3.367609322291986,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.36,
                     "Entry_Flexibility": 4.3
@@ -167,11 +167,11 @@
                 }
             },
             "Cybersecurity Analyst": {
-                "Overall_Demand_Score": 5.04,
+                "Overall_Demand_Score": 5.27,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.531113720121606,
-                    "Growth_Trend": 5.59,
+                    "Volume": 4.551637008638988,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.55,
                     "Entry_Flexibility": 4.46
@@ -182,11 +182,11 @@
                 }
             },
             "Cloud Engineer": {
-                "Overall_Demand_Score": 4.34,
+                "Overall_Demand_Score": 5.06,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.2707879918158,
-                    "Growth_Trend": 3.46,
+                    "Volume": 4.137028128832678,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.63,
                     "Entry_Flexibility": 3.45
@@ -197,11 +197,11 @@
                 }
             },
             "DevOps Engineer": {
-                "Overall_Demand_Score": 5.79,
+                "Overall_Demand_Score": 4.97,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.9425073445169048,
-                    "Growth_Trend": 10.0,
+                    "Volume": 4.103414862446265,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.53,
                     "Entry_Flexibility": 2.82
@@ -215,7 +215,7 @@
                 "Overall_Demand_Score": 5.39,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.430031582758586,
+                    "Volume": 4.428078063144618,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.02,
@@ -227,10 +227,10 @@
                 }
             },
             "Technical Writer": {
-                "Overall_Demand_Score": 5.19,
+                "Overall_Demand_Score": 5.23,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 4.168109638303018,
+                    "Volume": 4.2904487529674675,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.64,
@@ -242,11 +242,11 @@
                 }
             },
             "Network Engineer": {
-                "Overall_Demand_Score": 4.99,
+                "Overall_Demand_Score": 5.16,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.9033695964946897,
-                    "Growth_Trend": 6.5,
+                    "Volume": 3.8324226624045954,
+                    "Growth_Trend": 7.27,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.71,
                     "Entry_Flexibility": 3.39
@@ -257,11 +257,11 @@
                 }
             },
             "Full Stack Developer": {
-                "Overall_Demand_Score": 4.14,
+                "Overall_Demand_Score": 4.81,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.220346966045443,
-                    "Growth_Trend": 3.65,
+                    "Volume": 3.1071376417010725,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.51,
                     "Entry_Flexibility": 2.8
@@ -272,11 +272,11 @@
                 }
             },
             "AI Engineer": {
-                "Overall_Demand_Score": 5.62,
+                "Overall_Demand_Score": 4.94,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.8292666921447314,
-                    "Growth_Trend": 9.2,
+                    "Volume": 3.8107457622751544,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.1,
                     "Entry_Flexibility": 2.58
@@ -290,7 +290,7 @@
                 "Overall_Demand_Score": 4.96,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.2022595588564755,
+                    "Volume": 3.21141508406904,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.33,
@@ -302,10 +302,10 @@
                 }
             },
             "Ruby on Rails Developer": {
-                "Overall_Demand_Score": 4.52,
+                "Overall_Demand_Score": 4.54,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.7727334992419657,
+                    "Volume": 2.815562166887577,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.38,
@@ -317,11 +317,11 @@
                 }
             },
             "Machine Learning Engineer": {
-                "Overall_Demand_Score": 4.56,
+                "Overall_Demand_Score": 4.51,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.616819561710246,
-                    "Growth_Trend": 6.75,
+                    "Volume": 2.686302885726702,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.88,
                     "Entry_Flexibility": 2.01
@@ -335,7 +335,7 @@
                 "Overall_Demand_Score": 4.87,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 3.366515898144547,
+                    "Volume": 3.347590570870361,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.12,
@@ -347,10 +347,10 @@
                 }
             },
             "Systems Analyst": {
-                "Overall_Demand_Score": 4.4,
+                "Overall_Demand_Score": 4.42,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.9430297276437867,
+                    "Volume": 2.9965025357204365,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.13,
@@ -362,11 +362,11 @@
                 }
             },
             "Product Manager": {
-                "Overall_Demand_Score": 4.47,
+                "Overall_Demand_Score": 4.39,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.226165667483367,
-                    "Growth_Trend": 6.84,
+                    "Volume": 2.2431615313943314,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.93,
                     "Entry_Flexibility": 2.04
@@ -377,11 +377,11 @@
                 }
             },
             "Data Scientist": {
-                "Overall_Demand_Score": 3.68,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.05,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.4305140718648415,
-                    "Growth_Trend": 5.0,
+                    "Volume": 1.3847447541600832,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.61,
                     "Entry_Flexibility": 1.64
@@ -392,11 +392,11 @@
                 }
             },
             "DevOps Specialist": {
-                "Overall_Demand_Score": 3.49,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.2,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.9977845677519945,
-                    "Growth_Trend": 3.54,
+                    "Volume": 1.89479366368437,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.34,
                     "Entry_Flexibility": 2.04
@@ -410,7 +410,7 @@
                 "Overall_Demand_Score": 3.25,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.7124282672114518,
+                    "Volume": 0.7099059861954793,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.79,
@@ -422,10 +422,10 @@
                 }
             },
             "Java Developer": {
-                "Overall_Demand_Score": 3.75,
+                "Overall_Demand_Score": 3.77,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.9708513211532478,
+                    "Volume": 1.0434223536079301,
                     "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 4.79,
@@ -440,7 +440,7 @@
                 "Overall_Demand_Score": 2.92,
                 "Score_Label": "\ud83d\udcc9 Declining",
                 "Breakdown": {
-                    "Volume": 0.23204931316675417,
+                    "Volume": 0.2321363008486101,
                     "Growth_Trend": 5.0,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 3.73,
@@ -456,11 +456,11 @@
     "domain": {
         "market_demand_top3": {
             "Data Scientist": {
-                "Overall_Demand_Score": 3.68,
-                "Score_Label": "\ud83d\udcc9 Declining",
+                "Overall_Demand_Score": 4.05,
+                "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 1.4305140718648415,
-                    "Growth_Trend": 5.0,
+                    "Volume": 1.3847447541600832,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.61,
                     "Entry_Flexibility": 1.64
@@ -471,11 +471,11 @@
                 }
             },
             "Machine Learning Engineer": {
-                "Overall_Demand_Score": 4.56,
+                "Overall_Demand_Score": 4.51,
                 "Score_Label": "\u2696\ufe0f  Stable",
                 "Breakdown": {
-                    "Volume": 2.616819561710246,
-                    "Growth_Trend": 6.75,
+                    "Volume": 2.686302885726702,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 5.88,
                     "Entry_Flexibility": 2.01
@@ -486,11 +486,11 @@
                 }
             },
             "Data Analyst": {
-                "Overall_Demand_Score": 6.17,
+                "Overall_Demand_Score": 6.13,
                 "Score_Label": "\ud83d\udcc8 Growing",
                 "Breakdown": {
-                    "Volume": 6.181548627560106,
-                    "Growth_Trend": 6.67,
+                    "Volume": 6.198220597453191,
+                    "Growth_Trend": 6.5,
                     "Applicant_Ratio": 5.0,
                     "Market_Diversity": 6.94,
                     "Entry_Flexibility": 6.07
@@ -682,7 +682,7 @@
                 0,
                 3
             ],
-            "Reference_Date": "2026-03-05",
+            "Reference_Date": "2026-03-17",
             "National_Velocity": {
                 "Status": {
                     "status": "Insufficient Data",
@@ -736,29 +736,29 @@
             "Time_Series": [
                 {
                     "period": "T-4",
-                    "start": "2025-11-05",
-                    "end": "2025-12-05",
+                    "start": "2025-11-17",
+                    "end": "2025-12-17",
                     "count": 0,
                     "listing_ct": 0
                 },
                 {
                     "period": "T-3",
-                    "start": "2025-12-05",
-                    "end": "2026-01-04",
+                    "start": "2025-12-17",
+                    "end": "2026-01-16",
                     "count": 0,
                     "listing_ct": 0
                 },
                 {
                     "period": "T-2",
-                    "start": "2026-01-04",
-                    "end": "2026-02-03",
+                    "start": "2026-01-16",
+                    "end": "2026-02-15",
                     "count": 0,
                     "listing_ct": 0
                 },
                 {
                     "period": "Current",
-                    "start": "2026-02-03",
-                    "end": "2026-03-05",
+                    "start": "2026-02-15",
+                    "end": "2026-03-17",
                     "count": 0,
                     "listing_ct": 0
                 }
@@ -979,14 +979,14 @@
                 "total_required": 141,
                 "status": "\u26aa Starting Fresh \u2014 build from foundations",
                 "Skills_You_Have": [
+                    "machine learning",
                     "python",
-                    "sql",
-                    "machine learning"
+                    "sql"
                 ],
                 "Skills_You_Gave": [
+                    "machine learning",
                     "python",
-                    "sql",
-                    "machine learning"
+                    "sql"
                 ]
             },
             "Missing_Skills_Prioritized": [
@@ -1034,7 +1034,7 @@
             "Learning_Path": {
                 "Ordered_Steps": [
                     {
-                        "skill": "programming",
+                        "skill": "keras",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1042,7 +1042,7 @@
                         "depth": 0
                     },
                     {
-                        "skill": "natural language processing",
+                        "skill": "artificial intelligence",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1050,72 +1050,12 @@
                         "depth": 0
                     },
                     {
-                        "skill": "cloud",
+                        "skill": "matplotlib",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
                         "can_start_now": true,
                         "depth": 0
-                    },
-                    {
-                        "skill": "data scientist",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "basic math",
-                        "weeks_to_learn": 1,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "calculus",
-                        "weeks_to_learn": 6,
-                        "prerequisites": [
-                            "basic math"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 1
-                    },
-                    {
-                        "skill": "probability",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "basic math"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 1
-                    },
-                    {
-                        "skill": "statistics",
-                        "weeks_to_learn": 8,
-                        "prerequisites": [
-                            "calculus",
-                            "probability"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 2
-                    },
-                    {
-                        "skill": "data science",
-                        "weeks_to_learn": 20,
-                        "prerequisites": [
-                            "statistics",
-                            "python",
-                            "sql",
-                            "machine learning"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 4
                     },
                     {
                         "skill": "logic",
@@ -1134,6 +1074,79 @@
                         "prereq_ready": true,
                         "can_start_now": false,
                         "depth": 1
+                    },
+                    {
+                        "skill": "cloud platforms",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "pandas",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [
+                            "python"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 3
+                    },
+                    {
+                        "skill": "cloud",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "basic math",
+                        "weeks_to_learn": 1,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "probability",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [
+                            "basic math"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": false,
+                        "depth": 1
+                    },
+                    {
+                        "skill": "programming",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "calculus",
+                        "weeks_to_learn": 6,
+                        "prerequisites": [
+                            "basic math"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": false,
+                        "depth": 1
+                    },
+                    {
+                        "skill": "statistics",
+                        "weeks_to_learn": 8,
+                        "prerequisites": [
+                            "calculus",
+                            "probability"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": false,
+                        "depth": 2
                     },
                     {
                         "skill": "linear algebra",
@@ -1158,6 +1171,17 @@
                         "depth": 4
                     },
                     {
+                        "skill": "pytorch",
+                        "weeks_to_learn": 10,
+                        "prerequisites": [
+                            "deep learning",
+                            "python"
+                        ],
+                        "prereq_ready": true,
+                        "can_start_now": false,
+                        "depth": 5
+                    },
+                    {
                         "skill": "tensorflow",
                         "weeks_to_learn": 10,
                         "prerequisites": [
@@ -1169,12 +1193,17 @@
                         "depth": 5
                     },
                     {
-                        "skill": "keras",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
+                        "skill": "data science",
+                        "weeks_to_learn": 20,
+                        "prerequisites": [
+                            "statistics",
+                            "python",
+                            "sql",
+                            "machine learning"
+                        ],
                         "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
+                        "can_start_now": false,
+                        "depth": 4
                     },
                     {
                         "skill": "java",
@@ -1187,7 +1216,7 @@
                         "depth": 2
                     },
                     {
-                        "skill": "artificial intelligence",
+                        "skill": "data scientist",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1203,7 +1232,25 @@
                         "depth": 0
                     },
                     {
-                        "skill": "cloud platforms",
+                        "skill": "natural language processing",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    }
+                ],
+                "Can_Start_Now": [
+                    {
+                        "skill": "keras",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "artificial intelligence",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1212,6 +1259,22 @@
                     },
                     {
                         "skill": "matplotlib",
+                        "weeks_to_learn": 5,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "logic",
+                        "weeks_to_learn": 1,
+                        "prerequisites": [],
+                        "prereq_ready": true,
+                        "can_start_now": true,
+                        "depth": 0
+                    },
+                    {
+                        "skill": "cloud platforms",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1229,44 +1292,7 @@
                         "depth": 3
                     },
                     {
-                        "skill": "pytorch",
-                        "weeks_to_learn": 10,
-                        "prerequisites": [
-                            "deep learning",
-                            "python"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": false,
-                        "depth": 5
-                    }
-                ],
-                "Can_Start_Now": [
-                    {
-                        "skill": "programming",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "natural language processing",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
                         "skill": "cloud",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "data scientist",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1282,15 +1308,7 @@
                         "depth": 0
                     },
                     {
-                        "skill": "logic",
-                        "weeks_to_learn": 1,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "keras",
+                        "skill": "programming",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1298,7 +1316,7 @@
                         "depth": 0
                     },
                     {
-                        "skill": "artificial intelligence",
+                        "skill": "data scientist",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
@@ -1314,30 +1332,12 @@
                         "depth": 0
                     },
                     {
-                        "skill": "cloud platforms",
+                        "skill": "natural language processing",
                         "weeks_to_learn": 5,
                         "prerequisites": [],
                         "prereq_ready": true,
                         "can_start_now": true,
                         "depth": 0
-                    },
-                    {
-                        "skill": "matplotlib",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 0
-                    },
-                    {
-                        "skill": "pandas",
-                        "weeks_to_learn": 5,
-                        "prerequisites": [
-                            "python"
-                        ],
-                        "prereq_ready": true,
-                        "can_start_now": true,
-                        "depth": 3
                     }
                 ],
                 "Total_Skills_Needed": 22,

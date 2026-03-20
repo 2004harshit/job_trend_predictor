@@ -641,6 +641,6 @@ if __name__ == "__main__":
     # Example usage
     df = pd.read_csv("D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\processed\cleaned\cleaned_job_data.csv")
     engine = InterviewDifficultyEngine()
-    result = engine.calculate_interview_difficulty(df, target_domain="Data Scientist", experience_band=(0, 3))
+    result = engine.calculate_interview_difficulty(df, target_domain="Data Analyst", experience_band=(0, 3))
     
     print(json.dumps(result, indent=2))

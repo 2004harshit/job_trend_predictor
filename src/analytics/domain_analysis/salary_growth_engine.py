@@ -444,3 +444,18 @@ class SalaryGrowthEngine:
 
         return base
 
+
+if __name__ =="main":
+    # Load sample data
+    data_path = r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\processed\cleaned\cleaned_job_data.csv"
+    
+    df = pd.read_csv(data_path)
+
+    sge = SalaryGrowthEngine()
+
+    result = sge.project_growth("Data Scientist",3)
+    
+
+    print(result)
+
+    

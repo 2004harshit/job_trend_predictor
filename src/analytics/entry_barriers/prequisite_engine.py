@@ -659,7 +659,7 @@ if __name__ == "__main__":
     engine = PrerequisiteEngine()
     result = engine.analyze_prerequisites(
         df=df,
-        target_domain="Data Science",
+        target_domain="Data Analyst",
         user_skills=["Python", "SQL", "Statistics"],
         experience_band=(0, 3)
     )

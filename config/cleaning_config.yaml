@@ -1,0 +1,124 @@
+# ============================================================
+# Job Data Cleaning Pipeline Configuration
+# ============================================================
+
+# Default input and output paths for the cleaning pipeline
+data_paths:
+  input_path:  "data/raw/general_jobs.csv"
+  output_dir:  "data/processed/cleaned"
+  output_file: "cleaned_job_data.csv"
+
+# Maps each DataFrame column name to its cleaning strategy class.
+#
+# IMPORTANT: All keys here must be LOWERCASE.
+# The pipeline lowercases all incoming column names (from CSV or SQL)
+# before dispatching strategies. These keys must match that lowercased form.
+#
+# CSV source column  → lowercased key used here
+# ─────────────────────────────────────────────
+# Title              → title
+# Company            → company
+# Location           → location
+# Salary             → salary
+# Experience         → experience
+# Education          → education
+# Department         → department
+# Scraped_At         → scraped_at
+# Description        → description
+# Last_Apply_Date    → last_apply_date
+# Posted_Date        → posted_date
+# Employment Type    → employment type   (space preserved after lowercasing)
+# Industry Type      → industry type     (space preserved after lowercasing)
+# Role Category      → role category     (space preserved after lowercasing)
+# Role               → role
+#
+# SQL source column  → lowercased key used here
+# ─────────────────────────────────────────────
+# title              → title             (same)
+# industry_type      → industry_type     (underscore preserved — DIFFERENT from CSV)
+# employment_type    → employment_type   (underscore preserved — DIFFERENT from CSV)
+# role_category      → role_category     (underscore preserved — DIFFERENT from CSV)
+#
+# NOTE: CSV "Industry Type" → "industry type" (space)
+#       SQL "industry_type" → "industry_type" (underscore)
+#       These are different keys. Add both entries if you mix sources,
+#       or pre-rename SQL columns to use spaces before calling clean_all().
+
+column_mappings:
+  title:               TitleCleaningStrategy
+  company:             CompanyCleaningStrategy
+  location:            LocationCleaningStrategy
+  salary:              SalaryCleaningStrategy
+  experience:          ExperienceCleaningStrategy
+  education:           EducationCleaningStrategy
+  department:          DepartmentCleaningStrategy
+  scraped_at:          TimestampCleaningStrategy
+  description:         DescriptionCleaningStrategy
+  last_apply_date:     LastApplyDateCleaningStrategy
+  posted_date:         PostedDateCleaningStrategy
+  employment_type:     EmploymentTypeCleaningStrategy
+  industry_type:       IndustryTypeCleaningStrategy
+  role_category:       RoleCategoryCleaningStrategy
+  role:                RoleCleaningStrategy
+# Skills column config — two source columns merged by SkillsCleaningStrategy.
+# Values must be LOWERCASE (matching lowercased DataFrame columns).
+skills_columns:
+  star_skills_col:   star_skills
+  normal_skills_col: normal_skills
+
+# Posted date column config — two source columns used by PostedDateCleaningStrategy.
+# Values must be LOWERCASE (matching lowercased DataFrame columns).
+posted_date_columns:
+  posted_date_col: posted_date
+  scraped_at_col:  scraped_at
+
+# Canonical job titles for TitleCleaningStrategy and RoleCleaningStrategy fuzzy matching.
+# These are the standardised output labels — casing here is for display only.
+job_list:
+  - Data Scientist
+  - Machine Learning Engineer
+  - Data Analyst
+  - Business Analyst
+  - AI Engineer
+  - Research Associate
+  - Data Engineer
+  - Web Developer
+  - Software Engineer
+  - DevOps Engineer
+  - Product Manager
+  - Project Manager
+  - UX Designer
+  - Full Stack Developer
+  - Cloud Engineer
+  - DevOps Specialist
+  - Database Administrator
+  - Cybersecurity Analyst
+  - Network Engineer
+  - Systems Analyst
+  - IT Support Specialist
+  - Mobile App Developer
+  - Front End Developer
+  - Back End Developer
+  - QA Engineer
+  - Technical Writer
+  - Scrum Master
+  - Python Developer
+  - Java Developer
+  - Ruby on Rails Developer
+  - Big Data Engineer
+  - Data Architect
+  - AI Researcher
+  - Blockchain Developer
+  - Computer Vision Engineer
+  - NLP Engineer
+  - Robotics Engineer
+  - Game Developer
+  - Embedded Systems Engineer
+  - Site Reliability Engineer
+  - Solutions Architect
+  - IT Consultant
+  - Business Intelligence Analyst
+  - Generative AI Specialist
+  - Generative AI Engineer
+  - Technical Support Specialist
+  - Customer Support Specialist

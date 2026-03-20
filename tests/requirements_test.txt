@@ -1,0 +1,49 @@
+# Test Requirements for Scraping Pipelines
+# Install with: pip install -r requirements_test.txt
+
+# Core testing framework
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-mock>=3.10.0
+pytest-html>=3.1.0
+pytest-xdist>=3.0.0
+
+# Coverage and reporting
+coverage>=7.0.0
+coverage-badge>=1.1.0
+
+# Performance testing
+pytest-benchmark>=4.0.0
+memory-profiler>=0.60.0
+
+# Mock and fixtures
+responses>=0.23.0
+faker>=18.0.0
+
+# Data validation
+jsonschema>=4.17.0
+cerberus>=1.3.4
+
+# Database testing (for integration tests)
+sqlalchemy>=2.0.0
+
+
+# Async testing (if needed for async scrapers)
+pytest-asyncio>=0.21.0
+
+# Test utilities
+testfixtures>=7.1.0
+freezegun>=1.2.0  # For time mocking
+
+# Reporting
+allure-pytest>=2.13.0
+pytest-json-report>=1.5.0
+
+# Development and debugging
+ipython>=8.0.0
+jupyter>=1.0.0
+
+# Code quality (for test code quality)
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0

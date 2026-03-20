@@ -1,35 +1,30 @@
 from abc import ABC, abstractmethod
 import pandas as pd
+from typing import Union
+
 
 class FeatureCleaningStrategy(ABC):
     """
-    Abstract base class for feature cleaning strategies.
-    
-    Strategies operate on individual Series (columns) and return cleaned Series.
+    Abstract base class for all feature cleaning strategies.
+
+    clean_feature accepts either a pd.Series (single column)
+    or a pd.DataFrame (multi-column), depending on the strategy.
     """
-    
+
     @abstractmethod
-    def clean_feature(self, feature: pd.Series) -> pd.Series|pd.DataFrame:
+    def clean_feature(
+        self, feature: Union[pd.Series, pd.DataFrame]
+    ) -> Union[pd.Series, pd.DataFrame]:
         """
-        Clean a feature (column) and return cleaned version.
-        
+        Clean the input feature(s) and return the cleaned result.
+
         Args:
-            feature: Input Series to clean
-        
+            feature: A pd.Series for single-column strategies,
+                     or a pd.DataFrame for multi-column strategies
+                     (e.g., SkillsCleaningStrategy).
+
         Returns:
-            pd.Series: For single-column output
-            pd.DataFrame: For multi-column output
+            pd.Series  → single cleaned column
+            pd.DataFrame → multiple derived columns
         """
         pass
-    
-    def validate(self, feature: pd.Series) -> bool:
-        """
-        Optional validation hook. Override if needed.
-        
-        Args:
-            feature: Series to validate
-        
-        Returns:
-            True if valid for cleaning
-        """
-        return True

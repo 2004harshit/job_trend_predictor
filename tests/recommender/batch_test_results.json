@@ -1,0 +1,555 @@
+{
+  "results": [
+    {
+      "user_id": "U001",
+      "precision@3": 0.3333,
+      "hit_rate": 1,
+      "ndcg@3": 0.2346,
+      "top1_match_pct": 54.0,
+      "avg_match_pct": 52.2,
+      "top3_predicted": [
+        "Backend Engineer",
+        "Data Engineer",
+        "Software Engineer"
+      ],
+      "ground_truth": [
+        "QA Automation",
+        "Data Analyst",
+        "Software Engineer"
+      ]
+    },
+    {
+      "user_id": "U002",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 74.7,
+      "avg_match_pct": 70.23,
+      "top3_predicted": [
+        "Data Analyst",
+        "Data Scientist",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Data Analyst",
+        "Data Engineer",
+        "Data Scientist"
+      ]
+    },
+    {
+      "user_id": "U003",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 62.0,
+      "avg_match_pct": 59.7,
+      "top3_predicted": [
+        "Web Developer",
+        "Front End Developer",
+        "Full Stack Developer"
+      ],
+      "ground_truth": [
+        "Web Developer",
+        "Front End Developer",
+        "Full Stack Developer"
+      ]
+    },
+    {
+      "user_id": "U004",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 81.3,
+      "avg_match_pct": 76.0,
+      "top3_predicted": [
+        "Machine Learning Engineer",
+        "AI Engineer",
+        "Data Scientist"
+      ],
+      "ground_truth": [
+        "Machine Learning Engineer",
+        "AI Engineer",
+        "Data Scientist"
+      ]
+    },
+    {
+      "user_id": "U005",
+      "precision@3": 0.3333,
+      "hit_rate": 1,
+      "ndcg@3": 0.4693,
+      "top1_match_pct": 78.0,
+      "avg_match_pct": 56.23,
+      "top3_predicted": [
+        "QA Automation",
+        "Backend Engineer",
+        "Data Engineer"
+      ],
+      "ground_truth": [
+        "QA Automation",
+        "Software Engineer",
+        "Web Developer"
+      ]
+    },
+    {
+      "user_id": "U006",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 80.0,
+      "avg_match_pct": 70.23,
+      "top3_predicted": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ]
+    },
+    {
+      "user_id": "U007",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 78.0,
+      "avg_match_pct": 63.77,
+      "top3_predicted": [
+        "Software Engineer",
+        "Backend Engineer",
+        "Data Analyst"
+      ],
+      "ground_truth": [
+        "Software Engineer",
+        "Backend Engineer",
+        "Data Analyst"
+      ]
+    },
+    {
+      "user_id": "U008",
+      "precision@3": 0.3333,
+      "hit_rate": 1,
+      "ndcg@3": 0.4693,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 74.67,
+      "top3_predicted": [
+        "Data Engineer",
+        "Backend Engineer",
+        "Data Scientist"
+      ],
+      "ground_truth": [
+        "Data Engineer",
+        "Cloud Engineer",
+        "DevOps Engineer"
+      ]
+    },
+    {
+      "user_id": "U009",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 78.0,
+      "avg_match_pct": 69.63,
+      "top3_predicted": [
+        "Front End Developer",
+        "Web Developer",
+        "Full Stack Developer"
+      ],
+      "ground_truth": [
+        "Front End Developer",
+        "Web Developer",
+        "Full Stack Developer"
+      ]
+    },
+    {
+      "user_id": "U010",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 78.23,
+      "top3_predicted": [
+        "AI Engineer",
+        "Machine Learning Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "AI Engineer",
+        "Machine Learning Engineer",
+        "Data Scientist"
+      ]
+    },
+    {
+      "user_id": "U011",
+      "precision@3": 0.3333,
+      "hit_rate": 1,
+      "ndcg@3": 0.4693,
+      "top1_match_pct": 58.0,
+      "avg_match_pct": 54.43,
+      "top3_predicted": [
+        "Data Analyst",
+        "Backend Engineer",
+        "Data Engineer"
+      ],
+      "ground_truth": [
+        "Data Analyst",
+        "QA Automation",
+        "Software Engineer"
+      ]
+    },
+    {
+      "user_id": "U012",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 74.67,
+      "top3_predicted": [
+        "Backend Engineer",
+        "Data Engineer",
+        "AI Engineer"
+      ],
+      "ground_truth": [
+        "Backend Engineer",
+        "Software Engineer",
+        "Data Engineer"
+      ]
+    },
+    {
+      "user_id": "U013",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 58.0,
+      "avg_match_pct": 52.67,
+      "top3_predicted": [
+        "DevOps Engineer",
+        "Cloud Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "DevOps Engineer",
+        "Cloud Engineer",
+        "Backend Engineer"
+      ]
+    },
+    {
+      "user_id": "U014",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 81.53,
+      "top3_predicted": [
+        "Web Developer",
+        "Front End Developer",
+        "Full Stack Developer"
+      ],
+      "ground_truth": [
+        "Web Developer",
+        "Full Stack Developer",
+        "Front End Developer"
+      ]
+    },
+    {
+      "user_id": "U015",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 58.0,
+      "avg_match_pct": 54.33,
+      "top3_predicted": [
+        "Data Analyst",
+        "Data Scientist",
+        "QA Automation"
+      ],
+      "ground_truth": [
+        "Data Analyst",
+        "Data Scientist",
+        "Machine Learning Engineer"
+      ]
+    },
+    {
+      "user_id": "U016",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 72.9,
+      "top3_predicted": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ]
+    },
+    {
+      "user_id": "U017",
+      "precision@3": 0.3333,
+      "hit_rate": 1,
+      "ndcg@3": 0.4693,
+      "top1_match_pct": 48.0,
+      "avg_match_pct": 46.23,
+      "top3_predicted": [
+        "QA Automation",
+        "Backend Engineer",
+        "Data Engineer"
+      ],
+      "ground_truth": [
+        "QA Automation",
+        "Software Engineer",
+        "Data Analyst"
+      ]
+    },
+    {
+      "user_id": "U018",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 80.0,
+      "avg_match_pct": 72.0,
+      "top3_predicted": [
+        "Data Scientist",
+        "Machine Learning Engineer",
+        "Data Analyst"
+      ],
+      "ground_truth": [
+        "Data Scientist",
+        "Data Analyst",
+        "Machine Learning Engineer"
+      ]
+    },
+    {
+      "user_id": "U019",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 54.0,
+      "avg_match_pct": 52.47,
+      "top3_predicted": [
+        "Web Developer",
+        "Front End Developer",
+        "Full Stack Developer"
+      ],
+      "ground_truth": [
+        "Front End Developer",
+        "Web Developer",
+        "QA Automation"
+      ]
+    },
+    {
+      "user_id": "U020",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 77.33,
+      "top3_predicted": [
+        "Data Analyst",
+        "Data Scientist",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Data Analyst",
+        "Data Scientist",
+        "Data Engineer"
+      ]
+    },
+    {
+      "user_id": "U021",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7039,
+      "top1_match_pct": 78.0,
+      "avg_match_pct": 61.1,
+      "top3_predicted": [
+        "QA Automation",
+        "Backend Engineer",
+        "Data Analyst"
+      ],
+      "ground_truth": [
+        "QA Automation",
+        "Data Analyst",
+        "Software Engineer"
+      ]
+    },
+    {
+      "user_id": "U022",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 74.67,
+      "top3_predicted": [
+        "Software Engineer",
+        "Backend Engineer",
+        "Data Scientist"
+      ],
+      "ground_truth": [
+        "Software Engineer",
+        "Backend Engineer",
+        "Data Analyst"
+      ]
+    },
+    {
+      "user_id": "U023",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 53.0,
+      "avg_match_pct": 51.67,
+      "top3_predicted": [
+        "Machine Learning Engineer",
+        "AI Engineer",
+        "Data Scientist"
+      ],
+      "ground_truth": [
+        "Machine Learning Engineer",
+        "AI Engineer",
+        "Data Scientist"
+      ]
+    },
+    {
+      "user_id": "U024",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 74.67,
+      "top3_predicted": [
+        "DevOps Engineer",
+        "Cloud Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "DevOps Engineer",
+        "Cloud Engineer",
+        "Backend Engineer"
+      ]
+    },
+    {
+      "user_id": "U025",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 78.0,
+      "avg_match_pct": 75.33,
+      "top3_predicted": [
+        "Web Developer",
+        "Full Stack Developer",
+        "Front End Developer"
+      ],
+      "ground_truth": [
+        "Full Stack Developer",
+        "Web Developer",
+        "Front End Developer"
+      ]
+    },
+    {
+      "user_id": "U026",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 74.7,
+      "avg_match_pct": 67.57,
+      "top3_predicted": [
+        "Data Engineer",
+        "Data Scientist",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Data Engineer",
+        "Data Analyst",
+        "Data Scientist"
+      ]
+    },
+    {
+      "user_id": "U027",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 62.0,
+      "avg_match_pct": 55.33,
+      "top3_predicted": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ],
+      "ground_truth": [
+        "Cloud Engineer",
+        "DevOps Engineer",
+        "Backend Engineer"
+      ]
+    },
+    {
+      "user_id": "U028",
+      "precision@3": 0.6667,
+      "hit_rate": 1,
+      "ndcg@3": 0.7654,
+      "top1_match_pct": 88.0,
+      "avg_match_pct": 79.13,
+      "top3_predicted": [
+        "Data Scientist",
+        "Machine Learning Engineer",
+        "Data Analyst"
+      ],
+      "ground_truth": [
+        "Data Scientist",
+        "Machine Learning Engineer",
+        "AI Engineer"
+      ]
+    },
+    {
+      "user_id": "U029",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 70.0,
+      "avg_match_pct": 66.97,
+      "top3_predicted": [
+        "Web Developer",
+        "Front End Developer",
+        "Full Stack Developer"
+      ],
+      "ground_truth": [
+        "Front End Developer",
+        "Web Developer",
+        "Full Stack Developer"
+      ]
+    },
+    {
+      "user_id": "U030",
+      "precision@3": 1.0,
+      "hit_rate": 1,
+      "ndcg@3": 1.0,
+      "top1_match_pct": 81.3,
+      "avg_match_pct": 73.77,
+      "top3_predicted": [
+        "AI Engineer",
+        "Backend Engineer",
+        "Machine Learning Engineer"
+      ],
+      "ground_truth": [
+        "AI Engineer",
+        "Machine Learning Engineer",
+        "Backend Engineer"
+      ]
+    }
+  ],
+  "aggregate": {
+    "total_users": 30,
+    "avg_precision@3": 0.7778,
+    "avg_hit_rate": 1.0,
+    "pct_users_good": 50.0,
+    "avg_ndcg@3": 0.8235,
+    "avg_top1_match_pct": 74.37,
+    "avg_match_pct": 66.32,
+    "worst_case_count": 0,
+    "worst_case_user_ids": []
+  }
+}

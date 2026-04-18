@@ -9,8 +9,8 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
     Cleaning strategy for skills columns.
 
     Unlike other strategies, this accepts a pd.DataFrame with two columns:
-    - Star_Skills   : Primary / featured skills
-    - Normal_Skills : Additional skills
+    - star_skills   : Primary / featured skills
+    - normal_skills : Additional skills
 
     Operations:
     - Parses comma / pipe / semicolon / slash-separated strings or lists
@@ -19,10 +19,10 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
     - Deduplicates with star skills taking priority (insertion order preserved)
 
     Returns:
-        pd.DataFrame with columns [Combined_Skills, Skill_Count]
+        pd.DataFrame with columns [combined_skills, skill_count]
     """
 
-    REQUIRED_COLUMNS = {"Star_Skills", "Normal_Skills"}
+    REQUIRED_COLUMNS = {"star_skills", "normal_skills"}
 
     SKILL_NORMALIZATION = {
         # Programming Languages
@@ -88,14 +88,14 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
         self, feature: Union[pd.Series, pd.DataFrame]
     ) -> pd.DataFrame:
         """
-        Apply skills cleaning to a DataFrame containing Star_Skills
-        and Normal_Skills columns.
+        Apply skills cleaning to a DataFrame containing star_skills
+        and normal_skills columns.
 
         Args:
-            feature: pd.DataFrame with columns [Star_Skills, Normal_Skills]
+            feature: pd.DataFrame with columns [star_skills, normal_skills]
 
         Returns:
-            pd.DataFrame with columns [Combined_Skills, Skill_Count]
+            pd.DataFrame with columns [combined_skills, skill_count]
 
         Raises:
             TypeError:  If input is not a pd.Series or pd.DataFrame
@@ -113,7 +113,7 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
         if isinstance(feature, pd.Series):
             raise ValueError(
                 f"SkillsCleaningStrategy requires a pd.DataFrame with columns "
-                f"{self.REQUIRED_COLUMNS}, got a pd.Series."
+                f"{self.REQUIRED_COLUMNS} (snake_case), got a pd.Series."
             )
 
         missing = self.REQUIRED_COLUMNS - set(feature.columns)
@@ -124,15 +124,15 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
 
         combined = feature.apply(
             lambda row: self._get_combined_skills(
-                row["Star_Skills"], row["Normal_Skills"]
+                row["star_skills"], row["normal_skills"]
             ),
             axis=1,
         )
 
         return pd.DataFrame(
             {
-                "Combined_Skills": combined,
-                "Skill_Count":     combined.apply(len),
+                "combined_skills": combined,
+                "skill_count":     combined.apply(len),
             },
             index=feature.index,
         )
@@ -145,10 +145,11 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
         self,
         star_skills:   Union[str, list, None],
         normal_skills: Union[str, list, None],
-    ) -> List[str]:
+    ) -> str:
         """
         Merge, normalize, and deduplicate skills from two sources.
         Star skills appear first in output.
+        Returns single comma-separated string of all skills.
         """
         star_norm   = [
             s for s in
@@ -166,7 +167,7 @@ class SkillsCleaningStrategy(FeatureCleaningStrategy):
         for skill in normal_norm:
             seen.setdefault(skill, None)
 
-        return list(seen.keys())
+        return ', '.join(seen.keys())
 
     def _parse_skills_string(
         self, skills_input: Union[str, list, None]

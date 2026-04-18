@@ -13,8 +13,8 @@ class PostedDateCleaningStrategy(FeatureCleaningStrategy):
     into absolute dates using the Scraped_At timestamp as the reference.
 
     Requires a pd.DataFrame with columns:
-    - Posted_Date  : relative date string
-    - Scraped_At   : ISO 8601 timestamp string (e.g., "2024-11-15T10:30:00")
+    - posted_date  : relative date string
+    - scraped_at   : ISO 8601 timestamp string (e.g., "2024-11-15T10:30:00")
 
     Relative format rules:
     - "X days ago"    → scraped_date - X days
@@ -27,11 +27,11 @@ class PostedDateCleaningStrategy(FeatureCleaningStrategy):
 
     Returns:
         pd.DataFrame with columns:
-        - Posted_Date_Parsed  (str | None)  — "YYYY-MM-DD"
-        - Days_Since_Posted   (int | None)  — days between posted and scraped
+        - posted_date_parsed  (str | None)  — "YYYY-MM-DD"
+        - days_since_posted   (int | None)  — days between posted and scraped
     """
 
-    REQUIRED_COLUMNS = {"Posted_Date", "Scraped_At"}
+    REQUIRED_COLUMNS = {"posted_date", "scraped_at"}
 
     INVALID_VALUES = {
         "nan", "na", "n/a", "none", "not mentioned", "not specified"
@@ -51,13 +51,13 @@ class PostedDateCleaningStrategy(FeatureCleaningStrategy):
         self, feature: Union[pd.Series, pd.DataFrame]
     ) -> pd.DataFrame:
         """
-        Parse Posted_Date relative strings into absolute dates.
+        Parse posted_date relative strings into absolute dates.
 
         Args:
-            feature: pd.DataFrame with columns [Posted_Date, Scraped_At]
+            feature: pd.DataFrame with columns [posted_date, scraped_at]
 
         Returns:
-            pd.DataFrame with columns [Posted_Date_Parsed, Days_Since_Posted]
+            pd.DataFrame with columns [posted_date_parsed, days_since_posted]
 
         Raises:
             TypeError:  If input is not a pd.Series or pd.DataFrame
@@ -74,7 +74,7 @@ class PostedDateCleaningStrategy(FeatureCleaningStrategy):
         if isinstance(feature, pd.Series):
             raise ValueError(
                 "PostedDateCleaningStrategy requires a pd.DataFrame with "
-                f"columns {self.REQUIRED_COLUMNS}, got a pd.Series."
+                f"columns {self.REQUIRED_COLUMNS} (snake_case), got a pd.Series."
             )
 
         missing = self.REQUIRED_COLUMNS - set(feature.columns)
@@ -85,15 +85,15 @@ class PostedDateCleaningStrategy(FeatureCleaningStrategy):
 
         records = feature.apply(
             lambda row: self._clean_single(
-                row["Posted_Date"], row["Scraped_At"]
+                row["posted_date"], row["scraped_at"]
             ),
             axis=1,
         )
 
         return pd.DataFrame(
             {
-                "Posted_Date_Parsed": records.apply(lambda r: r["parsed"]),
-                "Days_Since_Posted":  records.apply(lambda r: r["days_since"]),
+                "posted_date_parsed": records.apply(lambda r: r["parsed"]),
+                "days_since_posted":  records.apply(lambda r: r["days_since"]),
             },
             index=feature.index,
         )

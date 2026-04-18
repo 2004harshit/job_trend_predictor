@@ -12,9 +12,8 @@ if PROJECT_ROOT not in sys.path:
 
 import streamlit as st
 from dashboards.components.career_profiler import render_profiling_flow
-from dashboards.pages import fresher_dashboard, home, counselor_dashboard, about,set_profile
+from dashboards.pages import fresher_dashboard, home, counselor_dashboard, about, set_profile
 from dashboards.utils.styles import apply_custom_styles
-from dashboards.utils.pipeline_loader import load_dataframe, get_global_metrics
 
 # 1. set_page_config FIRST — before any other st.* call
 st.set_page_config(
@@ -23,15 +22,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# 2. Bootstrap AFTER
-if "df" not in st.session_state:
-    st.session_state["df"] = load_dataframe()
-
-if "global_analytics" not in st.session_state:
-    st.session_state["global_analytics"] = get_global_metrics(
-        st.session_state["df"]
-    )
 
 # Apply custom styles
 apply_custom_styles()
@@ -47,59 +37,48 @@ def navigate_to(page: str) -> None:
     st.session_state.current_page = page
     st.rerun()
 
-def render_navigation() -> None:
-    """Render the top navigation bar in a single line"""
-    
-    # Ek hi row mein columns create karein
-    # [3, 1, 1, 1] ka matlab hai Brand name zyada space lega, buttons kam
-    col_brand, col_home, col_profile, col_login = st.columns([3, 1, 1, 1], vertical_alignment="center")
-
-    with col_brand:
-        # Markdown ko yahan render karein
-        st.markdown("""
-        <div style="display: flex; align-items: center;">
-            <span style="font-size: 24px; margin-right: 10px;">📊</span>
-            <span style="font-size: 20px; font-weight: bold; white-space: nowrap;">Job Trend Predictor</span>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col_home:
-        if st.button("🏠 Home", key="nav_home", use_container_width=True, type="primary"):
-            st.session_state.current_page = 'Home'
+def render_sidebar() -> None:
+    """Render sidebar navigation"""
+    with st.sidebar:
+        st.markdown("## 📊 Job Trend Predictor")
+        st.markdown("---")
+        if st.button("🏠 Home", key="nav_home", use_container_width=True):
+            st.session_state.current_page = "Home"
             st.rerun()
-
-    with col_profile:
-        if st.button("👤 Profile", key="nav_profile", use_container_width=True):
-            st.session_state.current_page = 'Profile'
+        if st.button("👤 Profile Selection", key="nav_profile", use_container_width=True):
+            st.session_state.current_page = "Profile"
             st.rerun()
-
-    with col_login:
-        if st.button("🔐 Login", key="nav_login", use_container_width=True):
-            st.session_state.current_page = 'Login'
+        if st.button("📈 Fresher Dashboard", key="nav_fresher", use_container_width=True):
+            st.session_state.current_page = "Fresher Dashboard"
             st.rerun()
-    
-    st.markdown("---") # Optional: Divider line for clean look
+        if st.button("ℹ️ About", key="nav_about", use_container_width=True):
+            st.session_state.current_page = "About"
+            st.rerun()
+        st.markdown("---")
+        if st.button("🎯 Counselor Dashboard", key="nav_counselor", use_container_width=True):
+            st.session_state.current_page = "Career Counselor Dashboard"
+            st.rerun()
 
 def main() -> None:
     """Main application logic"""
-    render_navigation()
-    
-    # Use a local variable to make the code cleaner
+    render_sidebar()
+
     page = st.session_state.current_page
-    
-    # Route to appropriate page
-    if page == 'Home':
+
+    if page == "Home":
         home.render(navigate_to)
-    elif page == 'Student Dashboard':
-        fresher_dashboard.render(navigate_to)
-    elif page == 'Career Counselor Dashboard':
-        counselor_dashboard.render(navigate_to)
-    elif page == 'About':
-        about.render(navigate_to)
-    elif page == 'profile':
+    elif page in ("Profile", "profile", "Profile Selection"):
         set_profile.render(navigate_to)
-    elif page =="profiling_flow":
+    elif page in ("Fresher Dashboard", "Student Dashboard"):
+        fresher_dashboard.render(navigate_to)
+    elif page == "Career Counselor Dashboard":
+        counselor_dashboard.render(navigate_to)
+    elif page == "About":
+        about.render(navigate_to)
+    elif page == "profiling_flow":
         render_profiling_flow(navigate_to)
+    else:
+        home.render(navigate_to)
 
 if __name__ == "__main__":
     main()

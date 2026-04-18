@@ -30,11 +30,11 @@ class SaturationRiskIndicator:
                 f"Current weights: {self.weights}"
             )
         
-    def _filter_domain(self , df, target_domain, experience_band):
-        # 1. Job_Type exact match — fastest, most accurate
-        if 'Job_Type' in df.columns:
-            result = df[df['Job_Type'].str.lower() == target_domain.lower()]
-            result = result[(result["Min_Experience"]>= experience_band[0]) & (result["Max_Experience"]<=experience_band[1])]
+    def _filter_domain(self, df, target_domain, experience_band):
+        # 1. title exact match — fastest, most accurate
+        if 'title' in df.columns:
+            result = df[df['title'].str.lower() == target_domain.lower()]
+            result = result[(result["min_experience"]>= experience_band[0]) & (result["max_experience"]<=experience_band[1])]
             
             if len(result) >= 5:
                 return result
@@ -47,8 +47,8 @@ class SaturationRiskIndicator:
         Saturation = applicants per opening.
         Normalized against market-wide distribution (not arbitrary 20:1 ceiling).
         """
-        APPLICANT_COL = 'No of applicant applied cleaned'
-        OPENINGS_COL  = 'No of job opening cleaned '
+        APPLICANT_COL = 'no_of_applicant'
+        OPENINGS_COL  = 'no_of_opening'
 
         has_applicants = APPLICANT_COL in domain_df.columns
         has_openings   = OPENINGS_COL in domain_df.columns
@@ -76,10 +76,10 @@ class SaturationRiskIndicator:
 
         # --- Market-wide normalization ---
         # Get ratios for all domains to normalize dynamically
-        if has_applicants and has_openings and 'Job_Type' in all_df.columns:
+        if has_applicants and has_openings and 'title' in all_df.columns:
             market_ratios = []
-            for d in all_df['Job_Type'].dropna().unique():
-                d_slice = all_df[all_df['Job_Type'] == d]
+            for d in all_df['title'].dropna().unique():
+                d_slice = all_df[all_df['title'] == d]
                 if len(d_slice) < 5:
                     continue
                 d_apps  = pd.to_numeric(d_slice[APPLICANT_COL], errors='coerce').sum()
@@ -108,7 +108,7 @@ class SaturationRiskIndicator:
         """
         df = domain_df.copy()  # Never mutate input
 
-        date_col = 'Posted_Date' if 'Posted_Date' in df.columns else 'Scraped_At_Cleaned'
+        date_col = 'posted_date' if 'posted_date' in df.columns else 'timestamp'
         df['_date'] = pd.to_datetime(df[date_col], errors='coerce')
         df = df.dropna(subset=['_date'])
 
@@ -171,11 +171,11 @@ class SaturationRiskIndicator:
         2. Domain-relative normalization (not arbitrary /10)
         3. Experience inflation trend (is it getting harder over time?)
         """
-        if 'Min_Experience' not in domain_df.columns:
+        if 'min_experience' not in domain_df.columns:
             return {"score": 0.5, "median_exp": None, "trend": "Unknown"}
 
         domain_exp = pd.to_numeric(
-            domain_df['Min_Experience'], errors='coerce'
+            domain_df['min_experience'], errors='coerce'
         ).dropna()
 
         if domain_exp.empty:
@@ -184,8 +184,8 @@ class SaturationRiskIndicator:
         median_exp = domain_exp.median()
 
         # Market-relative normalization
-        if 'Min_Experience' in all_df.columns and 'Job_Type' in all_df.columns:
-            market_medians = all_df.groupby('Job_Type')['Min_Experience'].median().dropna()
+        if 'min_experience' in all_df.columns and 'title' in all_df.columns:
+            market_medians = all_df.groupby('title')['min_experience'].median().dropna()
             if not market_medians.empty:
                 # Percentile rank: what fraction of domains require less experience?
                 f3_score = float((market_medians < median_exp).mean())
@@ -196,17 +196,17 @@ class SaturationRiskIndicator:
 
         # Experience inflation: is the bar rising over time?
         trend = "Stable"
-        if 'Scraped_At_Cleaned' in domain_df.columns and len(domain_df) >= 20:
+        if 'timestamp' in domain_df.columns and len(domain_df) >= 20:
             df_t = domain_df.copy()
-            df_t['_date'] = pd.to_datetime(df_t['Scraped_At_Cleaned'], errors='coerce')
-            df_t = df_t.dropna(subset=['_date', 'Min_Experience'])
+            df_t['_date'] = pd.to_datetime(df_t['timestamp'], errors='coerce')
+            df_t = df_t.dropna(subset=['_date', 'min_experience'])
 
             if len(df_t) >= 10:
                 # Split into first half and second half
                 df_t = df_t.sort_values('_date')
                 mid = len(df_t) // 2
-                old_median = df_t.iloc[:mid]['Min_Experience'].median()
-                new_median = df_t.iloc[mid:]['Min_Experience'].median()
+                old_median = df_t.iloc[:mid]['min_experience'].median()
+                new_median = df_t.iloc[mid:]['min_experience'].median()
 
                 if new_median > old_median + 0.5:
                     trend = "Rising"   # Experience bar getting higher
@@ -220,8 +220,8 @@ class SaturationRiskIndicator:
             "median_exp":  round(median_exp, 1),
             "exp_trend":   trend,
             "fresher_pct": round(
-                float((domain_df['Min_Experience'] <= 1).mean() * 100), 1
-            ) if 'Min_Experience' in domain_df else None
+                float((domain_df['min_experience'] <= 1).mean() * 100), 1
+            ) if 'min_experience' in domain_df else None
         }
 
     def _factor_salary_compression(self, domain_df: pd.DataFrame,
@@ -234,10 +234,10 @@ class SaturationRiskIndicator:
         2. Market-relative normalization (not hardcoded ₹1L threshold)
         3. Salary growth trend as additional signal
         """
-        if 'Min_Salary' not in domain_df.columns or 'Max_Salary' not in domain_df.columns:
-            # Fallback: use Avg_Salary std if available
-            if 'Avg_Salary' in domain_df.columns:
-                avg_sal = pd.to_numeric(domain_df['Avg_Salary'], errors='coerce').dropna()
+        if 'min_salary' not in domain_df.columns or 'max_salary' not in domain_df.columns:
+            # Fallback: use avg_salary std if available
+            if 'avg_salary' in domain_df.columns:
+                avg_sal = pd.to_numeric(domain_df['avg_salary'], errors='coerce').dropna()
                 if avg_sal.empty:
                     return {"score": 0.5, "compression_ratio": None}
                 cv = avg_sal.std() / avg_sal.mean() if avg_sal.mean() > 0 else 0
@@ -247,37 +247,37 @@ class SaturationRiskIndicator:
             return {"score": 0.5, "compression_ratio": None}
 
         df = domain_df.copy()
-        df['Min_Salary'] = pd.to_numeric(df['Min_Salary'], errors='coerce')
-        df['Max_Salary'] = pd.to_numeric(df['Max_Salary'], errors='coerce')
+        df['min_salary'] = pd.to_numeric(df['min_salary'], errors='coerce')
+        df['max_salary'] = pd.to_numeric(df['max_salary'], errors='coerce')
 
-        valid = df.dropna(subset=['Min_Salary', 'Max_Salary'])
-        valid = valid[valid['Max_Salary'] > valid['Min_Salary']]
+        valid = df.dropna(subset=['min_salary', 'max_salary'])
+        valid = valid[valid['max_salary'] > valid['min_salary']]
 
         if valid.empty:
             return {"score": 0.5, "compression_ratio": None}
 
         # CORRECT: per-row gap, then aggregate
-        valid['_gap'] = valid['Max_Salary'] - valid['Min_Salary']
-        valid['_mid'] = (valid['Max_Salary'] + valid['Min_Salary']) / 2
+        valid['_gap'] = valid['max_salary'] - valid['min_salary']
+        valid['_mid'] = (valid['max_salary'] + valid['min_salary']) / 2
 
         # Compression ratio: gap as % of midpoint (normalized for salary level)
         valid['_compression'] = valid['_gap'] / valid['_mid'].replace(0, np.nan)
         domain_compression = valid['_compression'].median()
 
         # Market-relative normalization
-        if 'Min_Salary' in all_df.columns and 'Max_Salary' in all_df.columns:
+        if 'min_salary' in all_df.columns and 'max_salary' in all_df.columns:
             all_valid = all_df.copy()
-            all_valid['Min_Salary'] = pd.to_numeric(all_valid['Min_Salary'], errors='coerce')
-            all_valid['Max_Salary'] = pd.to_numeric(all_valid['Max_Salary'], errors='coerce')
-            all_valid = all_valid.dropna(subset=['Min_Salary', 'Max_Salary'])
-            all_valid = all_valid[all_valid['Max_Salary'] > all_valid['Min_Salary']]
+            all_valid['min_salary'] = pd.to_numeric(all_valid['min_salary'], errors='coerce')
+            all_valid['max_salary'] = pd.to_numeric(all_valid['max_salary'], errors='coerce')
+            all_valid = all_valid.dropna(subset=['min_salary', 'max_salary'])
+            all_valid = all_valid[all_valid['max_salary'] > all_valid['min_salary']]
 
             if not all_valid.empty:
                 all_valid['_comp'] = (
-                    (all_valid['Max_Salary'] - all_valid['Min_Salary']) /
-                    ((all_valid['Max_Salary'] + all_valid['Min_Salary']) / 2)
+                    (all_valid['max_salary'] - all_valid['min_salary']) /
+                    ((all_valid['max_salary'] + all_valid['min_salary']) / 2)
                 )
-                market_compressions = all_valid.groupby('Job_Type')['_comp'].median() if 'Job_Type' in all_valid else pd.Series()
+                market_compressions = all_valid.groupby('title')['_comp'].median() if 'title' in all_valid else pd.Series()
 
                 if not market_compressions.empty:
                     # Lower compression than market = more saturation (employers pay less spread)
@@ -304,21 +304,21 @@ class SaturationRiskIndicator:
 
         Signal: if avg Skill_Count is rising over time → saturation pressure increasing.
         """
-        if 'Skill_Count' not in domain_df.columns:
+        if 'skill_count' not in domain_df.columns:
             return {"score": 0.5, "avg_skills": None, "trend": "Unknown"}
 
         domain_df = domain_df.copy()
-        domain_df['Skill_Count'] = pd.to_numeric(domain_df['Skill_Count'], errors='coerce')
+        domain_df['skill_count'] = pd.to_numeric(domain_df['skill_count'], errors='coerce')
 
-        valid = domain_df.dropna(subset=['Skill_Count'])
+        valid = domain_df.dropna(subset=['skill_count'])
         if valid.empty:
             return {"score": 0.5, "avg_skills": None, "trend": "Unknown"}
 
-        domain_median_skills = valid['Skill_Count'].median()
+        domain_median_skills = valid['skill_count'].median()
 
         # Market-relative: what percentile is this domain's skill demand?
-        if 'Skill_Count' in all_df.columns and 'Job_Type' in all_df.columns:
-            market_skills = all_df.groupby('Job_Type')['Skill_Count'].median().dropna()
+        if 'skill_count' in all_df.columns and 'title' in all_df.columns:
+            market_skills = all_df.groupby('title')['skill_count'].median().dropna()
             if not market_skills.empty:
                 f5_score = float((market_skills < domain_median_skills).mean())
             else:
@@ -328,12 +328,12 @@ class SaturationRiskIndicator:
 
         # Skill inflation trend
         trend = "Stable"
-        if 'Scraped_At_Cleaned' in valid.columns and len(valid) >= 20:
-            valid['_date'] = pd.to_datetime(valid['Scraped_At_Cleaned'], errors='coerce')
+        if 'timestamp' in valid.columns and len(valid) >= 20:
+            valid['_date'] = pd.to_datetime(valid['timestamp'], errors='coerce')
             valid = valid.sort_values('_date').dropna(subset=['_date'])
             mid = len(valid) // 2
-            old_skills = valid.iloc[:mid]['Skill_Count'].median()
-            new_skills = valid.iloc[mid:]['Skill_Count'].median()
+            old_skills = valid.iloc[:mid]['skill_count'].median()
+            new_skills = valid.iloc[mid:]['skill_count'].median()
 
             if new_skills > old_skills + 1:
                 trend = "Inflating"  # Employers want more skills — oversupply condition

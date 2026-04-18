@@ -20,7 +20,7 @@ class JobMarketVelocityCalculator:
         """
         nearby_cities: expand local search radius (e.g., ['Sanganer', 'Amer'] for Jaipur)
         use_real_date: if True, use datetime.now() as reference.
-                       if False, use max(Scraped_At_Cleaned) — for offline/historical analysis
+                       if False, use max(timestamp) — for offline/historical analysis
         """
         self.nearby_cities = nearby_cities or []
         self.use_real_date = use_real_date
@@ -35,7 +35,7 @@ class JobMarketVelocityCalculator:
             return pd.Timestamp.now()
         
         # Historical mode: use max date in data
-        date_col = 'Posted_Date' if 'Posted_Date' in df.columns else 'Scraped_At_Cleaned'
+        date_col = 'timestamp' 
         max_date = pd.to_datetime(df[date_col], errors='coerce').max()
         
         if pd.isna(max_date):
@@ -58,18 +58,18 @@ class JobMarketVelocityCalculator:
         """
         result = pd.DataFrame()
 
-        # Strategy 1: Job_Type exact match
-        if 'Job_Type' in df.columns:
-            mask = df['Job_Type'].str.lower().isin(
+        # Strategy 1: title exact match
+        if 'title' in df.columns:
+            mask = df['title'].str.lower().isin(
                 [kw.lower() for kw in domain_keywords]
             )
             result = df[mask]
             if len(result) >= self.MIN_SAMPLE_PER_PERIOD * 2:
-                self.logger.info(f"Domain filter: Job_Type → {len(result)} records")
+                self.logger.info(f"Domain filter: title → {len(result)} records")
                 return self._apply_experience_filter(result, experience_band)
 
-        # Strategy 2: Title word-boundary match
-        title_col = 'Title_Cleaned' if 'Title_Cleaned' in df.columns else 'TItle_Cleaned'
+        # Strategy 2: title word-boundary match
+        title_col = 'title' if 'title' in df.columns else None
         if title_col in df.columns:
             # Word boundary regex for each keyword
             patterns = [r'\b' + kw.replace(' ', r'\s+') + r'\b' 
@@ -82,20 +82,20 @@ class JobMarketVelocityCalculator:
                 )
             ]
             if len(title_match) >= self.MIN_SAMPLE_PER_PERIOD:
-                self.logger.info(f"Domain filter: Title regex → {len(title_match)} records")
+                self.logger.info(f"Domain filter: title regex → {len(title_match)} records")
                 return self._apply_experience_filter(title_match, experience_band)
 
-        # Strategy 3: Description — only for primary keyword, not all
-        if 'Description_Cleaned' in df.columns and len(domain_keywords) > 0:
+        # Strategy 3: description — only for primary keyword, not all
+        if 'description_cleaned' in df.columns and len(domain_keywords) > 0:
             primary = domain_keywords[0]
             # Strict: keyword must appear multiple times to indicate it's a core role
             desc_match = df[
-                df['Description_Cleaned'].str.count(
+                df['description_cleaned'].str.count(
                     r'\b' + primary + r'\b'
                 ) >= 2  # Must appear at least twice
             ]
             self.logger.warning(
-                f"Domain filter: Description fallback — noisy data possible. "
+                f"Domain filter: description fallback — noisy data possible. "
                 f"{len(desc_match)} records"
             )
             return self._apply_experience_filter(desc_match, experience_band)
@@ -105,12 +105,12 @@ class JobMarketVelocityCalculator:
     def _apply_experience_filter(self, df: pd.DataFrame, 
                                   band: tuple) -> pd.DataFrame:
         """Apply experience bracket filter if column exists."""
-        if 'Min_Experience' not in df.columns:
+        if 'min_experience' not in df.columns:
             return df
         min_exp, max_exp = band
         return df[
-            (df['Min_Experience'] >= min_exp) & 
-            (df['Min_Experience'] <= max_exp)
+            (df['min_experience'] >= min_exp) & 
+            (df['min_experience'] <= max_exp)
         ].copy()
 
     def _build_time_series(self, domain_df: pd.DataFrame,
@@ -121,12 +121,12 @@ class JobMarketVelocityCalculator:
 
         Returns DataFrame with columns: [period_label, start, end, count, weighted_count]
         """
-        date_col = 'Posted_Date' if 'Posted_Date' in domain_df.columns else 'Scraped_At_Cleaned'
+        date_col = 'timestamp' if 'timestamp' in domain_df.columns else 'timestamp'
         domain_df = domain_df.copy()
         domain_df['_date'] = pd.to_datetime(domain_df[date_col], errors='coerce')
         domain_df = domain_df.dropna(subset=['_date'])
 
-        openings_col = 'No of job opening cleaned '
+        openings_col = 'no_of_opening'
         has_openings = openings_col in domain_df.columns
 
         periods = []
@@ -351,7 +351,7 @@ class JobMarketVelocityCalculator:
         df = df.copy()
 
         # Safe date parsing
-        for col in ['Scraped_At_Cleaned', 'Posted_Date']:
+        for col in ['timestamp', 'timestamp']:
             if col in df.columns:
                 df[col] = pd.to_datetime(df[col], errors='coerce')
 
@@ -371,9 +371,9 @@ class JobMarketVelocityCalculator:
         location_list = [target_location] + self.nearby_cities
         loc_pattern   = '|'.join(location_list)
 
-        if 'Location' in domain_df.columns:
+        if 'location' in domain_df.columns:
             local_df = domain_df[
-                domain_df['Location'].str.contains(
+                domain_df['location'].str.contains(
                     loc_pattern, case=False, na=False
                 )
             ]
@@ -403,24 +403,26 @@ class JobMarketVelocityCalculator:
 
         # 9. Company velocity (new entrants = strong signal)
         new_companies = 0
-        if 'Company_Cleaned' in domain_df.columns:
-            date_col = 'Posted_Date' if 'Posted_Date' in domain_df else 'Scraped_At_Cleaned'
+        if 'company' in domain_df.columns:
+            date_col = 'timestamp' if 'timestamp' in domain_df else 'timestamp'
             recent_cutoff = reference_date - pd.Timedelta(days=self.WINDOW_DAYS)
             older_cutoff  = reference_date - pd.Timedelta(days=self.WINDOW_DAYS * 2)
 
             recent_cos = set(domain_df[
                 domain_df['_date'] > recent_cutoff
-            ]['Company_Cleaned'].dropna()) if '_date' in domain_df else set()
+            ]['company'].dropna()) if '_date' in domain_df else set()
 
             older_cos = set(domain_df[
                 domain_df['_date'] <= recent_cutoff
-            ]['Company_Cleaned'].dropna()) if '_date' in domain_df else set()
+            ]['company'].dropna()) if '_date' in domain_df else set()
 
             new_companies = len(recent_cos - older_cos)  # Companies hiring NOW that weren't before
 
         return {
-            "Domain":          domain_keywords,
-            "Location":        target_location,
+            "domain":          domain_keywords,
+            "location":        target_location,
+            "experience_band": experience_band,
+            "reference_date":  str(reference_date.date()),
             "Experience_Band": experience_band,
             "Reference_Date":  str(reference_date.date()),
 

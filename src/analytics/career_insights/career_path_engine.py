@@ -66,17 +66,14 @@ class CareerPathEngine:
         """Job_Type first, Title fallback. Safe copy. Experience filtered."""
         df = df.copy()
 
-        if 'TItle_Cleaned' in df.columns and 'Title_Cleaned' not in df.columns:
-            df = df.rename(columns={'TItle_Cleaned': 'Title_Cleaned'})
-
-        if 'Job_Type' in df.columns:
-            exact = df[df['Job_Type'].str.lower() == target_domain.lower()]
+        if 'title' in df.columns:
+            exact = df[df['title'].str.lower() == target_domain.lower()]
             domain_df = exact if len(exact) >= self.MIN_SAMPLES else pd.DataFrame()
         else:
             domain_df = pd.DataFrame()
 
         if domain_df.empty:
-            col = 'Title_Cleaned' if 'Title_Cleaned' in df.columns else None
+            col = 'title' if 'title' in df.columns else None
             if col:
                 pattern = r'\b' + re.escape(target_domain) + r'\b'
                 domain_df = df[df[col].str.contains(
@@ -86,11 +83,11 @@ class CareerPathEngine:
         if domain_df.empty:
             return pd.DataFrame()
 
-        if 'Min_Experience' in domain_df.columns:
+        if 'min_experience' in domain_df.columns:
             min_e, max_e = experience_band
             domain_df = domain_df[
-                (domain_df['Min_Experience'] >= min_e) &
-                (domain_df['Min_Experience'] <= max_e + 1)
+                (domain_df['min_experience'] >= min_e) &
+                (domain_df['min_experience'] <= max_e + 1)
             ]
 
         return domain_df.copy()
@@ -105,7 +102,7 @@ class CareerPathEngine:
 
         total   = len(domain_df)
         counts  = {}
-        weights = {'Star_Skills': 2.0, 'Combined_Skills': 1.0, 'Normal_Skills': 0.6}
+        weights = {'star_skills': 2.0, 'combined_skills': 1.0, 'normal_skills': 0.6}
 
         for col, w in weights.items():
             if col not in domain_df.columns:
@@ -256,13 +253,13 @@ class CareerPathEngine:
             except Exception as e:
                 self.logger.warning(f"ProjectComplexityEvaluator failed: {e}")
 
-        # Internal fallback — uses Skill_Count median as proxy
+        # Internal fallback — uses skill_count median as proxy
         domain_df = self._filter_domain(df, target_domain, experience_band)
-        if domain_df.empty or 'Skill_Count' not in domain_df.columns:
+        if domain_df.empty or 'skill_count' not in domain_df.columns:
             return {"Market_Benchmark": {"Score": 5.0, "Label": "Medium Complexity (estimated)"}}
 
         median_skills = pd.to_numeric(
-            domain_df['Skill_Count'], errors='coerce'
+            domain_df['skill_count'], errors='coerce'
         ).median()
         score = min(10.0, (median_skills / 20) * 10) if not pd.isna(median_skills) else 5.0
 
@@ -322,8 +319,8 @@ class CareerPathEngine:
         domain_df = self._filter_domain(df, target_domain, experience_band)
         blockers  = []
 
-        if not domain_df.empty and 'Min_Experience' in domain_df.columns:
-            fresher_pct = (domain_df['Min_Experience'] <= 1).mean() * 100
+        if not domain_df.empty and 'min_experience' in domain_df.columns:
+            fresher_pct = (domain_df['min_experience'] <= 1).mean() * 100
             if fresher_pct < 30:
                 blockers.append({
                     "blocker_id": "experience_inflation",
@@ -477,10 +474,10 @@ class CareerPathEngine:
             overlap, learning_time, blocker_data, interview_data
         )
 
-        # 10. Domain salary benchmark
+        # 11. Domain salary benchmark
         salary_signal = None
-        if 'Avg_Salary' in domain_df.columns:
-            sal = pd.to_numeric(domain_df['Avg_Salary'], errors='coerce').dropna()
+        if 'avg_salary' in domain_df.columns:
+            sal = pd.to_numeric(domain_df['avg_salary'], errors='coerce').dropna()
             if len(sal) >= 5:
                 Q1, Q3 = sal.quantile(0.25), sal.quantile(0.75)
                 sal = sal[(sal >= Q1 - 1.5*(Q3-Q1)) & (sal <= Q3 + 1.5*(Q3-Q1))]

@@ -43,7 +43,7 @@ def apply_custom_styles():
             background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #c026d3 100%);
             padding: 6rem 2rem;
             border-radius: 24px;
-            margin: 2rem 1rem 4rem 1rem;
+            margin: 2rem 1rem 5.5rem 1rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -73,7 +73,7 @@ def apply_custom_styles():
             color: #ffffff !important;
             letter-spacing: -0.025em;
             margin-bottom: 1.5rem;
-            font-size: 3.5rem;
+            font-size: 2.4rem;
             animation: fadeInUp 0.9s ease-out both;
         }
 
@@ -86,7 +86,7 @@ def apply_custom_styles():
         }
 
         .hero-subtitle {
-            font-size: clamp(1.35rem, 1.4vw + 0.95rem, 1.85rem);
+            font-size: 1.35rem;
             line-height: 1.7;
             color: rgba(255, 255, 255, 0.9);
             max-width: 48rem;
@@ -185,7 +185,7 @@ def apply_custom_styles():
 
         @media (min-width: 768px) {
             .hero-headline {
-                font-size: 5rem;
+                font-size: 2.9rem;
             }
         }
 
@@ -204,7 +204,7 @@ def apply_custom_styles():
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1.5rem;
-            margin: 2.25rem 0 3rem 0;
+            margin: 3rem 0 4rem 0;
         }
 
         @media (min-width: 768px) {
@@ -231,7 +231,7 @@ def apply_custom_styles():
         }
         
         .stat-number {
-            font-size: 2.25rem;
+            font-size: 2.4rem;
             font-weight: 900;
             background: linear-gradient(to right, #2563eb, #7c3aed);
             -webkit-background-clip: text;
@@ -243,12 +243,12 @@ def apply_custom_styles():
 
         @media (min-width: 768px) {
             .stat-number {
-                font-size: 3rem;
+                font-size: 2.4rem;
             }
         }
         
         .stat-label {
-            font-size: 0.875rem;
+            font-size: 1rem;
             color: #4b5563;
             font-weight: 600;
         }
@@ -274,7 +274,7 @@ def apply_custom_styles():
         }
         
         .section-title {
-            font-size: 3rem;
+            font-size: 2.1rem;
             font-weight: 900;
             color: #f8fafc;
             margin-bottom: 1.5rem;
@@ -293,10 +293,10 @@ def apply_custom_styles():
         
         /* Features Section - modern cards */
         .features-section {
-            padding: 5rem 1.5rem;
+            padding: 3.5rem 1.5rem;
             background: #ffffff;
             border-radius: 24px;
-            margin: 4rem 0;
+            margin: 4.5rem 0;
         }
 
         .features-inner {
@@ -305,6 +305,9 @@ def apply_custom_styles():
         }
 
         .features-heading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
             margin-bottom: 3rem;
         }
@@ -331,7 +334,7 @@ def apply_custom_styles():
         }
 
         .features-heading-title {
-            font-size: 2.25rem;
+            font-size: 2.1rem;
             line-height: 1.1;
             font-weight: 800;
             color: #111827;
@@ -340,7 +343,7 @@ def apply_custom_styles():
 
         @media (min-width: 768px) {
             .features-heading-title {
-                font-size: 3rem;
+                font-size: 2.1rem;
             }
         }
 
@@ -357,6 +360,7 @@ def apply_custom_styles():
             color: #4b5563;
             max-width: 40rem;
             margin: 0.5rem auto 0 auto;
+            text-align: center;
         }
 
         .feature-grid {
@@ -378,6 +382,8 @@ def apply_custom_styles():
             background: #ffffff;
             transition: all 0.3s ease;
             box-shadow: 0 0 0 rgba(15, 23, 42, 0);
+            text-align: center;
+            align-items: center;
         }
 
         .feature-card:hover {
@@ -432,14 +438,14 @@ def apply_custom_styles():
         }
 
         .feature-title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: #111827;
             margin-bottom: 0.5rem;
         }
 
         .feature-description {
-            font-size: 0.975rem;
+            font-size: 1.05rem;
             color: #4b5563;
             line-height: 1.6;
         }
@@ -480,7 +486,7 @@ def apply_custom_styles():
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: bold;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),
                         0 2px 4px -1px rgba(0,0,0,0.06);
@@ -535,7 +541,7 @@ def apply_custom_styles():
         
         /* Persona Section – exact visual match + refined spacing */
         .personas-section {
-            padding: 5rem 0;                    /* py-20 */
+            padding: 3.5rem 0;                  /* py-14 approx */
             background: #ffffff;                /* bg-white */
         }
 
@@ -568,7 +574,7 @@ def apply_custom_styles():
         }
 
         .personas-title {
-            font-size: 2.25rem;                 /* text-4xl */
+            font-size: 2.1rem;                 /* text-4xl */
             font-weight: 800;
             color: #111827;                     /* text-gray-900 */
             margin-bottom: 1rem;                /* mb-4 */
@@ -577,7 +583,7 @@ def apply_custom_styles():
 
         @media (min-width: 768px) {
             .personas-title {
-                font-size: 3rem;                /* md:text-5xl */
+                font-size: 2.1rem;                /* md:text-5xl */
             }
             .personas-heading {
                 margin-bottom: 4rem !important; /* stronger separation on desktop */
@@ -621,10 +627,23 @@ def apply_custom_styles():
         }
 
         /* Emoji title */
-        .persona-emoji {
-            font-size: 2.5rem;                  /* text-4xl feel */
-            margin-bottom: 0.75rem;             /* mb-3 */
-            text-align: center;
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+        .persona-header svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: #2563eb;
+        }
+        .persona-header h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
         }
 
         /* Description */
@@ -707,7 +726,7 @@ def apply_custom_styles():
         }
         
         .ai-icon {
-            font-size: 4rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
             filter: drop-shadow(0 4px 12px rgba(99, 102, 241, 0.5));
             position: relative;
@@ -715,7 +734,7 @@ def apply_custom_styles():
         }
         
         .ai-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #f8fafc;
             margin-bottom: 1rem;
@@ -735,7 +754,7 @@ def apply_custom_styles():
         .cta-section {
             background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
             border-radius: 24px;
-            padding: 5rem 3rem;
+            padding: 4rem 3rem;
             text-align: center;
             margin: 5rem 0;
             box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.4);
@@ -760,7 +779,7 @@ def apply_custom_styles():
         }
         
         .cta-title {
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 900;
             color: white;
             margin-bottom: 1.5rem;
@@ -814,20 +833,22 @@ def apply_custom_styles():
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             border-radius: 24px;
             padding: 4rem 3rem 2rem 3rem;
-            margin-top: 5rem;
+            margin-top: 4rem;
             color: #e2e8f0;
             border: 1px solid rgba(99, 102, 241, 0.1);
         }
         
         .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
             margin-bottom: 3rem;
         }
         
         .footer-brand h3 {
-            font-size: 1.75rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
             font-weight: 800;
             background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
@@ -842,7 +863,7 @@ def apply_custom_styles():
         }
         
         .footer-column h4 {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
             color: #f8fafc;
             font-weight: 700;
@@ -930,7 +951,7 @@ def apply_custom_styles():
         .how-it-works-container {
             width: 100%;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
         
         .how-it-works-badge {
@@ -956,7 +977,7 @@ def apply_custom_styles():
         }
         
         .how-it-works-title {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             line-height: 1.1;
             color: #111827;
             margin-bottom: 1rem;
@@ -965,7 +986,7 @@ def apply_custom_styles():
         
         @media (min-width: 768px) {
             .how-it-works-title {
-                font-size: 3.5rem;
+                font-size: 2.25rem;
             }
         }
         
@@ -974,6 +995,7 @@ def apply_custom_styles():
             color: #4b5563;
             line-height: 1.6;
             font-weight: 400;
+            text-align: center;
         }
         
         /* Smooth Animations */
@@ -1489,5 +1511,83 @@ def apply_custom_styles():
     .dcr-animate:nth-child(3) { animation-delay:0.16s; }
     .dcr-animate:nth-child(4) { animation-delay:0.24s; }
     .dcr-animate:nth-child(5) { animation-delay:0.32s; }
+
+    /* =========================================================
+       UI/UX POLISH - STEP 1 GLOBAL IMPROVEMENTS
+       ========================================================= */
+
+    /* 1. Make Streamlit Column Layout Stretch to Equal Height */
+    div[data-testid="stHorizontalBlock"] {
+        align-items: stretch !important;
+    }
+
+    /* 2. Force Streamlit vertical hierarchy divs inside columns to fill 100% height */
+    div[data-testid="column"] {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Streamlit wraps markdown in multiple nested divs. All must expand to pass the height down. */
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"],
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div.element-container,
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div.element-container > div.stMarkdown,
+    div[data-testid="column"] > div[data-testid="stVerticalBlock"] > div.element-container > div.stMarkdown > div {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-grow: 1 !important;
+        height: 100% !important;
+    }
+
+    /* 3. Force your Custom Card Classes to use Flexbox natively */
+    .feature-card, 
+    .process-card, 
+    .persona-card, 
+    .stat-card, 
+    .ai-model-card,
+    .rec-card,
+    .sat-card,
+    .mcard {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05) !important;
+        transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    .card-bottom {
+        margin-top: auto !important; /* pushes elements like buttons or final text to bottom */
+    }
+
+    /* 4. Global Typography & Readability Override */
+    p, li, .stMarkdown, div[data-testid="stMarkdownContainer"] {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 1.06rem !important;
+        line-height: 1.65 !important;
+        color: #4b5563 !important; /* Readability improvement */
+    }
+    h1, h2, h3, h4, h5, div[data-testid="stHeadingContainer"] {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.02em !important;
+        color: #111827 !important;
+    }
+
+    /* 5. Whitespace and Section Breathers */
+    .section-spacing, 
+    .hero-container, 
+    .features-section, 
+    .personas-section, 
+    .cta-section {
+        margin-top: 5rem !important;
+        margin-bottom: 5rem !important;
+        border-radius: 24px !important;
+    }
+    
+    /* 6. Emoji Control Hints */
+    .excessive-emoji {
+        display: none !important;
+    }
     </style>
  """, unsafe_allow_html=True)

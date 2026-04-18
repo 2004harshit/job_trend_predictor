@@ -51,6 +51,7 @@ column_mappings:
   salary:              SalaryCleaningStrategy
   experience:          ExperienceCleaningStrategy
   education:           EducationCleaningStrategy
+  skills:              SkillsCleaningStrategy
   department:          DepartmentCleaningStrategy
   scraped_at:          TimestampCleaningStrategy
   description:         DescriptionCleaningStrategy

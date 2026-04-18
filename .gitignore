@@ -50,7 +50,7 @@ datasets/
 *.pt
 *.onnx
 *.ckpt
-
+.env
 # Images, videos, large binaries
 *.png
 *.jpg

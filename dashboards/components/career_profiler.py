@@ -1,5 +1,5 @@
 import streamlit as st
-from dashboards.utils.pipeline_loader import run_profile_analytics
+from dashboards.utils import api_client
 
 def load_qna_based_profiler() -> None:
     """Load the Q&A based user profiler component"""
@@ -189,32 +189,33 @@ def render_profiling_flow(navigate_to):
                     "math":      math,
                 })
 
-                # Build the inputs Phase 3 needs
+                # Build user_profile for API
                 profile  = st.session_state.profile_results
-                domain   = st.session_state.get("domain_analytics", {}).get("domain", "Data Scientist")
-                exp_band = st.session_state.get("domain_analytics", {}).get("experience_band", (0, 3))
-
-                # user_project_stats — map from profiler answers
-                project_stats = {
-                    "features":     2,       # update from actual profiler fields if available
-                    "tech_count":   3,
-                    "integrations": 1,
-                    "deployment":   False,
+                domain   = "Data Scientist"  # default for profiler flow
+                location = profile.get("location", "Jaipur") if isinstance(profile.get("location"), str) else "Jaipur"
+                if location == "Remote":
+                    location = "Bangalore"  # API expects city
+                math_map = {"Weak": "Weak", "Average": "Moderate", "Strong": "Strong"}
+                user_profile = {
+                    "skills":       profile.get("interests", []) or [],
+                    "experience":   "Fresher",
+                    "location":     location,
+                    "math_comfort": math_map.get(str(profile.get("math", "Average")), "Moderate"),
                 }
 
-                with st.spinner("Building your personalised career roadmap…"):
-                    comfort_raw = profile.get("comfort", "beginner").lower()
-                    prior_knowledge = COMFORT_MAP.get(comfort_raw, "basic")
-                    st.session_state["profile_analytics"] = run_profile_analytics(
-                        df=st.session_state["df"],
+                with st.spinner("Fetching from server…"):
+                    response = api_client.get_domain_analytics(
                         domain=domain,
-                        experience_band=exp_band,
-                        location=profile.get("location", "Jaipur"),
-                        user_skills=profile.get("interests", []),
-                        prior_knowledge=prior_knowledge,
-                        user_project_stats=project_stats,
-                        domain_results=st.session_state.get("domain_analytics", {}),
+                        location=location,
+                        experience_band=(0, 3),
+                        user_profile=user_profile,
                     )
+                    if response and response.get("profile_analytics"):
+                        st.session_state["profile_analytics"] = response["profile_analytics"]
+                        st.session_state["domain_analytics"] = response.get("domain_analytics", {})
+                    else:
+                        st.error("Server error — could not build roadmap. Ensure Flask API is running.")
+                        st.session_state["profile_analytics"] = {}
 
                 st.session_state.profiling_complete = True
                 st.rerun()

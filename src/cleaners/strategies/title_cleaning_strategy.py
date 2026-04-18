@@ -153,8 +153,8 @@ class TitleCleaningStrategy(FeatureCleaningStrategy):
             feature: Raw job title Series
 
         Returns:
-            pd.Series where each element is a List[str] of matched titles
-            (or ["Other"] for low-confidence / invalid inputs)
+            pd.Series where each element is a single matched title string
+            (or "Other" for low-confidence / invalid inputs)
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -173,7 +173,7 @@ class TitleCleaningStrategy(FeatureCleaningStrategy):
     #  Private helpers                                                      #
     # ------------------------------------------------------------------ #
 
-    def _match_title(self, raw: str) -> List[str]:
+    def _match_title(self, raw: str) -> str:
         """
         Clean and fuzzy-match a single raw job title string.
 
@@ -181,21 +181,21 @@ class TitleCleaningStrategy(FeatureCleaningStrategy):
             raw: Raw job title string
 
         Returns:
-            List of matched canonical titles, or ["Other"]
+            Single matched canonical title, or "Other"
         """
         # --- null / non-string guard ---
         try:
             if raw is None or pd.isna(raw):
-                return ["Other"]
+                return "Other"
         except (TypeError, ValueError):
             pass
 
         if not isinstance(raw, str):
-            return ["Other"]
+            return "Other"
 
         title = raw.lower().strip()
         if not title:
-            return ["Other"]
+            return "Other"
 
         # Step 1: Remove metadata keywords
         for pattern in self.METADATA_PATTERNS:
@@ -216,20 +216,20 @@ class TitleCleaningStrategy(FeatureCleaningStrategy):
         title = re.sub(r'\s+', ' ', title).strip()
 
         if not title:
-            return ["Other"]
+            return "Other"
 
         # Step 6: Fuzzy match against canonical list
         return self._fuzzy_match(title)
 
-    def _fuzzy_match(self, cleaned_title: str) -> List[str]:
+    def _fuzzy_match(self, cleaned_title: str) -> str:
         """
-        Score cleaned title against canonical job list and return best match(es).
+        Score cleaned title against canonical job list and return best match.
 
         Args:
             cleaned_title: Pre-cleaned, lowercase title string
 
         Returns:
-            List of matched job titles, or ["Other"]
+            Single matched job title, or "Other"
         """
         scores = {
             job: fuzz.token_set_ratio(job_lower, cleaned_title)
@@ -240,18 +240,13 @@ class TitleCleaningStrategy(FeatureCleaningStrategy):
         top_score = sorted_matches[0][1]
 
         if top_score >= self.HIGH_CONFIDENCE_THRESHOLD:
-            return [sorted_matches[0][0]]
+            return sorted_matches[0][0]
 
         if top_score >= self.MEDIUM_CONFIDENCE_THRESHOLD:
-            matches = [sorted_matches[0][0]]
-            if (
-                len(sorted_matches) > 1
-                and sorted_matches[1][1] >= top_score - self.MEDIUM_CONFIDENCE_GAP
-            ):
-                matches.append(sorted_matches[1][0])
-            return matches
+            # For medium confidence, return the best match (first one)
+            return sorted_matches[0][0]
 
-        return ["Other"]
+        return "Other"
     
 
 

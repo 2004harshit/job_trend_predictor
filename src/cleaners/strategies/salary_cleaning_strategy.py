@@ -9,9 +9,9 @@ class SalaryCleaningStrategy(FeatureCleaningStrategy):
     Cleaning strategy for salary columns.
 
     Extracts and normalizes salary data into three derived columns:
-    - Min_Salary  (float, in LPA)
-    - Max_Salary  (float, in LPA)
-    - Avg_Salary  (float, in LPA)
+    - min_salary  (float, in LPA)
+    - max_salary  (float, in LPA)
+    - avg_salary  (float, in LPA)
 
     Handles formats:
     - Range       : "3-5 LPA", "3 to 5 Lakhs"
@@ -22,7 +22,7 @@ class SalaryCleaningStrategy(FeatureCleaningStrategy):
     - Invalid     : "Not Disclosed", "Negotiable", None → NaN
 
     Returns:
-        pd.DataFrame with columns [Min_Salary, Max_Salary, Avg_Salary]
+        pd.DataFrame with columns [min_salary, max_salary, avg_salary]
     """
 
     INVALID_SALARY_VALUES = {
@@ -80,7 +80,7 @@ class SalaryCleaningStrategy(FeatureCleaningStrategy):
             feature: Raw salary Series
 
         Returns:
-            pd.DataFrame with columns [Min_Salary, Max_Salary, Avg_Salary]
+            pd.DataFrame with columns [min_salary, max_salary, avg_salary]
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -96,9 +96,9 @@ class SalaryCleaningStrategy(FeatureCleaningStrategy):
         ranges = feature.apply(self._extract_salary_range)
 
         return pd.DataFrame({
-            "Min_Salary": ranges.apply(self._get_min),
-            "Max_Salary": ranges.apply(self._get_max),
-            "Avg_Salary": ranges.apply(self._get_avg),
+            "min_salary": ranges.apply(self._get_min),
+            "max_salary": ranges.apply(self._get_max),
+            "avg_salary": ranges.apply(self._get_avg),
         })
 
     # ------------------------------------------------------------------ #

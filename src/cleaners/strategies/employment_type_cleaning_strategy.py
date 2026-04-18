@@ -20,9 +20,9 @@ class EmploymentTypeCleaningStrategy(FeatureCleaningStrategy):
 
     Returns:
         pd.DataFrame with columns:
-        - Employment_Types    (List[str])
-        - Primary_Employment  (str | None) — first type in list
-        - Employment_Count    (int)
+        - employment_types    (List[str])
+        - primary_employment  (str | None) — first type in list
+        - employment_count    (int)
     """
 
     EMPLOYMENT_NORMALIZATION = {
@@ -76,7 +76,7 @@ class EmploymentTypeCleaningStrategy(FeatureCleaningStrategy):
 
         Returns:
             pd.DataFrame with columns
-            [Employment_Types, Primary_Employment, Employment_Count]
+            [employment_types, primary_employment, employment_count]
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -93,11 +93,11 @@ class EmploymentTypeCleaningStrategy(FeatureCleaningStrategy):
 
         return pd.DataFrame(
             {
-                "Employment_Types":   cleaned,
-                "Primary_Employment": cleaned.apply(
+                "employment_types":   cleaned,
+                "primary_employment": cleaned.apply(
                     lambda x: x[0] if x else None
                 ),
-                "Employment_Count":   cleaned.apply(len),
+                "employment_count":   cleaned.apply(len),
             },
             index=feature.index,
         )

@@ -24,19 +24,32 @@ class PostgreSQLConfig:
     """PostgreSQL configuration management"""
     
     def __init__(self):
-        self.host = os.getenv('DB_HOST', 'localhost')
-        self.port = os.getenv('DB_PORT', '5432')
-        self.database = os.getenv('DB_NAME', 'job_trend_predictor')
-        self.username = os.getenv('DB_USER', 'postgres')
-        self.password = os.getenv('DB_PASSWORD', '')
-        self.sslmode = os.getenv('DB_SSLMODE', 'require')
+        # Check for Neon URL first (serverless PostgreSQL)
+        neon_url = os.getenv('NEON_URL')
+        if neon_url:
+            self.connection_string = neon_url
+            self.use_neon = True
+            logger.info("Using Neon PostgreSQL connection")
+        else:
+            self.use_neon = False
+            self.host = os.getenv('DB_HOST', 'localhost')
+            self.port = os.getenv('DB_PORT', '5432')
+            self.database = os.getenv('DB_NAME', 'job_trend_predictor')
+            self.username = os.getenv('DB_USER', 'postgres')
+            self.password = os.getenv('DB_PASSWORD', '')
+            self.sslmode = os.getenv('DB_SSLMODE', 'require')
+            logger.info("Using standard PostgreSQL connection")
     
     def get_connection_string(self) -> str:
         """Get PostgreSQL connection string"""
+        if self.use_neon:
+            return self.connection_string
         return f"postgresql://{self.username}:{self.password}@{self.host}:{self.port}/{self.database}"
     
     def get_connection_params(self) -> Dict:
         """Get connection parameters for psycopg2"""
+        if self.use_neon:
+            return {'dsn': self.connection_string}
         return {
             'host': self.host,
             'port': self.port,

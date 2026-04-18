@@ -21,9 +21,9 @@ class IndustryTypeCleaningStrategy(FeatureCleaningStrategy):
 
     Returns:
         pd.DataFrame with columns:
-        - Industry_Types    (List[str])
-        - Primary_Industry  (str | None)
-        - Industry_Count    (int)
+        - industry_types    (List[str])
+        - primary_industry  (str | None)
+        - industry_count    (int)
     """
 
     INDUSTRY_NORMALIZATION = {
@@ -93,7 +93,7 @@ class IndustryTypeCleaningStrategy(FeatureCleaningStrategy):
 
         Returns:
             pd.DataFrame with columns
-            [Industry_Types, Primary_Industry, Industry_Count]
+            [industry_types, primary_industry, industry_count]
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -110,11 +110,11 @@ class IndustryTypeCleaningStrategy(FeatureCleaningStrategy):
 
         return pd.DataFrame(
             {
-                "Industry_Types":   cleaned,
-                "Primary_Industry": cleaned.apply(
+                "industry_types":   cleaned,
+                "primary_industry": cleaned.apply(
                     lambda x: x[0] if x else None
                 ),
-                "Industry_Count":   cleaned.apply(len),
+                "industry_count":   cleaned.apply(len),
             },
             index=feature.index,
         )

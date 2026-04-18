@@ -34,17 +34,17 @@ class SalaryGrowthEngine:
         df = df.copy()  # Safe copy — never touch caller's data
 
         # Fix recurring typo
-        if 'TItle_Cleaned' in df.columns and 'Title_Cleaned' not in df.columns:
-            df = df.rename(columns={'TItle_Cleaned': 'Title_Cleaned'})
+        if 'title_cleaned' in df.columns and 'title' not in df.columns:
+            df = df.rename(columns={'title_cleaned': 'title'})
 
-        # Priority 1: Job_Type exact match
-        if 'Job_Type' in df.columns:
-            exact = df[df['Job_Type'].str.lower() == target_domain.lower()]
+        # Priority 1: title exact match
+        if 'title' in df.columns:
+            exact = df[df['title'].str.lower() == target_domain.lower()]
             if len(exact) >= self.MIN_SAMPLES_PER_BAND * 2:
                 return exact
 
         # Priority 2: Title word-boundary
-        title_col = 'Title_Cleaned' if 'Title_Cleaned' in df.columns else None
+        title_col = 'title' if 'title' in df.columns else None
         if title_col:
             pattern = r'\b' + re.escape(target_domain) + r'\b'
             return df[df[title_col].str.contains(
@@ -55,52 +55,52 @@ class SalaryGrowthEngine:
 
     def _preprocess_salary(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Returns clean copy with unified Salary_Mid column.
-        Priority: Avg_Salary (already computed) > (Min+Max)/2 > either bound.
+        Returns clean copy with unified salary_mid column.
+        Priority: avg_salary (already computed) > (min+max)/2 > either bound.
         Never modifies input.
         """
         df = df.copy()
 
-        for col in ['Min_Salary', 'Max_Salary', 'Avg_Salary']:
+        for col in ['min_salary', 'max_salary', 'avg_salary']:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors='coerce')
 
-        # Priority 1: Use Avg_Salary if available (already cleaned in your pipeline)
-        if 'Avg_Salary' in df.columns:
-            df['Salary_Mid'] = df['Avg_Salary']
+        # Priority 1: Use avg_salary if available (already cleaned in your pipeline)
+        if 'avg_salary' in df.columns:
+            df['salary_mid'] = df['avg_salary']
         else:
-            df['Salary_Mid'] = np.nan
+            df['salary_mid'] = np.nan
 
-        # Fill missing with (Min+Max)/2
-        if 'Min_Salary' in df.columns and 'Max_Salary' in df.columns:
-            computed_mid = (df['Min_Salary'] + df['Max_Salary']) / 2
-            df['Salary_Mid'] = df['Salary_Mid'].fillna(computed_mid)
+        # Fill missing with (min+max)/2
+        if 'min_salary' in df.columns and 'max_salary' in df.columns:
+            computed_mid = (df['min_salary'] + df['max_salary']) / 2
+            df['salary_mid'] = df['salary_mid'].fillna(computed_mid)
 
         # Last resort: either bound
-        if 'Min_Salary' in df.columns:
-            df['Salary_Mid'] = df['Salary_Mid'].fillna(df['Min_Salary'])
-        if 'Max_Salary' in df.columns:
-            df['Salary_Mid'] = df['Salary_Mid'].fillna(df['Max_Salary'])
+        if 'min_salary' in df.columns:
+            df['salary_mid'] = df['salary_mid'].fillna(df['min_salary'])
+        if 'max_salary' in df.columns:
+            df['salary_mid'] = df['salary_mid'].fillna(df['max_salary'])
 
         # IQR outlier removal for salary
-        valid = df.dropna(subset=['Salary_Mid'])
+        valid = df.dropna(subset=['salary_mid'])
         if len(valid) >= 4:
-            Q1 = valid['Salary_Mid'].quantile(0.25)
-            Q3 = valid['Salary_Mid'].quantile(0.75)
+            Q1 = valid['salary_mid'].quantile(0.25)
+            Q3 = valid['salary_mid'].quantile(0.75)
             IQR = Q3 - Q1
             df = df[
-                (df['Salary_Mid'] >= Q1 - 2.5 * IQR) &
-                (df['Salary_Mid'] <= Q3 + 2.5 * IQR)
+                (df['salary_mid'] >= Q1 - 2.5 * IQR) &
+                (df['salary_mid'] <= Q3 + 2.5 * IQR)
             ]
 
         # Full-time filter
-        if 'Employment Type' in df.columns:
-            full_time = df[df['Employment Type'].str.lower().str.contains(
+        if 'employment_type' in df.columns:
+            full_time = df[df['employment_type'].str.lower().str.contains(
                 'full.?time|permanent', na=False, regex=True
             )]
             df = full_time if len(full_time) >= self.MIN_SAMPLES_PER_BAND else df
 
-        return df.dropna(subset=['Salary_Mid'])
+        return df.dropna(subset=['salary_mid'])
 
     def _cross_sectional_growth(self, domain_df: pd.DataFrame) -> dict:
         """
@@ -114,15 +114,15 @@ class SalaryGrowthEngine:
 
         for band, (min_e, max_e, midpoint_yr) in self.EXPERIENCE_BANDS.items():
             band_df = domain_df[
-                (domain_df['Min_Experience'] >= min_e) &
-                (domain_df['Min_Experience'] < max_e)
+                (domain_df['min_experience'] >= min_e) &
+                (domain_df['min_experience'] < max_e)
             ]
 
             if len(band_df) >= self.MIN_SAMPLES_PER_BAND:
                 band_salaries[band] = {
-                    "median":   round(float(band_df['Salary_Mid'].median()), 2),
-                    "p25":      round(float(band_df['Salary_Mid'].quantile(0.25)), 2),
-                    "p75":      round(float(band_df['Salary_Mid'].quantile(0.75)), 2),
+                    "median":   round(float(band_df['salary_mid'].median()), 2),
+                    "p25":      round(float(band_df['salary_mid'].quantile(0.25)), 2),
+                    "p75":      round(float(band_df['salary_mid'].quantile(0.75)), 2),
                     "n":        len(band_df),
                     "exp_midpoint_yr": midpoint_yr
                 }
@@ -159,14 +159,14 @@ class SalaryGrowthEngine:
 
         This captures MARKET inflation, not just seniority premium.
         """
-        date_col = 'Posted_Date' if 'Posted_Date' in domain_df.columns else 'Scraped_At_Cleaned'
+        date_col = 'timestamp' 
 
         if date_col not in domain_df.columns:
             return {"available": False, "monthly_slope_pct": 0.0, "annualized_pct": 0.0}
 
         df = domain_df.copy()
         df['_date'] = pd.to_datetime(df[date_col], errors='coerce')
-        df = df.dropna(subset=['_date', 'Salary_Mid'])
+        df = df.dropna(subset=['_date', 'salary_mid'])
 
         if len(df) < 10:
             return {"available": False, "monthly_slope_pct": 0.0, "annualized_pct": 0.0}
@@ -174,8 +174,8 @@ class SalaryGrowthEngine:
         # Group by month, get median salary
         df['_month'] = df['_date'].dt.to_period('M')
         monthly = df.groupby('_month').agg(
-            median_salary=('Salary_Mid', 'median'),
-            count=('Salary_Mid', 'size')
+            median_salary=('salary_mid', 'median'),
+            count=('salary_mid', 'size')
         ).reset_index()
 
         # Need at least 3 months of data
@@ -296,12 +296,12 @@ class SalaryGrowthEngine:
         Location multiplier for salary growth rate.
         Metro cities have faster salary growth curves.
         """
-        if 'Location' not in domain_df.columns or 'Avg_Salary' not in df.columns:
+        if 'location' not in domain_df.columns or 'salary_mid' not in df.columns:
             return 1.0
 
         # Domain salary in target location
         local = domain_df[
-            domain_df['Location'].str.contains(target_location, case=False, na=False)
+            domain_df['location'].str.contains(target_location, case=False, na=False)
         ]
 
         if len(local) < self.MIN_SAMPLES_PER_BAND:
@@ -311,8 +311,8 @@ class SalaryGrowthEngine:
             )
             return 1.0
 
-        national_median = domain_df['Salary_Mid'].median()
-        local_median    = local['Salary_Mid'].median()
+        national_median = domain_df['salary_mid'].median()
+        local_median    = local['salary_mid'].median()
 
         if pd.isna(national_median) or national_median == 0:
             return 1.0
@@ -367,7 +367,7 @@ class SalaryGrowthEngine:
             fresher_median = fresher_data["median"]
         else:
             # Fallback: P25 of cleaned domain salary
-            fresher_median = domain_df['Salary_Mid'].quantile(0.25)
+            fresher_median = domain_df['salary_mid'].quantile(0.25)
 
         if pd.isna(fresher_median) or fresher_median <= 0:
             return {"error": "Cannot determine fresher salary baseline."}

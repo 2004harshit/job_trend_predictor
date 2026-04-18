@@ -6,8 +6,8 @@ from typing import Dict, List, Optional
 
 class AverageSalaryRangeCalculator:
     
-    REQUIRED_COLUMNS = ['Avg_Salary', 'Min_Experience', 'Max_Experience']
-    TITLE_COLUMN = 'Title_Cleaned'  # Fixed typo from 'TItle_Cleaned'
+    REQUIRED_COLUMNS = ['avg_salary', 'min_experience', 'max_experience']
+    TITLE_COLUMN = 'title'
     
     EXPERIENCE_BANDS = {
         "fresher":  (0, 1),   # True fresher: 0-1 year
@@ -42,24 +42,24 @@ class AverageSalaryRangeCalculator:
         #     self.logger.warning("Auto-fixed column typo: 'TItle_Cleaned' → 'Title_Cleaned'")
         
         # Safe numeric conversion on the COPY only
-        for col in ['Min_Salary', 'Max_Salary', 'Avg_Salary', 
-                    'Min_Experience', 'Max_Experience']:
+        for col in ['min_salary', 'max_salary', 'avg_salary', 
+                    'min_experience', 'max_experience']:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors='coerce')
         
         return df
     
     def _filter_domain(self , df, target_domain, experience_band):
-        # 1. Job_Type exact match — fastest, most accurate
-        if 'Job_Type' in df.columns:
-            result = df[df['Job_Type'].str.lower() == target_domain.lower()]
-            result = result[(result["Min_Experience"]>= experience_band[0]) & (result["Max_Experience"]<=experience_band[1])]
+        # 1. title exact match — fastest, most accurate
+        if 'title' in df.columns:
+            result = df[df['title'].str.lower() == target_domain.lower()]
+            result = result[(result["min_experience"]>= experience_band[0]) & (result["max_experience"]<=experience_band[1])]
             
             if len(result) >= 5:
                 return result
 
-        # 2. Title_Cleaned fallback
-        title_col = 'Title_Cleaned' if 'Title_Cleaned' in df.columns else None
+        # 2. title fallback
+        title_col = 'title' if 'title' in df.columns else None
         if title_col:
             result = df[df[title_col].str.contains(target_domain, case=False, na=False)]
             if not result.empty:
@@ -69,13 +69,13 @@ class AverageSalaryRangeCalculator:
 
     def _filter_employment_type(self, df: pd.DataFrame) -> pd.DataFrame:
         """Remove contract/freelance/part-time — they skew salary down artificially."""
-        if 'Employment Type' not in df.columns:
+        if 'employment_type' not in df.columns:
             return df
 
         full_time_keywords = ['full time', 'full-time', 'permanent', 'regular']
         pattern = '|'.join(full_time_keywords)
 
-        full_time = df[df['Employment Type'].str.lower().str.contains(
+        full_time = df[df['employment_type'].astype(str).str.lower().str.contains(
             pattern, na=False
         )]
 
@@ -83,7 +83,7 @@ class AverageSalaryRangeCalculator:
         return full_time if len(full_time) >= 5 else df
     
     def _remove_salary_outliers(self, df: pd.DataFrame, 
-                                 col: str = 'Avg_Salary') -> pd.DataFrame:
+                                 col: str = 'avg_salary') -> pd.DataFrame:
         """
         IQR-based outlier removal.
         Handles cases like ₹1/month test entries or ₹1Cr outliers
@@ -126,10 +126,10 @@ class AverageSalaryRangeCalculator:
         min_exp, max_exp = self.EXPERIENCE_BANDS[band]
 
         band_df = df[
-            (df['Min_Experience'] >= min_exp) & 
-            (df['Max_Experience'] <= max_exp + 1) &  # +1 tolerance for "0-3 yrs" style
-            (df['Min_Experience'].notna()) &
-            (df['Max_Experience'].notna())
+            (df['min_experience'] >= min_exp) & 
+            (df['max_experience'] <= max_exp + 1) &  # +1 tolerance for "0-3 yrs" style
+            (df['min_experience'].notna()) &
+            (df['max_experience'].notna())
         ]
 
         # Graceful fallback chain
@@ -139,26 +139,26 @@ class AverageSalaryRangeCalculator:
                 f"Expanding to include adjacent experience levels."
             )
             # Expand filter slightly
-            band_df = df[df['Min_Experience'] <= max_exp + 2]
+            band_df = df[df['min_experience'] <= max_exp + 2]
 
         return band_df
     
     def _apply_time_decay(self, df: pd.DataFrame) -> pd.DataFrame:
         """Apply exponential time decay. Newer postings get higher weight."""
-        if 'Scraped_At_Cleaned' not in df.columns:
+        if 'timestamp' not in df.columns:
             df['_weight'] = 1.0
             return df
 
         df = df.copy()
-        df['Scraped_At_Cleaned'] = pd.to_datetime(df['Scraped_At_Cleaned'], errors='coerce')
+        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
 
-        max_date = df['Scraped_At_Cleaned'].max()
+        max_date = df['timestamp'].max()
         if pd.isna(max_date):
             df['_weight'] = 1.0
             return df
 
         df['_months_old'] = (
-            (max_date - df['Scraped_At_Cleaned']).dt.days / 30.0
+            (max_date - df['timestamp']).dt.days / 30.0
         ).clip(lower=0).fillna(6.0)  # Unknown date → treat as 6 months old
 
         df['_weight'] = np.exp(-self.lambda_val * df['_months_old'])
@@ -204,14 +204,14 @@ class AverageSalaryRangeCalculator:
 
         """
         # National median for THIS domain only
-        national_median = domain_df['Avg_Salary'].median()
+        national_median = domain_df['avg_salary'].median()
 
         if pd.isna(national_median) or national_median == 0:
             return 1.0  # Neutral factor — no adjustment
 
         # Local data for THIS domain in target location
         local_domain = domain_df[
-            domain_df['Location'].str.contains(
+            domain_df['location'].astype(str).str.contains(
                 target_location, case=False, na=False
             )
         ]
@@ -223,7 +223,7 @@ class AverageSalaryRangeCalculator:
             )
             return 1.0
 
-        local_median = local_domain['Avg_Salary'].median()
+        local_median = local_domain['avg_salary'].median()
 
         if pd.isna(local_median):
             return 1.0
@@ -308,11 +308,11 @@ class AverageSalaryRangeCalculator:
         band_df = self._apply_time_decay(band_df)
 
         # 7. Compute weighted percentiles
-        p10 = self._weighted_percentile(band_df['Avg_Salary'], band_df['_weight'], 0.10)
-        p25 = self._weighted_percentile(band_df['Avg_Salary'], band_df['_weight'], 0.25)
-        p50 = self._weighted_percentile(band_df['Avg_Salary'], band_df['_weight'], 0.50)
-        p75 = self._weighted_percentile(band_df['Avg_Salary'], band_df['_weight'], 0.75)
-        p90 = self._weighted_percentile(band_df['Avg_Salary'], band_df['_weight'], 0.90)
+        p10 = self._weighted_percentile(band_df['avg_salary'], band_df['_weight'], 0.10)
+        p25 = self._weighted_percentile(band_df['avg_salary'], band_df['_weight'], 0.25)
+        p50 = self._weighted_percentile(band_df['avg_salary'], band_df['_weight'], 0.50)
+        p75 = self._weighted_percentile(band_df['avg_salary'], band_df['_weight'], 0.75)
+        p90 = self._weighted_percentile(band_df['avg_salary'], band_df['_weight'], 0.90)
 
         # 8. Location adjustment (domain-specific fix)
         loc_factor = 1.0
@@ -322,12 +322,12 @@ class AverageSalaryRangeCalculator:
         adjusted_p50 = round(p50 * loc_factor, 2) if not pd.isna(p50) else np.nan
 
         # 9. Confidence interval (statistically grounded)
-        std = band_df['Avg_Salary'].std()
+        std = band_df['avg_salary'].std()
         ci = self._calculate_confidence_interval(adjusted_p50, len(band_df), std)
 
         # 10. Min/Max salary range from raw Min_Salary/Max_Salary columns
-        raw_min = band_df['Min_Salary'].quantile(0.25) if 'Min_Salary' in band_df else np.nan
-        raw_max = band_df['Max_Salary'].quantile(0.75) if 'Max_Salary' in band_df else np.nan
+        raw_min = band_df['min_salary'].quantile(0.25) if 'min_salary' in band_df else np.nan
+        raw_max = band_df['max_salary'].quantile(0.75) if 'max_salary' in band_df else np.nan
 
         return {
             "Domain":           target_domain,

@@ -1,9 +1,19 @@
 import streamlit as st
-import time
 
 def render(navigate_to):
     """Render the enhanced home page"""
-    
+
+    # Common Icons Setup (Clean, emoji-free)
+    ICON_TARGET = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M22 12H18"/><path d="M6 12H2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="m15 9-3 3 3 3"/><path d="m9 9 3 3-3 3"/></svg>'
+    ICON_BRAIN = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0c0 1-.5 1.5-1 2-.5.5-1 1-1 2"/><path d="M12 17h.01"/><path d="M5.5 8A6.5 6.5 0 0 1 18 6.5"/><path d="M8 20h8"/><path d="M7 20a4 4 0 0 1-.88-7.9"/><path d="M17.88 12.1A4 4 0 0 1 17 20"/></svg>'
+    ICON_ROCKET = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21 9 3l4 9 4-6 2.5 15"/><path d="M4.5 21h15"/></svg>'
+    ICON_CHART = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7" rx="1"/><rect x="12" y="6" width="3" height="11" rx="1"/><rect x="17" y="8" width="3" height="9" rx="1"/></svg>'
+    ICON_ZAP = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg>'
+    ICON_TREND = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>'
+    ICON_USER = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'
+    ICON_BOOK = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>'
+    ICON_COMPASS = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>'
+
     # Hero Section
     st.markdown("""
     <div class="hero-container">
@@ -46,7 +56,7 @@ def render(navigate_to):
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
             if st.button("🚀 Get Started Now", use_container_width=True, type="primary"):
-                navigate_to('profile')  # or wherever you want
+                navigate_to("Profile Selection")
         with btn_col2:
             if st.button("▶ Watch Demo", use_container_width=True):
                 st.info("Demo video coming soon!")
@@ -57,33 +67,24 @@ def render(navigate_to):
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-number">355K+</div>
-            <div class="stat-label">Job Openings Tracked</div>
+            <div class="stat-label card-bottom">Job Openings Tracked</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">1500+</div>
-            <div class="stat-label">Companies Analyzed</div>
+            <div class="stat-label card-bottom">Companies Analyzed</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">50+</div>
-            <div class="stat-label">Tech Skills Monitored</div>
+            <div class="stat-label card-bottom">Tech Skills Monitored</div>
         </div>
         <div class="stat-card">
             <div class="stat-number">85%</div>
-            <div class="stat-label">Prediction Accuracy</div>
+            <div class="stat-label card-bottom">Prediction Accuracy</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("<br/>", unsafe_allow_html=True)
-    
     # Features Section - modern landing style (single-line SVGs to avoid raw HTML showing)
-    ICON_TARGET = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M22 12H18"/><path d="M6 12H2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="m15 9-3 3 3 3"/><path d="m9 9 3 3-3 3"/></svg>'
-    ICON_BRAIN = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9a3 3 0 0 1 6 0c0 1-.5 1.5-1 2-.5.5-1 1-1 2"/><path d="M12 17h.01"/><path d="M5.5 8A6.5 6.5 0 0 1 18 6.5"/><path d="M8 20h8"/><path d="M7 20a4 4 0 0 1-.88-7.9"/><path d="M17.88 12.1A4 4 0 0 1 17 20"/></svg>'
-    ICON_ROCKET = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21 9 3l4 9 4-6 2.5 15"/><path d="M4.5 21h15"/></svg>'
-    ICON_CHART = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7" rx="1"/><rect x="12" y="6" width="3" height="11" rx="1"/><rect x="17" y="8" width="3" height="9" rx="1"/></svg>'
-    ICON_ZAP = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg>'
-    ICON_TREND = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>'
-
     features = [
         {"title": "Domain Confusion Resolver", "description": "Compare multiple tech domains with AI-powered recommendations. Know exactly which path suits you best.", "gradient_class": "gradient-blue-cyan", "icon_svg": ICON_TARGET},
         {"title": "AI-Powered Insights", "description": "Machine learning models analyze market trends and predict future demands with 85%+ accuracy.", "gradient_class": "gradient-purple-pink", "icon_svg": ICON_BRAIN},
@@ -94,7 +95,7 @@ def render(navigate_to):
     ]
 
     cards_html = "".join(
-        f'<div class="feature-card"><div class="feature-icon-wrapper {f["gradient_class"]}">{f["icon_svg"]}</div><h3 class="feature-title">{f["title"]}</h3><p class="feature-description">{f["description"]}</p></div>'
+        f'<div class="feature-card"><div class="feature-icon-wrapper {f["gradient_class"]}">{f["icon_svg"]}</div><h3 class="feature-title">{f["title"]}</h3><p class="feature-description card-bottom">{f["description"]}</p></div>'
         for f in features
     )
 
@@ -106,18 +107,20 @@ def render(navigate_to):
     )
     
     # How It Works Section
-    st.markdown("""
-    <div class="how-it-works-container">
-        <div class="how-it-works-badge">
-            <span class="how-it-works-badge-icon">🚀</span>
-            <span>Simple Process</span>
-        </div>
-        <h2 class="how-it-works-title">How It Works</h2>
-        <p class="how-it-works-subtitle">Three simple steps to career clarity</p>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True) # Spacer before How It Works
     
-    col1, col2, col3 = st.columns(3)
+    st.markdown(f"""
+<div class="how-it-works-container" style="margin-bottom: 3.5rem;">
+    <div class="how-it-works-badge">
+        <span class="how-it-works-badge-icon">{ICON_ROCKET}</span>
+        <span>Simple Process</span>
+    </div>
+    <h2 class="how-it-works-title">How It Works</h2>
+    <p class="how-it-works-subtitle">Three simple steps to career clarity</p>
+</div>
+""", unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3, gap="large")
     
     with col1:
         st.markdown("""
@@ -135,7 +138,7 @@ def render(navigate_to):
                     </svg>
                 </div>
                 <h3 class="process-title">Select Your Profile</h3>
-                <p class="process-description">Choose whether you're a fresher, intermediate learner, professional, or counselor</p>
+                <p class="process-description card-bottom">Open Profile Selection — choose Fresher to unlock the full dashboard</p>
             </div>
             <div class="process-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: #2563eb;">
@@ -161,7 +164,7 @@ def render(navigate_to):
                     </svg>
                 </div>
                 <h3 class="process-title">Explore Insights</h3>
-                <p class="process-description">Access personalized dashboards with real-time market data and AI predictions</p>
+                <p class="process-description card-bottom">Access personalized dashboards with real-time market data and AI predictions</p>
             </div>
             <div class="process-arrow">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: #2563eb;">
@@ -186,195 +189,68 @@ def render(navigate_to):
                     </svg>
                 </div>
                 <h3 class="process-title">Make Decisions</h3>
-                <p class="process-description">Use data-driven recommendations to plan your career moves strategically</p>
+                <p class="process-description card-bottom">Use data-driven recommendations to plan your career moves strategically</p>
             </div>
         </div>
         """, unsafe_allow_html=True)
     
 
     # Personas Section
-    st.markdown("""
-    <section class="personas-section">
-        <div class="personas-inner">
-            <div class="personas-heading">
-                <div class="personas-badge">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
-                    <span>For Everyone</span>
-                </div>
-                <h2 class="personas-title">Tailored for Your Journey</h2>
-                <p class="personas-subtitle">Personalized dashboards and insights built for every stage of your tech career</p>
-            </div>
-            <div class="persona-grid">
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="section-spacing"></div>', unsafe_allow_html=True) # Adding symmetric spacing
     
-    # Persona data
+    # Persona data — Freshers, Intermediate, Counselors
     personas = [
-        {"emoji": "👨‍🎓", "title": "Freshers", "desc": "Navigate career choices with data-driven domain comparisons and skill roadmaps",
+        {"icon": ICON_USER, "title": "Freshers", "desc": "Navigate career choices with data-driven domain comparisons and skill roadmaps",
          "features": ["Domain Selection Guide", "Learning Roadmaps", "Company Insights", "Salary Expectations"]},
-        {"emoji": "📚", "title": "Intermediate Learners", "desc": "Analyze skill gaps and discover high-value upskilling opportunities",
+        {"icon": ICON_BOOK, "title": "Intermediate Learners", "desc": "Analyze skill gaps and discover high-value upskilling opportunities",
          "features": ["Skill Gap Analysis", "Upskilling Advisor", "Role Predictions", "Salary Projections"]},
-        {"emoji": "💼", "title": "Professionals", "desc": "Find growth opportunities and optimal switch timing with market intelligence",
-         "features": ["Career Growth Path", "Switch Opportunities", "Salary Comparison", "Domain Switch Analysis"]},
-        {"emoji": "🎯", "title": "Counselors", "desc": "Access comprehensive market insights for curriculum design and career guidance",
+        {"icon": ICON_COMPASS, "title": "Counselors", "desc": "Access comprehensive market insights for curriculum design and career guidance",
          "features": ["Market Overview", "Trend Forecasting", "Emerging Skills", "Policy Recommendations"]}
     ]
-    
-    # Create 2x2 grid using Streamlit columns
-    col1, col2 = st.columns(2)
-    
-    # First row - Freshers and Intermediate Learners
-    with col1:
+
+    persona_cards_html = ""
+    for p in personas:
         features_html = "".join(
             f'<div class="persona-feature-item"><div class="persona-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div><span>{f}</span></div>'
-            for f in personas[0]["features"]
+            for f in p["features"]
         )
-        st.markdown(f"""
-        <div class="persona-card">
-            <div class="persona-emoji">{personas[0]["emoji"]} {personas[0]["title"]}</div>
-            <p class="persona-description">{personas[0]["desc"]}</p>
-            <div class="persona-features">{features_html}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        features_html = "".join(
-            f'<div class="persona-feature-item"><div class="persona-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div><span>{f}</span></div>'
-            for f in personas[1]["features"]
-        )
-        st.markdown(f"""
-        <div class="persona-card">
-            <div class="persona-emoji">{personas[1]["emoji"]} {personas[1]["title"]}</div>
-            <p class="persona-description">{personas[1]["desc"]}</p>
-            <div class="persona-features">{features_html}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Second row - Professionals and Counselors
-    col3, col4 = st.columns(2)
-    
-    with col3:
-        features_html = "".join(
-            f'<div class="persona-feature-item"><div class="persona-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div><span>{f}</span></div>'
-            for f in personas[2]["features"]
-        )
-        st.markdown(f"""
-        <div class="persona-card">
-            <div class="persona-emoji">{personas[2]["emoji"]} {personas[2]["title"]}</div>
-            <p class="persona-description">{personas[2]["desc"]}</p>
-            <div class="persona-features">{features_html}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col4:
-        features_html = "".join(
-            f'<div class="persona-feature-item"><div class="persona-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div><span>{f}</span></div>'
-            for f in personas[3]["features"]
-        )
-        st.markdown(f"""
-        <div class="persona-card">
-            <div class="persona-emoji">{personas[3]["emoji"]} {personas[3]["title"]}</div>
-            <p class="persona-description">{personas[3]["desc"]}</p>
-            <div class="persona-features">{features_html}</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Close the section containers
-    st.markdown("""
-        </div>      <!-- personas-inner -->
-    </section>      <!-- personas-section -->
-    """, unsafe_allow_html=True)
-    
-    # AI Models Section
-    st.markdown("""
-    <div class="section-header" style="margin-top: 4rem;">
-        <span class="section-badge">Powered by AI</span>
-        <h2 class="section-title">Advanced Machine Learning</h2>
-        <p class="section-subtitle">Our platform uses cutting-edge AI models to deliver accurate predictions with 85%+ confidence</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div class="ai-model-card">
-            <div class="ai-icon">🔮</div>
-            <h3 class="ai-title">ARIMA Models</h3>
-            <p class="ai-description">Time-series forecasting for accurate trend prediction</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="ai-model-card">
-            <div class="ai-icon">📊</div>
-            <h3 class="ai-title">Prophet Algorithm</h3>
-            <p class="ai-description">Seasonal trend decomposition & analysis</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="ai-model-card">
-            <div class="ai-icon">🚀</div>
-            <h3 class="ai-title">XGBoost</h3>
-            <p class="ai-description">Advanced regression for salary prediction</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # CTA Section
-    st.markdown("""
-    <div class="cta-section">
-        <h2 class="cta-title">Ready to Transform Your Career?</h2>
-        <p class="cta-subtitle">Join thousands who are making smarter career decisions with data-driven insights</p>
-        <button class="cta-button">Get Started Now →</button>
-        <p class="cta-note">No credit card required • Free access • Updated daily</p>
-    </div>
-    """, unsafe_allow_html=True)
+        persona_cards_html += f"""
+<div class="persona-card">
+    <div class="persona-header">{p["icon"]} <h3>{p["title"]}</h3></div>
+    <p class="persona-description">{p["desc"]}</p>
+    <div class="persona-features card-bottom">{features_html}</div>
+</div>
+"""
+
+    st.markdown(f"""
+<section class="personas-section">
+<div class="personas-inner">
+<div class="personas-heading">
+<div class="personas-badge">
+{ICON_USER}
+<span>For Learners</span>
+</div>
+<h2 class="personas-title">Tailored for Your Journey</h2>
+<p class="personas-subtitle">Insights built for freshers and intermediate learners entering tech</p>
+</div>
+<div class="persona-grid">
+{persona_cards_html}</div>
+</div>
+</section>
+""", unsafe_allow_html=True)
     
     # Footer
     st.markdown("""
     <div class="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>CareerTrend AI</h3>
-                <p>AI-powered career intelligence platform for the modern tech professional</p>
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h4>Platform</h4>
-                    <ul>
-                        <li>Features</li>
-                        <li>Pricing</li>
-                        <li>API Access</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li>Documentation</li>
-                        <li>Blog</li>
-                        <li>Career Guides</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li>About Us</li>
-                        <li>Contact</li>
-                        <li>Privacy Policy</li>
-                    </ul>
-                </div>
+                <h3>Job Trend Predictor</h3>
+                <p>AI-powered career intelligence for tech learners and job seekers</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 CareerTrend AI. All rights reserved.</p>
-            <p class="footer-stats">📊 Data from LinkedIn, Naukri, Indeed • 🤖 85%+ Prediction Accuracy</p>
+            <p>© 2026 Job Trend Predictor. All rights reserved.</p>
+            <p class="footer-stats">Reliable Data from LinkedIn, Naukri, Indeed &bull; 85%+ Prediction Accuracy</p>
         </div>
     </div>
     """, unsafe_allow_html=True)

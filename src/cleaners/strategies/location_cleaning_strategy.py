@@ -17,10 +17,10 @@ class LocationCleaningStrategy(FeatureCleaningStrategy):
 
     Returns:
         pd.DataFrame with columns:
-        - Location_Cities   (List[str])  — list of cleaned city names
-        - Primary_Location  (str | None) — first city in list
-        - Location_Count    (int)        — number of cities
-        - Is_Remote         (bool)       — True if remote/WFH role
+        - location_cities   (List[str])  — list of cleaned city names
+        - primary_location  (str | None) — first city in list
+        - location_count    (int)        — number of cities
+        - is_remote         (bool)       — True if remote/WFH role
     """
 
     REMOTE_INDICATORS = {
@@ -62,7 +62,7 @@ class LocationCleaningStrategy(FeatureCleaningStrategy):
 
         Returns:
             pd.DataFrame with columns:
-            [Location_Cities, Primary_Location, Location_Count, Is_Remote]
+            [location_cities, primary_location, location_count, is_remote]
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -79,10 +79,10 @@ class LocationCleaningStrategy(FeatureCleaningStrategy):
 
         return pd.DataFrame(
             {
-                "Location_Cities":  records.apply(lambda r: r["cities"]),
-                "Primary_Location": records.apply(lambda r: r["cities"][0] if r["cities"] else None),
-                "Location_Count":   records.apply(lambda r: len(r["cities"])),
-                "Is_Remote":        records.apply(lambda r: r["is_remote"]),
+                "location_cities":  records.apply(lambda r: r["cities"]),
+                "primary_location": records.apply(lambda r: r["cities"][0] if r["cities"] else None),
+                "location_count":   records.apply(lambda r: len(r["cities"])),
+                "is_remote":        records.apply(lambda r: r["is_remote"]),
             },
             index=feature.index,
         )

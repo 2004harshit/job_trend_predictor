@@ -16,9 +16,9 @@ class DepartmentCleaningStrategy(FeatureCleaningStrategy):
 
     Returns:
         pd.DataFrame with columns:
-        - Department_Cleaned   (List[str])
-        - Primary_Department   (str | None)  — first item in cleaned list
-        - Department_Count     (int)
+        - department_cleaned   (List[str])
+        - primary_department   (str | None)  — first item in cleaned list
+        - department_count     (int)
     """
 
     DEPARTMENT_NORMALIZATION = {
@@ -120,7 +120,7 @@ class DepartmentCleaningStrategy(FeatureCleaningStrategy):
 
         Returns:
             pd.DataFrame with columns
-            [Department_Cleaned, Primary_Department, Department_Count]
+            [department_cleaned, primary_department, department_count]
 
         Raises:
             TypeError:  If input is not a pd.Series or pd.DataFrame
@@ -145,11 +145,11 @@ class DepartmentCleaningStrategy(FeatureCleaningStrategy):
 
         return pd.DataFrame(
             {
-                "Department_Cleaned":  cleaned,
-                "Primary_Department":  cleaned.apply(
+                "department_cleaned":  cleaned,
+                "primary_department":  cleaned.apply(
                     lambda x: x[0] if x else None
                 ),
-                "Department_Count":    cleaned.apply(len),
+                "department_count":    cleaned.apply(len),
             },
             index=feature.index,
         )
@@ -194,7 +194,7 @@ class DepartmentCleaningStrategy(FeatureCleaningStrategy):
         Split raw input into individual department token strings.
 
         Args:
-            value: Department string or list
+            value: department string or list
 
         Returns:
             List of stripped, non-empty raw tokens

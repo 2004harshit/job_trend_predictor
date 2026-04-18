@@ -478,11 +478,8 @@ class JobDataCleaner(DataCleaner):
                 f"Skills source columns missing from DataFrame: {missing}"
             )
 
-        # Rename to what SkillsCleaningStrategy.REQUIRED_COLUMNS expects
-        return data[[star_col, normal_col]].rename(columns={
-            star_col: "Star_Skills",
-            normal_col: "Normal_Skills",
-        })
+        # Pass columns as-is (already lowercase from config)
+        return data[[star_col, normal_col]].copy()
 
     def _get_strategy(self, column: str) -> FeatureCleaningStrategy:
         """Retrieve registered strategy for a column name (case-insensitive)."""

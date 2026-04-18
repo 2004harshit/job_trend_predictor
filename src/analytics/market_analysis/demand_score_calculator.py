@@ -13,27 +13,26 @@ class MarketDemandEngine:
         
         default_weights = {
             "Job_Posting_Frequency": 0.30,
-            "Trend_Direction": 0.25,
-            "Applicant_Demand_Ratio": 0.20,
+            "Trend_Direction": 0.30,
+            "Applicant_Demand_Ratio": 0.25,
             "Skill_Diversity": 0.15,
-            "Experience_Flexibility": 0.10
         }
         self.weights = weights or default_weights
         self._validate_weights()
         
         # Safe date parsing - Added dayfirst=True to help infer format and avoid warnings
-        self.data['Scraped_At_Cleaned'] = pd.to_datetime(
-            self.data['Scraped_At_Cleaned'], errors='coerce', dayfirst=True
+        self.data['timestamp'] = pd.to_datetime(
+            self.data['timestamp'], errors='coerce', dayfirst=True
         )
-        self.data['Posted_Date'] = pd.to_datetime(
-            self.data['Posted_Date'], errors='coerce', dayfirst=True
+        self.data['posted_timestamp'] = pd.to_datetime(
+            self.data['posted_timestamp'], errors='coerce', dayfirst=True
         )
         
         # Initialize the report dictionary
         self.demand_report = {}
 
     def _validate_required_columns(self, df):
-        required = ['Job_Type', 'Scraped_At_Cleaned', 'Min_Experience', 'Company_Cleaned']
+        required = ['title', 'timestamp', 'min_experience', 'company']
         missing = [c for c in required if c not in df.columns]
         if missing:
             raise ValueError(f"Missing required columns: {missing}")
@@ -47,14 +46,14 @@ class MarketDemandEngine:
 
     def _filter_fresher_data(self, df):
         return df[
-            (df["Min_Experience"] >= 0) & 
-            (df["Max_Experience"] <= 5) &
-            (df["Min_Experience"].notna()) &
-            (df["Max_Experience"].notna())
+            (df["min_experience"] >= 0) & 
+            (df["max_experience"] <= 5) &
+            (df["min_experience"].notna()) &
+            (df["max_experience"].notna())
         ]
 
     def _get_valid_domains(self, fresher_df, domains):
-        counts = fresher_df["Job_Type"].value_counts()
+        counts = fresher_df["title"].value_counts()
         if domains is None:
             domains = counts.index.tolist()
 
@@ -66,13 +65,13 @@ class MarketDemandEngine:
         return valid, counts
     
     def _calculate_frequency_score(self, fresher_df, domain, max_freq):
-        domain_df = fresher_df[fresher_df["Job_Type"] == domain].copy()
+        domain_df = fresher_df[fresher_df["title"] == domain].copy()
         if domain_df.empty:
             return 0.0
 
         today = pd.Timestamp.now()
-        domain_df = domain_df.dropna(subset=['Scraped_At_Cleaned'])
-        domain_df['days_ago'] = (today - domain_df['Scraped_At_Cleaned']).dt.days.clip(lower=0)
+        domain_df = domain_df.dropna(subset=['timestamp'])
+        domain_df['days_ago'] = (today - domain_df['timestamp']).dt.days.clip(lower=0)
         domain_df['decay_weight'] = np.exp(-0.693 * domain_df['days_ago'] / 30)
 
         weighted_freq = domain_df['decay_weight'].sum()
@@ -80,13 +79,13 @@ class MarketDemandEngine:
     
     def _calculate_trend_score(self, fresher_df, domain, first_this, first_prev, last_prev):
         curr_df = fresher_df[
-            (fresher_df["Job_Type"] == domain) &
-            (fresher_df["Scraped_At_Cleaned"] >= first_this)
+            (fresher_df["title"] == domain) &
+            (fresher_df["timestamp"] >= first_this)
         ]
         prev_df = fresher_df[
-            (fresher_df["Job_Type"] == domain) &
-            (fresher_df["Scraped_At_Cleaned"] >= first_prev) &
-            (fresher_df["Scraped_At_Cleaned"] <= last_prev)
+            (fresher_df["title"] == domain) &
+            (fresher_df["timestamp"] >= first_prev) &
+            (fresher_df["timestamp"] <= last_prev)
         ]
 
         c_count = curr_df.shape[0]
@@ -104,22 +103,22 @@ class MarketDemandEngine:
         return round(score, 2)
     
     def _calculate_applicant_demand_ratio(self, fresher_df, domain):
-        domain_df = fresher_df[fresher_df["Job_Type"] == domain].copy()
-        has_applicants = 'No of applicant applied cleaned' in domain_df.columns
-        has_openings = 'No of job opening cleaned ' in domain_df.columns
+        domain_df = fresher_df[fresher_df["title"] == domain].copy()
+        has_applicants = 'no_of_applicant' in domain_df.columns
+        has_openings = 'no_of_opening' in domain_df.columns
 
         if not has_applicants or not has_openings:
             return 5.0
 
         domain_df = domain_df.dropna(
-            subset=['No of applicant applied cleaned', 'No of job opening cleaned ']
+            subset=['no_of_applicant', 'no_of_opening']
         )
 
         if domain_df.empty:
             return 5.0
 
-        total_applicants = domain_df['No of applicant applied cleaned'].sum()
-        total_openings = domain_df['No of job opening cleaned '].sum()
+        total_applicants = domain_df['no_of_applicant'].sum()
+        total_openings = domain_df['no_of_opening'].sum()
 
         if total_openings == 0:
             return 5.0
@@ -129,8 +128,8 @@ class MarketDemandEngine:
         return round(score, 2)
     
     def _calculate_diversity_score(self, fresher_df, domain):
-        domain_cos = fresher_df[fresher_df["Job_Type"] == domain]["Company_Cleaned"].nunique()
-        total_cos = fresher_df["Company_Cleaned"].nunique()
+        domain_cos = fresher_df[fresher_df["title"] == domain]["company"].nunique()
+        total_cos = fresher_df["company"].nunique()
 
         if total_cos == 0:
             return 0.0
@@ -151,11 +150,11 @@ class MarketDemandEngine:
         # We need to compute decay_weight before finding the max_freq
         today = pd.Timestamp.now()
         fresher_df = fresher_df.copy()
-        fresher_df['days_ago'] = (today - fresher_df['Scraped_At_Cleaned']).dt.days.clip(lower=0)
+        fresher_df['days_ago'] = (today - fresher_df['timestamp']).dt.days.clip(lower=0)
         fresher_df['decay_weight'] = np.exp(-0.693 * fresher_df['days_ago'] / 30)
 
         max_freq = max(
-            fresher_df[fresher_df["Job_Type"] == d]['decay_weight'].sum()
+            fresher_df[fresher_df["title"] == d]['decay_weight'].sum()
             for d in valid_domains
         ) or 1
 
@@ -167,8 +166,8 @@ class MarketDemandEngine:
             score_adr = self._calculate_applicant_demand_ratio(fresher_df, domain)
             score_diversity = self._calculate_diversity_score(fresher_df, domain)
 
-            total_domain = self.data[self.data["Job_Type"] == domain].shape[0]
-            fresher_count = fresher_df[fresher_df["Job_Type"] == domain].shape[0]
+            total_domain = self.data[self.data["title"] == domain].shape[0]
+            fresher_count = fresher_df[fresher_df["title"] == domain].shape[0]
             score_flex = round((fresher_count / total_domain * 10) if total_domain > 0 else 0, 2)
 
             weighted_score = (
@@ -214,8 +213,9 @@ class MarketDemandEngine:
 if __name__ == "__main__":
     # Ensure your CSV path is correct
     try:
-        df = pd.read_csv(r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\processed\cleaned\cleaned_job_data.csv")
+        df = pd.read_csv(r"D:\DATA SCIENCE AND ML\Project\job_trend_predictor\data\processed\cleaned\cleaned_data.csv")
         engine = MarketDemandEngine(df)
+       
         report = engine.calculate_metrics()
         import json
         print(json.dumps(report, indent=4))

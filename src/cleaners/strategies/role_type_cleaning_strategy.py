@@ -115,7 +115,8 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
             feature: Raw Role pd.Series
 
         Returns:
-            pd.Series where each element is List[str] of matched titles
+            pd.Series where each element is a single matched title string
+            (or "Other" for low-confidence / invalid inputs)
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -134,7 +135,7 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
     #  Private helpers                                                      #
     # ------------------------------------------------------------------ #
 
-    def _match_role(self, value: str) -> List[str]:
+    def _match_role(self, value: str) -> str:
         """
         Strip noise from a single Role string then fuzzy match.
 
@@ -142,17 +143,17 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
             value: Raw role string (e.g., "Cyber Security ,")
 
         Returns:
-            List of matched canonical titles, or ["Other"]
+            Single matched canonical title, or "Other"
         """
         # --- null guard ---
         try:
             if value is None or pd.isna(value):
-                return ["Other"]
+                return "Other"
         except (TypeError, ValueError):
             pass
 
         if not isinstance(value, str):
-            return ["Other"]
+            return "Other"
 
         # Step 1: Strip trailing/leading commas, pipes, whitespace
         value = re.sub(r'^[,;:|/\s]+|[,;:|/\s]+$', '', value).strip()
@@ -161,12 +162,12 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
         value = re.sub(r'\s+', ' ', value).strip()
 
         if not value or len(value) < 2:
-            return ["Other"]
+            return "Other"
 
         # Step 3: Fuzzy match against canonical list
         return self._fuzzy_match(value.lower())
 
-    def _fuzzy_match(self, cleaned: str) -> List[str]:
+    def _fuzzy_match(self, cleaned: str) -> str:
         """
         Score cleaned role string against canonical job list.
 
@@ -174,7 +175,7 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
             cleaned: Pre-cleaned, lowercase role string
 
         Returns:
-            List of matched job titles, or ["Other"]
+            Single matched job title, or "Other"
         """
         scores = {
             job: fuzz.token_set_ratio(job_lower, cleaned)
@@ -187,15 +188,10 @@ class RoleCleaningStrategy(FeatureCleaningStrategy):
         top_score = sorted_matches[0][1]
 
         if top_score >= self.HIGH_CONFIDENCE_THRESHOLD:
-            return [sorted_matches[0][0]]
+            return sorted_matches[0][0]
 
         if top_score >= self.MEDIUM_CONFIDENCE_THRESHOLD:
-            matches = [sorted_matches[0][0]]
-            if (
-                len(sorted_matches) > 1
-                and sorted_matches[1][1] >= top_score - self.MEDIUM_CONFIDENCE_GAP
-            ):
-                matches.append(sorted_matches[1][0])
-            return matches
+            # For medium confidence, return the best match (first one)
+            return sorted_matches[0][0]
 
-        return ["Other"]
+        return "Other"

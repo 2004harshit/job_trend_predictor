@@ -9,8 +9,8 @@ class ExperienceCleaningStrategy(FeatureCleaningStrategy):
     Cleaning strategy for experience columns.
 
     Extracts and normalizes experience data into two derived columns:
-    - Min_Experience (float, in years)
-    - Max_Experience (float, in years)
+    - min_experience (float, in years)
+    - max_experience (float, in years)
 
     Handles formats:
     - Range   : "3-5 years", "3 to 5 yrs"
@@ -63,7 +63,7 @@ class ExperienceCleaningStrategy(FeatureCleaningStrategy):
             feature: Raw experience Series
 
         Returns:
-            pd.DataFrame with columns [Min_Experience, Max_Experience]
+            pd.DataFrame with columns [min_experience, max_experience]
 
         Raises:
             TypeError:  If input is not a pd.Series
@@ -79,8 +79,8 @@ class ExperienceCleaningStrategy(FeatureCleaningStrategy):
         ranges = feature.apply(self._extract_experience_range)
 
         return pd.DataFrame({
-            "Min_Experience": ranges.apply(self._get_min),
-            "Max_Experience": ranges.apply(self._get_max),
+            "min_experience": ranges.apply(self._get_min),
+            "max_experience": ranges.apply(self._get_max),
         })
 
     # ------------------------------------------------------------------ #

@@ -112,23 +112,34 @@ class SafeJSONEncoder(json.JSONEncoder):
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Column Normalizer — maps your actual CSV columns to what engines expect
+# Column Normalizer — maps legacy PascalCase/typo columns to snake_case
 #
-# Your CSV columns          → Engine expected columns
-# ─────────────────────────────────────────────────
-# TItle_Cleaned             → Title_Cleaned   (typo fix — capital I)
-# Scraped_At                → Scraped_At_Cleaned  (engines use _Cleaned suffix)
-# Min_Salary / Max_Salary   → engines use Avg_Salary (already present ✓)
-#
-# Columns confirmed present in your CSV:
-#   TItle_Cleaned, Company_Cleaned, Min_Experience, Max_Experience,
-#   Avg_Salary, Scraped_At_Cleaned, Job_Type, Combined_Skills,
-#   Star_Skills, Skill_Count, Description_Cleaned, Posted_Date
+# All DataFrame columns MUST be lowercase + snake_case.
+# This map handles older CSVs or upstream sources that use different naming.
 # ──────────────────────────────────────────────────────────────────────────────
 COLUMN_MAP = {
-    # Typo fix — engines do this rename internally but only if the column exists
-    # Doing it once here guarantees all engines see the correct name
-    'TItle_Cleaned': 'Title_Cleaned',
+    'TItle_Cleaned': 'title_cleaned',
+    'Title_Cleaned': 'title_cleaned',
+    'Company_Cleaned': 'company_cleaned',
+    'Min_Experience': 'min_experience',
+    'Max_Experience': 'max_experience',
+    'Min_Salary': 'min_salary',
+    'Max_Salary': 'max_salary',
+    'Avg_Salary': 'avg_salary',
+    'Job_Type': 'job_type',
+    'Combined_Skills': 'combined_skills',
+    'Star_Skills': 'star_skills',
+    'Skill_Count': 'skill_count',
+    'Description_Cleaned': 'description_cleaned',
+    'Scraped_At_Cleaned': 'scraped_at_cleaned',
+    'Posted_Date': 'posted_date',
+    'Location': 'location',
+    'UG_Degree': 'ug_degree',
+    'PG_Degree': 'pg_degree',
+    'No of applicant applied cleaned': 'no_of_applicant_applied_cleaned',
+    'No of job opening cleaned ': 'no_of_job_opening_cleaned',
+    'Job Title': 'job_title',
+    'Employment Type': 'employment_type',
 }
 
 def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -149,6 +160,46 @@ class AnalyticsPipeline:
     Orchestrates all analytics engines across three phases.
     Each phase is a separate method — call them at the right moment in the UI.
     """
+
+    # ── Experience band label → tuple mapping ─────────────────────────────────
+    # Accepts both string labels (from Streamlit UI) and raw tuples (from code).
+    # All internal engines expect Tuple[int, int] — never a string.
+    _BAND_MAP: Dict[str, Tuple[int, int]] = {
+        "fresher":      (0, 1),
+        "junior":       (1, 3),
+        "mid":          (3, 6),
+        "senior":       (6, 12),
+        "intermediate": (2, 5),   # alias used in prior_knowledge field
+        "basic":        (0, 1),   # alias for prior_knowledge="basic"
+        "advanced":     (5, 12),  # alias for prior_knowledge="advanced"
+    }
+
+    @classmethod
+    def _resolve_band(cls, experience_band) -> Tuple[int, int]:
+        """
+        Normalize experience_band to Tuple[int, int].
+
+        Accepts:
+          - Tuple/List:  (0, 3)  → (0, 3)   (passthrough)
+          - String:     "fresher" → (0, 1)
+          - None:        → (0, 5)  (safe default)
+        """
+        if experience_band is None:
+            return (0, 5)
+        if isinstance(experience_band, (tuple, list)) and len(experience_band) == 2:
+            return (int(experience_band[0]), int(experience_band[1]))
+        if isinstance(experience_band, str):
+            key = experience_band.lower().strip()
+            if key in cls._BAND_MAP:
+                return cls._BAND_MAP[key]
+            logger.warning(
+                f"Unknown experience_band string '{experience_band}'. "
+                f"Falling back to (0, 5). Valid values: {list(cls._BAND_MAP.keys())}"
+            )
+            return (0, 5)
+        logger.warning(f"Unrecognised experience_band type {type(experience_band)}. Using (0, 5).")
+        return (0, 5)
+    # ──────────────────────────────────────────────────────────────────────────
 
     def __init__(self, data: pd.DataFrame):
         # Normalize column names once — all engines see clean names
@@ -210,6 +261,7 @@ class AnalyticsPipeline:
                                Required if recommended_domains is provided.
         """
         logger.info(f"Phase 2 | Running domain metrics — domain={domain}")
+        experience_band = self._resolve_band(experience_band)   # accept str or tuple
         nearby_cities = nearby_cities or []
         results = {}
 
@@ -362,6 +414,7 @@ class AnalyticsPipeline:
         target_domain_2     : Optional second domain for SkillTransferability
         """
         logger.info(f"Phase 3 | Running profile metrics — domain={domain}")
+        experience_band = self._resolve_band(experience_band)   # accept str or tuple
         results = {}
 
         # 1. Competition Level (needs user_skills)

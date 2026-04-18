@@ -373,7 +373,7 @@ class GeneralJobScraper(JobExtractor):
             job_data = self._extract_job_details(page, job_url)
             
             if job_data and self._apply_location_filter(job_data.get("Location", "")):
-                job_data["Job_Type"] = job_name
+                job_data["job_type"] = job_name
                 extracted_data.append(job_data)
                 logger.debug(f"Extracted: {job_data.get('Title', 'Unknown')}")
         except Exception as e:
